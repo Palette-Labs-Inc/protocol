@@ -1,0 +1,495 @@
+datasource postgres {
+    provider = "postgresql"
+    url      = env("DB_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Bazzar {
+    id               String               @id @default(cuid())
+    localBusinesses  LocalBusiness[]
+    fulfillmentModes EnumFulfillmentModes
+    createdAt        DateTime             @default(now())
+    updatedAt        DateTime             @updatedAt
+    promotions       Promotion[]
+    Courier          Courier?             @relation(fields: [courierId], references: [id])
+    courierId        String?
+}
+
+model LocalBusiness {
+    id                        String                     @id @default(cuid())
+    name                      String
+    description               String
+    url                       String
+    telephone                 String
+    servesCuisine             String
+    aggregateRating           AggregateRating            @relation(fields: [aggregateRatingId], references: [id])
+    review                    Review[]
+    photo                     Image[]
+    logo                      Logo                       @relation(fields: [logoId], references: [id])
+    logoId                    String
+    openingHours              String
+    openingHoursSpecification OpeningHoursSpecfication[]
+    longitude                 Float
+    latitude                  Float
+    globalLocationNumber      BigInt
+    faxNumber                 String
+    address                   PostalAddress              @relation(fields: [postalAddressId], references: [id])
+    postalAddressId           String
+    paymentAccepted           EnumPaymentAccepted[]
+    priceRange                String
+    email                     String
+    foundingDate              DateTime
+    createdAt                 DateTime                   @default(now())
+    updatedAt                 DateTime                   @updatedAt
+    hasPOS                    Boolean
+    pos                       String
+    branchCode                String
+    parentOrganization        Organization               @relation(fields: [organizationId], references: [id])
+    organizationId            String
+    category                  EnumBusinessCategory[]
+    promotions                Promotion[]
+    Bazzar                    Bazzar?                    @relation(fields: [bazzarId], references: [id])
+    bazzarId                  String?
+    Order                     Order[]
+    PaymentTerm               PaymentTerm[]
+    hasMenu                   Menu[]
+    commission                String
+    aggregateRatingId         String
+}
+
+model AggregateRating {
+    id                String          @id @default(cuid())
+    ratingCount       Int
+    reviewCount       Int
+    LocalBusiness     LocalBusiness[]
+    itemReviewed      EnumItemReview
+    author            Customer        @relation(fields: [customerId], references: [id])
+    bestRating        Float
+    ratingExplanation String
+    ratingValue       Float
+    worstRating       Float
+    customerId        String
+}
+
+model Review {
+    id              String         @id @default(cuid())
+    LocalBusiness   LocalBusiness? @relation(fields: [localBusinessId], references: [id])
+    localBusinessId String?
+    reviewBody      String
+    reviewRating    String
+    author          Customer       @relation(fields: [customerId], references: [id])
+    dateCreated     DateTime       @default(now())
+    dateModified    DateTime       @updatedAt
+    image           Image          @relation(fields: [imageId], references: [id])
+    imageId         String
+    customerId      String
+    Courier         Courier?       @relation(fields: [courierId], references: [id])
+    courierId       String?
+    MenuItem        MenuItem?      @relation(fields: [menuItemId], references: [id])
+    menuItemId      String?
+}
+
+model OpeningHoursSpecfication {
+    id              String         @id @default(cuid())
+    dayOfWeek       EnumDayOfWeek
+    opens           String
+    closes          String
+    validFrom       DateTime
+    validThrough    DateTime
+    Promotion       Promotion?     @relation(fields: [promotionId], references: [id])
+    promotionId     String?
+    createdAt       DateTime       @default(now())
+    updatedAt       DateTime       @updatedAt
+    Menu            Menu[]
+    LocalBusiness   LocalBusiness? @relation(fields: [localBusinessId], references: [id])
+    localBusinessId String?
+}
+
+model PostalAddress {
+    id                   String          @id @default(cuid())
+    LocalBusiness        LocalBusiness[]
+    addressCountry       String
+    addressLocality      String
+    addressRegion        String
+    postOfficeBoxNumber  String
+    postalCode           String
+    streetAddress        String
+    Customer             Customer?       @relation(fields: [customerId], references: [id])
+    customerId           String?
+    Courier              Courier[]
+    globalLocationNumber BigInt
+    Order                Order[]
+    Node                 Node[]
+}
+
+model Organization {
+    id            String          @id @default(cuid())
+    name          String
+    LocalBusiness LocalBusiness[]
+    createdAt     DateTime        @default(now())
+    updatedAt     DateTime        @updatedAt
+}
+
+model Promotion {
+    id            String                     @id @default(cuid())
+    LocalBusiness LocalBusiness[]
+    Bazzar        Bazzar?                    @relation(fields: [bazzarId], references: [id])
+    bazzarId      String?
+    createdAt     DateTime                   @default(now())
+    updatedAt     DateTime                   @updatedAt
+    openingHours  OpeningHoursSpecfication[]
+    Order         Order[]
+}
+
+model Image {
+    id              String         @id @default(cuid())
+    LocalBusiness   LocalBusiness? @relation(fields: [localBusinessId], references: [id])
+    localBusinessId String?
+    url             String
+    Review          Review[]
+    MenuItem        MenuItem?      @relation(fields: [menuItemId], references: [id])
+    menuItemId      String?
+}
+
+model Logo {
+    id            String          @id @default(cuid())
+    LocalBusiness LocalBusiness[]
+    url           String
+}
+
+model Customer {
+    id              String            @id @default(cuid())
+    Review          Review[]
+    familyName      String
+    givenName       String
+    birthDate       DateTime
+    telephone       String
+    address         PostalAddress[]
+    email           String
+    gender          EnumGender
+    Order           Order[]
+    PaymentTerm     PaymentTerm[]
+    AggregateRating AggregateRating[]
+}
+
+model Courier {
+    id              String          @id @default(cuid())
+    givenName       String
+    familyName      String
+    birthDate       DateTime
+    telephone       String
+    address         PostalAddress   @relation(fields: [postalAddressId], references: [id])
+    postalAddressId String
+    email           String
+    gender          EnumGender
+    vehicle         Vehicle         @relation(fields: [vehicleId], references: [id])
+    vehicleId       String
+    review          Review[]
+    rating          Float
+    bazzar          Bazzar[]
+    OrderDelivery   OrderDelivery[]
+}
+
+model Vehicle {
+    id            String    @id @default(cuid())
+    Courier       Courier[]
+    capacity      Int
+    category      String
+    code          String
+    color         String
+    model         String
+    registeration String
+    size          String
+    wheelCount    Int
+}
+
+model Order {
+    orderNumber        String               @id @default(cuid())
+    seller             LocalBusiness        @relation(fields: [localBusinessId], references: [id])
+    localBusinessId    String
+    orderedItem        OrderItem[]
+    orderStatus        EnumOrderStatus
+    orderDelivery      OrderDelivery        @relation(fields: [orderDeliveryId], references: [id])
+    orderDeliveryId    String
+    orderDate          DateTime             @default(now())
+    orderCompleteDate  DateTime
+    orderETA           DateTime
+    customer           Customer             @relation(fields: [customerId], references: [id])
+    customerId         String
+    discount           Promotion            @relation(fields: [promotionId], references: [id])
+    promotionId        String
+    paymentTerm        PaymentTerm          @relation(fields: [paymentTermId], references: [id])
+    paymentTermId      String               @unique
+    confirmationNumber String
+    deliveryAddress    PostalAddress        @relation(fields: [postalAddressId], references: [id])
+    postalAddressId    String
+    referenceOrderId   String
+    updatedAt          DateTime             @updatedAt
+    type               EnumFulfillmentModes
+    Cancellation       Cancellation[]
+    Support            Support[]
+}
+
+model OrderItem {
+    orderItemId     String         @id @default(cuid())
+    Order           Order?         @relation(fields: [orderNumber], references: [orderNumber])
+    orderNumber     String?
+    orderedItem     MenuItem       @relation(fields: [menuItemId], references: [id])
+    menuItemId      String
+    orderQuantity   Int
+    orderItemStatus EnumItemStatus
+}
+
+model PaymentTerm {
+    id                  String                   @id @default(cuid())
+    seller              LocalBusiness            @relation(fields: [localBusinessId], references: [id])
+    localBusinessId     String
+    customer            Customer                 @relation(fields: [customerId], references: [id])
+    customerId          String
+    createdAt           DateTime                 @default(now())
+    updatedAt           DateTime                 @updatedAt
+    lifecycleProcessing EnumPaymentTermLifecycle
+    order               Order?
+    orderPrice          Float
+    tip                 Float
+    servicePrice        Float
+    paymentCurrency     String
+    commissionCharged   Float
+    paymentMethod       EnumPaymentAccepted
+    status              EnumPaymentStatus
+}
+
+model OrderDelivery {
+    id        String  @id @default(cuid())
+    Order     Order[]
+    courier   Courier @relation(fields: [courierId], references: [id])
+    courierId String
+}
+
+model Menu {
+    id                         String                   @id @default(cuid())
+    name                       String
+    seller                     LocalBusiness            @relation(fields: [localBusinessId], references: [id])
+    localBusinessId            String
+    description                String
+    openHours                  OpeningHoursSpecfication @relation(fields: [openingHoursSpecficationId], references: [id])
+    openingHoursSpecficationId String
+    createdAt                  DateTime                 @default(now())
+    updatedAt                  DateTime                 @updatedAt
+    fulfillmentModes           EnumFulfillmentModes
+    hasmenuSection             MenuSection[]
+    MenuItem                   MenuItem[]
+}
+
+model MenuSection {
+    id             String        @id @default(cuid())
+    name           String
+    description    String
+    hasMenuItem    MenuItem[]
+    Menu           Menu?         @relation(fields: [menuId], references: [id])
+    menuId         String?
+    hasMenuSection MenuSection[] @relation("MenuSection")
+    MenuSection    MenuSection[] @relation("MenuSection")
+}
+
+model MenuItem {
+    id                      String               @id @default(cuid())
+    OrderItem               OrderItem[]
+    Menu                    Menu?                @relation(fields: [menuId], references: [id])
+    menuId                  String?
+    name                    String
+    nutrition               NutritionInformation @relation(fields: [nutritionInformationId], references: [id])
+    description             String
+    hasmenuAddOn            MenuItem[]           @relation(name: "menuAddOn")
+    menuAddon               MenuItem[]           @relation(name: "menuAddOn")
+    price                   Float
+    priceCurrency           String
+    quantity                Int
+    maximumPurchasableCount Int
+    minimumPurchasableCount Int
+    itemStatus              EnumItemStatus
+    fulfillmentMode         EnumFulfillmentModes
+    createAt                DateTime             @default(now())
+    updatedAt               DateTime             @updatedAt
+    image                   Image[]
+    review                  Review[]
+    Quote                   Quote?               @relation(fields: [quoteId], references: [id])
+    quoteId                 String?
+    MenuSection             MenuSection?         @relation(fields: [menuSectionId], references: [id])
+    menuSectionId           String?
+    nutritionInformationId  String
+    suitableForDiet         EnumDiet
+}
+
+model NutritionInformation {
+    id                    String     @id @default(cuid())
+    calories              String
+    servingSize           String
+    fatContent            String
+    fiberContent          String
+    proteinContent        String
+    saturatedFatContent   String
+    unsaturatedFatContent String
+    sugarContent          String
+    transFatContent       String
+    sodiumContent         String
+    MenuItem              MenuItem[]
+}
+
+model Cancellation {
+    id               String          @id @default(cuid())
+    orderNumber      Order           @relation(fields: [orderOrderNumber], references: [orderNumber])
+    cancelledBy      EnumCancelledBy
+    createdAt        DateTime        @default(now())
+    isReasonRequired Boolean
+    reason           String
+    updatedAt        DateTime        @updatedAt
+    orderOrderNumber String
+}
+
+model Quote {
+    createdAt    DateTime   @default(now())
+    currencyCode String
+    id           String     @id @default(cuid())
+    menuItems    MenuItem[]
+    timeToLive   Int
+    totalPrice   Float
+    updatedAt    DateTime   @updatedAt
+}
+
+model Support {
+    createdAt        DateTime @default(now())
+    email            String
+    id               String   @id @default(cuid())
+    phone            String
+    updatedAt        DateTime @updatedAt
+    url              String
+    orderNumber      Order    @relation(fields: [orderOrderNumber], references: [orderNumber])
+    orderOrderNumber String
+}
+
+model Node {
+    createdAt       DateTime             @default(now())
+    hostUrl         String
+    id              Int                  @id @default(autoincrement())
+    industryCode    EnumNodeIndustryCode
+    location        PostalAddress        @relation(fields: [postalAddressId], references: [id])
+    operatorType    EnumNodeOperatorType
+    updatedAt       DateTime             @updatedAt
+    postalAddressId String
+}
+
+enum EnumPaymentAccepted {
+    CreditCard
+    Cash
+    Credit
+    Paypal
+    Venmo
+}
+
+enum EnumDayOfWeek {
+    Monday
+    Tuesday
+    Wednesday
+    Thursday
+    Friday
+    Saturday
+    Sunday
+}
+
+enum EnumBusinessCategory {
+    Restaurant
+    Grocery
+    Flower
+}
+
+enum EnumFulfillmentModes {
+    PickUp
+    Delivery
+    DineIn
+    TakeOut
+    DriveThru
+}
+
+enum EnumGender {
+    Male
+    Female
+    Unknown
+}
+
+enum EnumOrderStatus {
+    OrderCancelled
+    OrderDelivered
+    OrderInTransit
+    OrderPaymentDue
+    OrderPickupAvailable
+    OrderProblem
+    OrderProcessing
+    OrderReturned
+}
+
+enum EnumPaymentTermLifecycle {
+    PreOrder
+    PreFulfillment
+    OnFulfillment
+    PostFulfillment
+}
+
+enum EnumPaymentStatus {
+    Processed
+    Collectable
+}
+
+enum EnumItemStatus {
+    BackOrder
+    Discontinued
+    InStock
+    InStoreOnly
+    LimitedAvailability
+    OnlineOnly
+    OutOfStock
+    PreOrder
+    PreSale
+    SoldOut
+}
+
+enum EnumCancelledBy {
+    Seller
+    Buyer
+    Courier
+}
+
+enum EnumNodeIndustryCode {
+    LastMileDelivery
+    Rideshare
+}
+
+enum EnumNodeOperatorType {
+    UNO
+    BSN
+    SSN
+    CSN
+}
+
+enum EnumItemReview {
+    MenuItem
+    LocalBusiness
+    Courier
+}
+
+enum EnumDiet {
+    DiabeticDiet
+    GlutenFreeDiet
+    HalalDiet
+    HinduDiet
+    KosherDiet
+    LowCalorieDiet
+    LowFatDiet
+    LowLactoseDiet
+    LowSaltDiet
+    VeganDiet
+    VegetarianDiet
+}

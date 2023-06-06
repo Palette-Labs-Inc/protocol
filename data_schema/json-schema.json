@@ -1,0 +1,1420 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Bazzar": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "localBusinesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalBusiness"
+          }
+        },
+        "fulfillmentModes": {
+          "type": "string",
+          "enum": [
+            "PickUp",
+            "Delivery",
+            "DineIn",
+            "TakeOut",
+            "DriveThru"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "promotions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Promotion"
+          }
+        },
+        "Courier": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Courier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "LocalBusiness": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "servesCuisine": {
+          "type": "string"
+        },
+        "aggregateRating": {
+          "$ref": "#/definitions/AggregateRating"
+        },
+        "review": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "photo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "logo": {
+          "$ref": "#/definitions/Logo"
+        },
+        "openingHours": {
+          "type": "string"
+        },
+        "openingHoursSpecification": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpeningHoursSpecfication"
+          }
+        },
+        "longitude": {
+          "type": "number"
+        },
+        "latitude": {
+          "type": "number"
+        },
+        "globalLocationNumber": {
+          "type": "integer"
+        },
+        "faxNumber": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "paymentAccepted": {
+          "type": "array",
+          "enum": [
+            "CreditCard",
+            "Cash",
+            "Credit",
+            "Paypal",
+            "Venmo"
+          ]
+        },
+        "priceRange": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "foundingDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hasPOS": {
+          "type": "boolean"
+        },
+        "pos": {
+          "type": "string"
+        },
+        "branchCode": {
+          "type": "string"
+        },
+        "parentOrganization": {
+          "$ref": "#/definitions/Organization"
+        },
+        "category": {
+          "type": "array",
+          "enum": [
+            "Restaurant",
+            "Grocery",
+            "Flower"
+          ]
+        },
+        "promotions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Promotion"
+          }
+        },
+        "Bazzar": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Bazzar"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "Order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "PaymentTerm": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentTerm"
+          }
+        },
+        "hasMenu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Menu"
+          }
+        },
+        "commission": {
+          "type": "string"
+        }
+      }
+    },
+    "AggregateRating": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "ratingCount": {
+          "type": "integer"
+        },
+        "reviewCount": {
+          "type": "integer"
+        },
+        "LocalBusiness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalBusiness"
+          }
+        },
+        "itemReviewed": {
+          "type": "string",
+          "enum": [
+            "MenuItem",
+            "LocalBusiness",
+            "Courier"
+          ]
+        },
+        "author": {
+          "$ref": "#/definitions/Customer"
+        },
+        "bestRating": {
+          "type": "number"
+        },
+        "ratingExplanation": {
+          "type": "string"
+        },
+        "ratingValue": {
+          "type": "number"
+        },
+        "worstRating": {
+          "type": "number"
+        }
+      }
+    },
+    "Review": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "LocalBusiness": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LocalBusiness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewBody": {
+          "type": "string"
+        },
+        "reviewRating": {
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/Customer"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateModified": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "Courier": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Courier"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "MenuItem": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuItem"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "OpeningHoursSpecfication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "dayOfWeek": {
+          "type": "string",
+          "enum": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        },
+        "opens": {
+          "type": "string"
+        },
+        "closes": {
+          "type": "string"
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "validThrough": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Promotion": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Promotion"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Menu": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Menu"
+          }
+        },
+        "LocalBusiness": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LocalBusiness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "PostalAddress": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "LocalBusiness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalBusiness"
+          }
+        },
+        "addressCountry": {
+          "type": "string"
+        },
+        "addressLocality": {
+          "type": "string"
+        },
+        "addressRegion": {
+          "type": "string"
+        },
+        "postOfficeBoxNumber": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "streetAddress": {
+          "type": "string"
+        },
+        "Customer": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Customer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "Courier": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Courier"
+          }
+        },
+        "globalLocationNumber": {
+          "type": "integer"
+        },
+        "Order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "Node": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "LocalBusiness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalBusiness"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Promotion": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "LocalBusiness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalBusiness"
+          }
+        },
+        "Bazzar": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Bazzar"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "openingHours": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpeningHoursSpecfication"
+          }
+        },
+        "Order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "LocalBusiness": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/LocalBusiness"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "url": {
+          "type": "string"
+        },
+        "Review": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "MenuItem": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuItem"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "Logo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "LocalBusiness": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalBusiness"
+          }
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "Review": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "familyName": {
+          "type": "string"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostalAddress"
+          }
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female",
+            "Unknown"
+          ]
+        },
+        "Order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "PaymentTerm": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentTerm"
+          }
+        },
+        "AggregateRating": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregateRating"
+          }
+        }
+      }
+    },
+    "Courier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "givenName": {
+          "type": "string"
+        },
+        "familyName": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "email": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "Male",
+            "Female",
+            "Unknown"
+          ]
+        },
+        "vehicle": {
+          "$ref": "#/definitions/Vehicle"
+        },
+        "review": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "rating": {
+          "type": "number"
+        },
+        "bazzar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Bazzar"
+          }
+        },
+        "OrderDelivery": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderDelivery"
+          }
+        }
+      }
+    },
+    "Vehicle": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "Courier": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Courier"
+          }
+        },
+        "capacity": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "registeration": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "wheelCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "properties": {
+        "orderNumber": {
+          "type": "string"
+        },
+        "seller": {
+          "$ref": "#/definitions/LocalBusiness"
+        },
+        "orderedItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        },
+        "orderStatus": {
+          "type": "string",
+          "enum": [
+            "OrderCancelled",
+            "OrderDelivered",
+            "OrderInTransit",
+            "OrderPaymentDue",
+            "OrderPickupAvailable",
+            "OrderProblem",
+            "OrderProcessing",
+            "OrderReturned"
+          ]
+        },
+        "orderDelivery": {
+          "$ref": "#/definitions/OrderDelivery"
+        },
+        "orderDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "orderCompleteDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "orderETA": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer": {
+          "$ref": "#/definitions/Customer"
+        },
+        "discount": {
+          "$ref": "#/definitions/Promotion"
+        },
+        "paymentTerm": {
+          "$ref": "#/definitions/PaymentTerm"
+        },
+        "confirmationNumber": {
+          "type": "string"
+        },
+        "deliveryAddress": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "referenceOrderId": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "PickUp",
+            "Delivery",
+            "DineIn",
+            "TakeOut",
+            "DriveThru"
+          ]
+        },
+        "Cancellation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cancellation"
+          }
+        },
+        "Support": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Support"
+          }
+        }
+      }
+    },
+    "OrderItem": {
+      "type": "object",
+      "properties": {
+        "orderItemId": {
+          "type": "string"
+        },
+        "Order": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Order"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "orderedItem": {
+          "$ref": "#/definitions/MenuItem"
+        },
+        "orderQuantity": {
+          "type": "integer"
+        },
+        "orderItemStatus": {
+          "type": "string",
+          "enum": [
+            "BackOrder",
+            "Discontinued",
+            "InStock",
+            "InStoreOnly",
+            "LimitedAvailability",
+            "OnlineOnly",
+            "OutOfStock",
+            "PreOrder",
+            "PreSale",
+            "SoldOut"
+          ]
+        }
+      }
+    },
+    "PaymentTerm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "seller": {
+          "$ref": "#/definitions/LocalBusiness"
+        },
+        "customer": {
+          "$ref": "#/definitions/Customer"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lifecycleProcessing": {
+          "type": "string",
+          "enum": [
+            "PreOrder",
+            "PreFulfillment",
+            "OnFulfillment",
+            "PostFulfillment"
+          ]
+        },
+        "order": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Order"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "orderPrice": {
+          "type": "number"
+        },
+        "tip": {
+          "type": "number"
+        },
+        "servicePrice": {
+          "type": "number"
+        },
+        "paymentCurrency": {
+          "type": "string"
+        },
+        "commissionCharged": {
+          "type": "number"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "enum": [
+            "CreditCard",
+            "Cash",
+            "Credit",
+            "Paypal",
+            "Venmo"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Processed",
+            "Collectable"
+          ]
+        }
+      }
+    },
+    "OrderDelivery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "Order": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        },
+        "courier": {
+          "$ref": "#/definitions/Courier"
+        }
+      }
+    },
+    "Menu": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "seller": {
+          "$ref": "#/definitions/LocalBusiness"
+        },
+        "description": {
+          "type": "string"
+        },
+        "openHours": {
+          "$ref": "#/definitions/OpeningHoursSpecfication"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fulfillmentModes": {
+          "type": "string",
+          "enum": [
+            "PickUp",
+            "Delivery",
+            "DineIn",
+            "TakeOut",
+            "DriveThru"
+          ]
+        },
+        "hasmenuSection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuSection"
+          }
+        },
+        "MenuItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        }
+      }
+    },
+    "MenuSection": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "hasMenuItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
+        "Menu": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Menu"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "hasMenuSection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuSection"
+          }
+        },
+        "MenuSection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuSection"
+          }
+        }
+      }
+    },
+    "MenuItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "OrderItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        },
+        "Menu": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Menu"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "nutrition": {
+          "$ref": "#/definitions/NutritionInformation"
+        },
+        "description": {
+          "type": "string"
+        },
+        "hasmenuAddOn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
+        "menuAddon": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
+        "price": {
+          "type": "number"
+        },
+        "priceCurrency": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "maximumPurchasableCount": {
+          "type": "integer"
+        },
+        "minimumPurchasableCount": {
+          "type": "integer"
+        },
+        "itemStatus": {
+          "type": "string",
+          "enum": [
+            "BackOrder",
+            "Discontinued",
+            "InStock",
+            "InStoreOnly",
+            "LimitedAvailability",
+            "OnlineOnly",
+            "OutOfStock",
+            "PreOrder",
+            "PreSale",
+            "SoldOut"
+          ]
+        },
+        "fulfillmentMode": {
+          "type": "string",
+          "enum": [
+            "PickUp",
+            "Delivery",
+            "DineIn",
+            "TakeOut",
+            "DriveThru"
+          ]
+        },
+        "createAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "image": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "review": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Review"
+          }
+        },
+        "Quote": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Quote"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "MenuSection": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MenuSection"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "suitableForDiet": {
+          "type": "string",
+          "enum": [
+            "DiabeticDiet",
+            "GlutenFreeDiet",
+            "HalalDiet",
+            "HinduDiet",
+            "KosherDiet",
+            "LowCalorieDiet",
+            "LowFatDiet",
+            "LowLactoseDiet",
+            "LowSaltDiet",
+            "VeganDiet",
+            "VegetarianDiet"
+          ]
+        }
+      }
+    },
+    "NutritionInformation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "calories": {
+          "type": "string"
+        },
+        "servingSize": {
+          "type": "string"
+        },
+        "fatContent": {
+          "type": "string"
+        },
+        "fiberContent": {
+          "type": "string"
+        },
+        "proteinContent": {
+          "type": "string"
+        },
+        "saturatedFatContent": {
+          "type": "string"
+        },
+        "unsaturatedFatContent": {
+          "type": "string"
+        },
+        "sugarContent": {
+          "type": "string"
+        },
+        "transFatContent": {
+          "type": "string"
+        },
+        "sodiumContent": {
+          "type": "string"
+        },
+        "MenuItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        }
+      }
+    },
+    "Cancellation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "orderNumber": {
+          "$ref": "#/definitions/Order"
+        },
+        "cancelledBy": {
+          "type": "string",
+          "enum": [
+            "Seller",
+            "Buyer",
+            "Courier"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "isReasonRequired": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Quote": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "menuItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
+        "timeToLive": {
+          "type": "integer"
+        },
+        "totalPrice": {
+          "type": "number"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Support": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string"
+        },
+        "orderNumber": {
+          "$ref": "#/definitions/Order"
+        }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hostUrl": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "industryCode": {
+          "type": "string",
+          "enum": [
+            "LastMileDelivery",
+            "Rideshare"
+          ]
+        },
+        "location": {
+          "$ref": "#/definitions/PostalAddress"
+        },
+        "operatorType": {
+          "type": "string",
+          "enum": [
+            "UNO",
+            "BSN",
+            "SSN",
+            "CSN"
+          ]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "properties": {
+    "bazzar": {
+      "$ref": "#/definitions/Bazzar"
+    },
+    "localBusiness": {
+      "$ref": "#/definitions/LocalBusiness"
+    },
+    "aggregateRating": {
+      "$ref": "#/definitions/AggregateRating"
+    },
+    "review": {
+      "$ref": "#/definitions/Review"
+    },
+    "openingHoursSpecfication": {
+      "$ref": "#/definitions/OpeningHoursSpecfication"
+    },
+    "postalAddress": {
+      "$ref": "#/definitions/PostalAddress"
+    },
+    "organization": {
+      "$ref": "#/definitions/Organization"
+    },
+    "promotion": {
+      "$ref": "#/definitions/Promotion"
+    },
+    "image": {
+      "$ref": "#/definitions/Image"
+    },
+    "logo": {
+      "$ref": "#/definitions/Logo"
+    },
+    "customer": {
+      "$ref": "#/definitions/Customer"
+    },
+    "courier": {
+      "$ref": "#/definitions/Courier"
+    },
+    "vehicle": {
+      "$ref": "#/definitions/Vehicle"
+    },
+    "order": {
+      "$ref": "#/definitions/Order"
+    },
+    "orderItem": {
+      "$ref": "#/definitions/OrderItem"
+    },
+    "paymentTerm": {
+      "$ref": "#/definitions/PaymentTerm"
+    },
+    "orderDelivery": {
+      "$ref": "#/definitions/OrderDelivery"
+    },
+    "menu": {
+      "$ref": "#/definitions/Menu"
+    },
+    "menuSection": {
+      "$ref": "#/definitions/MenuSection"
+    },
+    "menuItem": {
+      "$ref": "#/definitions/MenuItem"
+    },
+    "nutritionInformation": {
+      "$ref": "#/definitions/NutritionInformation"
+    },
+    "cancellation": {
+      "$ref": "#/definitions/Cancellation"
+    },
+    "quote": {
+      "$ref": "#/definitions/Quote"
+    },
+    "support": {
+      "$ref": "#/definitions/Support"
+    },
+    "node": {
+      "$ref": "#/definitions/Node"
+    }
+  }
+}
