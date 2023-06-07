@@ -7,15 +7,14 @@ generator client {
     provider = "prisma-client-js"
 }
 
-model Bazzar {
+model Bazaar {
     id               String               @id @default(cuid())
     localBusinesses  LocalBusiness[]
     fulfillmentModes EnumFulfillmentModes
     createdAt        DateTime             @default(now())
     updatedAt        DateTime             @updatedAt
     promotions       Promotion[]
-    Courier          Courier?             @relation(fields: [courierId], references: [id])
-    courierId        String?
+    Courier          Courier[]
 }
 
 model LocalBusiness {
@@ -51,8 +50,8 @@ model LocalBusiness {
     organizationId            String
     category                  EnumBusinessCategory[]
     promotions                Promotion[]
-    Bazzar                    Bazzar?                    @relation(fields: [bazzarId], references: [id])
-    bazzarId                  String?
+    Bazaar                    Bazaar?                    @relation(fields: [bazaarId], references: [id])
+    bazaarId                  String?
     Order                     Order[]
     PaymentTerm               PaymentTerm[]
     hasMenu                   Menu[]
@@ -136,8 +135,8 @@ model Organization {
 model Promotion {
     id            String                     @id @default(cuid())
     LocalBusiness LocalBusiness[]
-    Bazzar        Bazzar?                    @relation(fields: [bazzarId], references: [id])
-    bazzarId      String?
+    Bazaar        Bazaar?                    @relation(fields: [bazaarId], references: [id])
+    bazaarId      String?
     createdAt     DateTime                   @default(now())
     updatedAt     DateTime                   @updatedAt
     openingHours  OpeningHoursSpecfication[]
@@ -189,8 +188,9 @@ model Courier {
     vehicleId       String
     review          Review[]
     rating          Float
-    bazzar          Bazzar[]
+    bazaar          Bazaar          @relation(fields: [bazaarId], references: [id])
     OrderDelivery   OrderDelivery[]
+    bazaarId        String
 }
 
 model Vehicle {
@@ -385,9 +385,14 @@ model Node {
 enum EnumPaymentAccepted {
     CreditCard
     Cash
-    Credit
+    Invoice
     Paypal
-    Venmo
+    GoogleCheckout
+    BankTransferInAdvance
+    CheckInAdvance
+    COD
+    DirectDebit
+    PaySwarm
 }
 
 enum EnumDayOfWeek {
