@@ -118,6 +118,7 @@ model PostalAddress {
     streetAddress        String
     Customer             Customer?       @relation(fields: [customerId], references: [id])
     customerId           String?
+    defaultAddress       Boolean
     Courier              Courier[]
     globalLocationNumber BigInt
     Order                Order[]
@@ -151,6 +152,8 @@ model Image {
     Review          Review[]
     MenuItem        MenuItem?      @relation(fields: [menuItemId], references: [id])
     menuItemId      String?
+    Support         Support?       @relation(fields: [supportId], references: [id])
+    supportId       String?
 }
 
 model Logo {
@@ -172,6 +175,7 @@ model Customer {
     Order           Order[]
     PaymentTerm     PaymentTerm[]
     AggregateRating AggregateRating[]
+    Support         Support[]
 }
 
 model Courier {
@@ -270,18 +274,17 @@ model OrderDelivery {
 }
 
 model Menu {
-    id                         String                   @id @default(cuid())
-    name                       String
-    seller                     LocalBusiness            @relation(fields: [localBusinessId], references: [id])
-    localBusinessId            String
-    description                String
-    openHours                  OpeningHoursSpecfication @relation(fields: [openingHoursSpecficationId], references: [id])
-    openingHoursSpecficationId String
-    createdAt                  DateTime                 @default(now())
-    updatedAt                  DateTime                 @updatedAt
-    fulfillmentModes           EnumFulfillmentModes
-    hasmenuSection             MenuSection[]
-    MenuItem                   MenuItem[]
+    id               String                     @id @default(cuid())
+    name             String
+    seller           LocalBusiness              @relation(fields: [localBusinessId], references: [id])
+    localBusinessId  String
+    description      String
+    openHours        OpeningHoursSpecfication[]
+    createdAt        DateTime                   @default(now())
+    updatedAt        DateTime                   @updatedAt
+    fulfillmentModes EnumFulfillmentModes
+    hasmenuSection   MenuSection[]
+    MenuItem         MenuItem[]
 }
 
 model MenuSection {
@@ -316,8 +319,7 @@ model MenuItem {
     updatedAt               DateTime             @updatedAt
     image                   Image[]
     review                  Review[]
-    Quote                   Quote?               @relation(fields: [quoteId], references: [id])
-    quoteId                 String?
+    Quote                   Quote[]
     MenuSection             MenuSection?         @relation(fields: [menuSectionId], references: [id])
     menuSectionId           String?
     nutritionInformationId  String
@@ -351,30 +353,31 @@ model Cancellation {
 }
 
 model Quote {
-    createdAt    DateTime   @default(now())
-    currencyCode String
-    id           String     @id @default(cuid())
-    menuItems    MenuItem[]
-    timeToLive   Int
-    totalPrice   Float
-    updatedAt    DateTime   @updatedAt
+    createdAt  DateTime   @default(now())
+    currency   String
+    id         String     @id @default(cuid())
+    menuItems  MenuItem[]
+    timeToLive Int
+    totalPrice Float
+    updatedAt  DateTime   @updatedAt
 }
 
 model Support {
-    createdAt        DateTime @default(now())
-    email            String
-    id               String   @id @default(cuid())
-    phone            String
-    updatedAt        DateTime @updatedAt
-    url              String
-    orderNumber      Order    @relation(fields: [orderOrderNumber], references: [orderNumber])
+    id               String            @id @default(cuid())
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
+    customer         Customer          @relation(fields: [customerId], references: [id])
+    photo            Image[]
+    orderNumber      Order             @relation(fields: [orderOrderNumber], references: [orderNumber])
     orderOrderNumber String
+    status           EnumSupportStatus
+    customerId       String
 }
 
 model Node {
     createdAt       DateTime             @default(now())
     hostUrl         String
-    id              Int                  @id @default(autoincrement())
+    id              String               @id @default(cuid())
     industryCode    EnumNodeIndustryCode
     location        PostalAddress        @relation(fields: [postalAddressId], references: [id])
     operatorType    EnumNodeOperatorType
@@ -468,8 +471,9 @@ enum EnumCancelledBy {
 }
 
 enum EnumNodeIndustryCode {
-    LastMileDelivery
+    DeliveryServiceProvider
     Rideshare
+    RestaurantDeliveryService
 }
 
 enum EnumNodeOperatorType {
@@ -497,4 +501,11 @@ enum EnumDiet {
     LowSaltDiet
     VeganDiet
     VegetarianDiet
+}
+
+enum EnumSupportStatus {
+    Submitted
+    InProgress
+    Fixed
+    Cancelled
 }
