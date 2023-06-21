@@ -25,10 +25,10 @@ In federated delivery systems, actors interact with local servers by placing ord
 
 This specification defines two closely related and interacting protocols:
 
-##### A client to server protocol
+#### A client to server protocol
 This protocol permits a client to act on behalf of a user. For example, this protocol is used by a mobile phone application to interact with the local server.
 
-##### A server to server protocol
+#### A server to server protocol
 This protocol is used for information retrieval among different servers.
 
 ## 3. Objects
@@ -213,4 +213,15 @@ The server to server interactions follows the communication defined by SMTP. The
 * DATA: defines information as the data text of the mail body
 * NOOP: checks whether the server is still connected 
 * QUIT: stops the processing
+
+
+## 7. Security Conisderations
+
+### 7.1 Authentication and Authorization
+
+### 7.2 Verification
+
+### 7.3 Spam
+
+### 7.4 Federation denial-of-service
 
