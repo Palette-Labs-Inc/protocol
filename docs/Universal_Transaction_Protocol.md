@@ -10,7 +10,7 @@ UTP provides two layers:
 * A server to server federation protocol (so information can flow between the decentralized network)
 * A client to server protocol (so users, including buyers, couriers, and sellers can fulfill the transaction using their accounts on servers, from mobile apps or web apps)
 
-![avatar](https://drive.google.com/file/d/1B6QXakOI4aygQA2h8HVvQFyMMsIseZ3-/view?usp=drive_link)
+![avatar](img/UTP_overview.png)
 
 
 In UTP, a user is represented by "actors" via user's accounts on servers. Users' accounts on different servers correspond to different actors. There are different user types:
