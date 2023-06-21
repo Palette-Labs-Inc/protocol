@@ -58,17 +58,15 @@ There are four types of actors representing users in the UTP. Properties, types,
 
 ## 5. Client to Server Interactions
 
-The client to server interactions are represented by the following APIs.
-
-#### Order Lifecycle APIs
+The client to server interactions are represented by the Order Lifecycle APIs.
 
 The APIs are broadly applicable to all commercial transactions. These APIs represent a standard order lifecycle. There are four stages in the order lifecycle, including Explore, Purchase, Fulfill and Post-fulfill APIs. 
 
-#### 5.1 Explore API
+### 5.1 Explore API
 
 This is the stage where a buyer searches or explores the product(s) or service(s) they intend to purchase from a seller. The Explore API enables a buyer to query the network. The Explore API has a callback mechanism that returns a bazaar which includes a selection of sellers offering the intended product(s) or service(s). The Explore API also enables sellers list their menus and update information for buyer to search. 
 
-##### 5.1.1 Buyer Activities
+#### 5.1.1 Buyer Activities
 
 * search
     * location
@@ -76,7 +74,7 @@ This is the stage where a buyer searches or explores the product(s) or service(s
     * cuisine
     * menu_item
 
-##### 5.1.2 Seller Activities
+#### 5.1.2 Seller Activities
 
 * menu_create
 * menu_update
@@ -85,18 +83,18 @@ This is the stage where a buyer searches or explores the product(s) or service(s
 * menu_item_update
 * menu_item_delete
 
-###### 5.2 Purchase API
+### 5.2 Purchase API
 
 This is the stage where the buyer creates an order for the selected product(s) or service(s). The buyer selects the menu item(s) and/or offer(s) they plan to purchase from the seller. The buyer then creates an order and the server responds with a quote. 
 
-## 5.2.1 Buyer Activities
+#### 5.2.1 Buyer Activities
 
 * order_create
 * order_update
 * order_submit
 * order_cancel
 
-## 5.2.2 Seller Activities
+#### 5.2.2 Seller Activities
 
 * order_inventory_query
 * order_confirm
@@ -107,15 +105,15 @@ This is the stage where the buyer creates an order for the selected product(s) o
 
 This is the stage where the seller processes the order, packages the product(s), and if applicable, ships them to the buyer’s specified delivery address.
 
-## 5.3.1 Buyer Support Activities
+#### 5.3.1 Buyer Support Activities
 
 * status_query
 
-## 5.3.2 Seller Support Activities
+#### 5.3.2 Seller Support Activities
 
 * inventory_update
 
-## 5.3.3 Courier Support Activities
+#### 5.3.3 Courier Support Activities
 
 * delivery_confirm
 * delivery_cancel
@@ -125,23 +123,23 @@ This is the stage where the seller processes the order, packages the product(s),
 
 This is the stage where the buyer receives the order(s), and inspects the item(s). In this stage, the buyer may provide feedback, require customer support, or initiate a return/refund if dissatisfied depending on the policies created by the transacting Nodes. 
 
-## 5.4.1 Buyer Support Activities
+#### 5.4.1 Buyer Support Activities
 
 * rate_order
 * rate_delivery
 * require_support
 
-## 5.4.2 Seller Support Activities
+#### 5.4.2 Seller Support Activities
 
 * handle_rating
 * handle_support
 
-## 5.4.3 Courier Support Activities
+#### 5.4.3 Courier Support Activities
 
 * handle_rating
 * handle_support
 
-# TODO:
+#### TODO:
 data examples of the following order lifecycle (in JSON):
 
 ```
@@ -201,7 +199,7 @@ Courier reply to support requirement => server return response code => notify bu
 ```
 
 
-#### 6. Server to Server Interactions
+## 6. Server to Server Interactions
 
 In UTP, clients only interact with local servers, client's interaction with remote server is fulfilled with the local server as a proxy. Server to server interaction is fulfilled by a SMTP-like protocal, here we call federation protocol. 
 
