@@ -1279,7 +1279,7 @@ Order batching (couriers deliver multiple orders in one trip)
     <tr>
         <td>openHours</td>
         <td>OpeningHoursSpecfication[]</td>
-        <td>Opening hours for the menu</td>
+        <td>Available hours for the menu</td>
     </tr>
     <tr>
         <td>createdAt</td>
@@ -1297,7 +1297,7 @@ Order batching (couriers deliver multiple orders in one trip)
         <td>Modes of fulfillment for the menu, including pickup, delivery, dine in, takeout, drive through</td>
     </tr>
     <tr>
-        <td>hasmenuSection</td>
+        <td>hasMenuSection</td>
         <td>MenuSection[]</td>
         <td>Menu sections associated with the menu</td>
     </tr>

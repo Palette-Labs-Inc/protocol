@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The Universal Transaction Protocol(UTP) is a decentralized food delivery protocol based upon the [schema markup] (https://schema.org) data format. It provides a client to server API for placing, editing, confirming, and tracking an order as well as a federated server to server API for information communication.
+The Universal Transaction Protocol(UTP) is a decentralized food delivery protocol based upon the [schema markup](https://schema.org) data format. It provides a client to server API for placing, editing, confirming, and tracking an order as well as a federated server to server API for information communication.
 
 ## 1. Overview
 
@@ -68,20 +68,526 @@ This is the stage where a buyer searches or explores the product(s) or service(s
 
 #### 5.1.1 Buyer Activities
 
-* search
-    * location
-    * open_hours
-    * cuisine
-    * menu_item
+##### Search Activity
+
+Buyer can search bazzars or local businesses by location, opening hour, cuisine, menu item, etc, server return bazzars or local businesses that satisfy the searching requirement. 
+
+```
+GET api/exploreapi/buyer/search
+```
+
+Authorization:
+Not required
+
+Parameters:
+* byLocation: `Optional`, Array of Float, longitude and latitude, current location specified by the buyer, search for bazzars or local businesses nearby the specified location
+* byOpening_hour: `Optional`, DateTime, time specified by the buyer, search for bazzars or local businesses available at the specified time
+* by_Cuisine: `Optional`, String, cuisine specified by the buyer, e.g., Thai food, search for bazzars or local businesses provide the specified type of cuisine
+* byMenuItem: `Optional`, String, menu item specified by the buyer, e.g., chicken salad, earch for bazzars or local businesses provide the specified menu item
+
+Example Request:
+```json
+{
+    "byLcation": "[40.350720,-74.652070]",
+    "byOpening_hour":"2020-03-05T22:38:12.196Z",
+    "byCuisine": "Thai",
+    "byMenuItem": "Salad"
+},
+{
+    "byLocation": "[]",
+    "byOpening_hour":"",
+    "byCuisine": "Thai",
+    "byMenuItem": ""
+}
+```
+
+Response:
+
+200: OK
+```json
+{
+    "bazzars":[
+        {
+            "id": "B180744",
+            "name": "foo bar",
+            //...
+        },
+        {
+            "id": "B214293",
+            "name": "catstar",
+            //...
+        }
+    ],
+    "localBusinesses":[
+        {
+            "id": "L103085519055545958",
+            "name": "cutecats",
+            "logo": "https://unsplash.com/photos/nKC772R_qog",
+            //...
+        },
+        {
+            "id":"L101068121469614510",
+            "name": "kittycutie",
+            "logo": "https://unsplash.com/photos/nKC772R_qog",
+            //...
+        }
+    ]
+}
+```
 
 #### 5.1.2 Seller Activities
 
-* menu_create
-* menu_update
-* menu_delete
-* menu_item_create
-* menu_item_update
-* menu_item_delete
+##### Create Menu Activity
+
+Seller creates menu, sets up names, available hours, description, menu sections etc. 
+
+```
+POST api/exploreapi/seller/menu_create
+```
+
+Authorization:
+Required, seller needs to login to create new menu
+
+Form data parameters:
+* name: `Required`, String, name of the menu
+* menuSection: `Required`, Array of MenuSections, sections the menu contains
+* createAt: `Required`, Datetime, auto-filled with the current time
+* description: `Optional`, String, description of the menu
+* openHours: `Optional`, Array of OpeningHoursSpecification, available hours of the menu
+* fulfillmentModes: `Optional`, Array, options including pickup, delivery, dine in, takeout, drive through
+
+Example Request:
+```json
+{
+    "name": "Weekday Menu",
+    "description": "Menu for weekdays", 
+    "openHours": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday"
+            ],
+            "opens": "09:00",
+            "closes": "21:00"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "22:00"
+        }
+    ],
+    "fulfillmentMode": ["pickup", "delivery", "drive through"],
+    "menuSection": [
+        {
+            "@type": "MenuSection",
+            "name": "Sandwich", 
+            "description": ""
+        },
+        {
+            "@type": "MenuSection",
+            "name": "Sandwich Combos", 
+            "description": ""
+        },
+                {
+            "@type": "MenuSection",
+            "name": "Drinks", 
+            "description": ""
+        }
+    ],
+    "createAt": "2019-12-05T11:34:47.196Z"
+}
+```
+
+Response:
+
+200: OK, menu is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Update Menu Activity
+
+Seller updates given menu, edits up names, available hours, description, menu sections etc. 
+
+```
+PUT api/exploreapi/seller/menu_update
+```
+
+Authorization:
+Required, seller needs to login to edit the given menu
+
+Form data parameters:
+* menuId: `Required`, String, unique identifier of the menu
+* updatedAt: `Required`, Datetime, auto-filled with the current time
+* name: `Optional`, String, name of the menu, auto-filled with the existing value, if any
+* description: `Optional`, String, description of the menu, auto-filled with the existing value, if any
+* openHours: `Optional`, Array of OpeningHoursSpecification, available hours of the menu, auto-filled with the existing value, if any
+* fulfillmentModes: `Optional`, Array, options including pickup, delivery, dine in, takeout, drive through, auto-filled with the existing value, if any
+* menuSection: `Optional`, Array of MenuSections, sections the menu contains, auto-filled with the existing value, if any
+
+Example Request:
+```json
+{
+    "menuId": "M706331",
+    "name": "Weekday Menu",
+    "description": "Menu for weekdays", 
+    "openHours": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday"
+            ],
+            "opens": "11:00",
+            "closes": "21:00"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+                "Friday"
+            ],
+            "opens": "11:00",
+            "closes": "22:00"
+        }
+    ],
+    "fulfillmentMode": ["pickup", "delivery", "drive through"],
+    "menuSection": [
+        {
+            "@type": "MenuSection",
+            "name": "Sandwich", 
+            "description": ""
+        },
+        {
+            "@type": "MenuSection",
+            "name": "Sandwich Combos", 
+            "description": ""
+        },
+                {
+            "@type": "MenuSection",
+            "name": "Drinks", 
+            "description": ""
+        }
+    ],
+    "updatedAt": "2019-12-09T19:19:23.196Z"
+}
+```
+
+Response:
+
+200: OK, the given menu is updated
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Menu does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+##### Delete Menu Activity
+
+Seller deletes given menu
+```
+DELETE api/exploreapi/seller/menu_delete
+```
+
+Authorization:
+Required, seller needs to login to delete the given menu
+
+Form data parameters:
+* menuId: `Required`, String, unique identifier of the menu
+
+Example Request:
+```json
+{
+    "menuId": "M706331"
+}
+```
+
+Response:
+
+200: OK, the given menu is deleted
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Menu does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+##### Create Menu Item Activity
+
+Seller creates menu item, sets up names, description, nutritions, price, maximum purchaseable count etc. 
+
+```
+POST api/exploreapi/seller/menu_item_create
+```
+
+Authorization:
+Required, seller needs to login to create new menu items
+
+Form data parameters:
+* name: `Required`, String, name of the menu item
+* menuID: `Required`, String, menu this item is associated
+* createAt: `Required`, Datetime, auto-filled with the current time
+* price: `Required`, Float, price of the menu item
+* priceCurrency: `Required`, String, currency used for the price of the menu item
+* seller: `Required`, LocalBusiness, auto-filled with the login account
+* description: `Optional`, String, description of the menu item
+* nutrition: `Optional`, NutritionInformation, nutrition information for the menu item, calories etc.
+* menuAddon: `Optional`, Array of MenuItem, menu items that can be added as add-ons to the menu item
+* quantity: `Optional`, Int, quantity of the menu item available, default inf
+* maximumPurchasableCount: `Optional`, Int, maximum count of the menu item that can be purchased, default inf
+* minimumPurchasableCount: `Optional`, Int, minimum count of the menu item that can be purchased, default 0
+* itemStatus: `Optional`, String, status of the menu item, including in stock, sold out, etc
+* fulfillmentModes: `Optional`, Array, options including pickup, delivery, dine in, takeout, drive through
+* image: `Optional`, Array of String , URL of the photos of the menu item
+* menuSection: `Optional`, MenuSection, menu section the menu item belongs to
+* suitableForDiet: `Optional`, String, suitable diet for the menu item, diabetic, gluten free, vegan, etc 
+
+
+Example Request:
+```json
+{
+    "name": "Chicken Sandwich",
+    "menuId": "M706331",
+    "createAt": "2019-12-05T11:34:47.196Z",
+    "price": 6.5,
+    "priceCurrency": "USD",
+    "description": "Chicken breast fillet marinated in an authentic blend of Louisiana seasonings", 
+    "nutrition": {
+        "@type": "NutritionInformation",
+        "calories": "650 Cal"
+    },
+    "menuAddon": {
+        "@type": "MenuItem",
+        "name": "Pickles",
+        "price": 0.5,
+        "priceCurrency": "USD",
+        "nutrition": {
+            "@type": "NutritionInformation",
+            "calories": "5 Cal"
+        }
+    },
+    "quantity": 100,
+    "maximumPurchasableCount": 50,
+    "minimumPurchasableCount": 1,
+    "itemStatus": "in stock",
+    "fulfillmentModes": "pickup, delivery, dine in, takeout, drive through",
+    "image": ["https://jollibeefoods.com/products/original-chicken-sandwich"],
+    "menuSection": [
+        {
+            "@type": "MenuSection",
+            "memuSectionId": "S13784" ,
+            "name": "Sandwich"
+        }, 
+        {
+            "@type": "MenuSection",
+            "memuSectionId": "S13785" ,
+            "name": "Sandwich Combo"
+        }
+    ],
+    "suitableForDiet": ""
+}
+```
+
+Response:
+
+200: OK, menu item is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Update Menu Item Activity
+
+Seller updates menu item, edits up names, description, nutritions, price, maximum purchaseable count etc. 
+
+```
+PUT api/exploreapi/seller/menu_item_update
+```
+
+Authorization:
+Required, seller needs to login to edit given menu items
+
+Form data parameters:
+* menuItemId: `Required`, String, unique identifier of the menu item
+* menuId: `Optional`, String, auto-filled with existing value
+* name: `Optional`, String, name of the menu item, auto-filled with the existing value
+* updatedAt: `Optional`, Datetime, auto-filled with the current time, auto-filled with the existing value
+* price: `Optional`, Float, price of the menu item, auto-filled with the existing value
+* priceCurrency: `Optional`: Currency used for the price of the menu item, auto-filled with the existing value
+* description: `Optional`, String, description of the menu item, auto-filled with the existing value, if any
+* nutrition: `Optional`, NutritionInformation, nutrition information for the menu item, calories etc, auto-filled with the existing value, if any
+* menuAddon: `Optional`, Array of MenuItem, menu items that can be added as add-ons to the menu item, auto-filled with the existing value, if any
+* quantity: `Optional`, Int, quantity of the menu item available, auto-filled with the existing value, if any
+* maximumPurchasableCount: `Optional`, Int, maximum count of the menu item that can be purchased, auto-filled with the existing value, if any
+* minimumPurchasableCount: `Optional`, Int, minimum count of the menu item that can be purchased, auto-filled with the existing value, if any
+* itemStatus: `Optional`, String, status of the menu item, including in stock, sold out, etc, auto-filled with the existing value, if any
+* fulfillmentModes: `Optional`, Array, options including pickup, delivery, dine in, takeout, drive through, auto-filled with the existing value, if any
+* image: `Optional`, Array of String , URL of the photos of the menu item, auto-filled with the existing value, if any
+* menuSection: `Optional`, MenuSection, menu section the menu item belongs to, auto-filled with the existing value, if any
+* suitableForDiet: `Optional`, String, suitable diet for the menu item, diabetic, gluten free, vegan, etc, auto-filled with the existing value, if any
+
+
+Example Request:
+```json
+{
+    "menuItemId": "I102947643728",
+    "menuId": "M706331",
+    "name": "Chicken Sandwich",
+    "createAt": "2019-12-05T11:34:47.196Z",
+    "price": 8.5,
+    "priceCurrency": "USD",
+    "description": "Chicken breast fillet marinated in an authentic blend of Louisiana seasonings", 
+    "nutrition": {
+        "@type": "NutritionInformation",
+        "calories": "650 Cal"
+    },
+    "menuAddon": {
+        "@type": "MenuItem",
+        "name": "Pickles",
+        "price": 0.5,
+        "priceCurrency": "USD",
+        "nutrition": {
+            "@type": "NutritionInformation",
+            "calories": "5 Cal"
+        }
+    },
+    "quantity": 100,
+    "maximumPurchasableCount": 50,
+    "minimumPurchasableCount": 1,
+    "itemStatus": "in stock",
+    "fulfillmentModes": "pickup, delivery, dine in, takeout, drive through",
+    "image": ["https://jollibeefoods.com/products/original-chicken-sandwich"],
+    "menuSection": [
+        {
+            "@type": "MenuSection",
+            "memuSectionId": "S13784" ,
+            "name": "Sandwich"
+        }, 
+        {
+            "@type": "MenuSection",
+            "memuSectionId": "S13785" ,
+            "name": "Sandwich Combo"
+        }
+    ],
+    "suitableForDiet": ""
+}
+```
+
+Response:
+
+200: OK, the given menu item is successfully updated
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Menu item does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Delete Menu Item Activity
+
+Seller deletes given menu items
+```
+DELETE api/exploreapi/seller/menu_item_delete
+```
+
+Authorization:
+Required, seller needs to login to delete the given menu item
+
+Form data parameters:
+* menuItemId: `Required`, String, unique identifier of the menu
+
+Example Request:
+```json
+{
+    "menuItemId": "I102947643728"
+}
+```
+
+Response:
+
+200: OK, the given menu item is deleted
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Menu item does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
 
 ### 5.2 Purchase API
 
@@ -89,17 +595,557 @@ This is the stage where the buyer creates an order for the selected product(s) o
 
 #### 5.2.1 Buyer Activities
 
-* order_create
-* order_update
-* order_submit
-* order_cancel
+##### Create Order Activity
+
+Buyer creates order (not submitted yet) with at least one menu item in the order.
+```
+POST api/purchaseapi/buyer/order_create
+```
+
+Authorization:
+Required, buyer needs to login to create new order
+
+Form data parameters:
+* orderedItem: `Required`, Array of OrderItem, menu items added to the order, including items and quantities
+* orderDate: `Required`, DateTime, auto-filled with the current time
+* customer: `Required`, Customer, auto-filled with the login account
+* type: `Required`, String, pickup, delivery, dine in, takeout or drive through
+* sellerId: `Required`, String, seller id associated with the order
+* orderStatus: `Required`, String, CREATED in this case
+* deliveryAddress: `Required`, PostalAddress, delivery address of the order
+* discount: `Optional`, Promotion, promotion applied to the order
+* paymentTerm: `Optional`, PaymentTerm, payment related information
+
+Example Request:
+```json
+{
+    "orderedItem": [
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I102947643728",
+            },
+            "orderQuantity": 2,
+            "orderItemStatus": "in stock"
+        }
+    ],
+    "orderDate": "2019-12-05T11:34:47.196Z",
+    "customer": {
+        "@type":"Customer",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "type": "delivery",
+    "sellerId": "L329847089",
+    "orderStatus": "CREATED",
+    "deliveryAddress": {
+        "@type": "PostalAddress", 
+        "addressCountry": "USA", 
+        "addressLocality": "Princeton", 
+        "addressRegion": "New Jersey",
+        "postalCode": "08540",
+        "streetAddress": "35 Olden St",
+        //...
+    },
+    "discount": {},
+    "paymentTerm":{}
+}
+```
+Response:
+
+200: OK, order is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Update Order Activity
+
+Buyer updates order (not submitted yet) by adding or deleting items.
+```
+PUT api/purchaseapi/buyer/order_update
+```
+
+Authorization:
+Required, buyer needs to login to edit the given order
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* updatedAt: `Required`, DateTime, auto-filled with the current time
+* updatedBy: `Required`, String, Buyer in this case
+* orderedItem: `Optional`, Array of OrderItem, menu items added to the order, including items and quantities, auto-filled with the existing value
+* customer: `Optional`, Customer, auto-filled with the login account
+* type: `Optional`, String, pickup, delivery, dine in, takeout or drive through, auto-filled with the existing value
+* sellerId: `Optional`, String, seller id associated with the order, auto-filled with the existing value
+* orderStatus: `Optional`, String, CREATED before submission
+* deliveryAddress: `Optional`, PostalAddress, delivery address of the order, auto-filled with the existing value
+* discount: `Optional`, Promotion, promotion applied to the order, auto-filled with the existing value, if any
+* paymentTerm: `Optional`, PaymentTerm, payment related information, auto-filled with the existing value, if any
+
+Example Request:
+```json
+{
+    "orderNumber": "O328472389570",
+    "orderedItem": [
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I102947643728",
+            },
+            "orderQuantity": 5,
+            "orderItemStatus": "in stock"
+        }
+    ],
+    "orderDate": "2019-12-05T11:34:47.196Z",
+    "updatedAt": "2019-12-05T12:04:12.196Z",
+    "updatedBy": "Buyer",
+    "customer": {
+        "@type":"Customer",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "type": "delivery",
+    "sellerId": "L329847089",
+    "orderStatus": "CREATED",
+    "deliveryAddress": {
+        "@type": "PostalAddress", 
+        "addressCountry": "USA", 
+        "addressLocality": "Princeton", 
+        "addressRegion": "New Jersey",
+        "postalCode": "08540",
+        "streetAddress": "35 Olden St",
+        //...
+    },
+    "discount": {},
+    "paymentTerm":{}
+}
+```
+Response:
+
+200: OK, order is successfully edited
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Submit Order Activity
+
+Buyer submits the order (cannot change after submission), with ordered items, delivery address (if needed), and payment information
+```
+PUT api/purchaseapi/buyer/order_submit
+```
+
+Authorization:
+Required, buyer needs to login to submit the given order
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* updatedAt: `Required`, DateTime, auto-filled with the current time
+* orderedItem: `Required`, Array of OrderItem, menu items added to the order, including items and quantities
+* orderDate: `Required`, DateTime, auto-filled with the current time
+* customer: `Required`, Customer, auto-filled with the login account
+* type: `Required`, String, pickup, delivery, dine in, takeout or drive through
+* sellerId: `Required`, String, seller id associated with the order
+* orderStatus: `Required`, String, SUBMITTED in this case
+* deliveryAddress: `Required`, PostalAddress, delivery address of the order
+* discount: `Optional`, Promotion, promotion applied to the order
+* paymentTerm: `Required`, PaymentTerm, payment related information
+
+Example Request:
+```json
+{
+    "orderNumber": "O328472389570",
+    "orderedItem": [
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I102947643728",
+            },
+            "orderQuantity": 2,
+            "orderItemStatus": "in stock"
+        },
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I148952602436",
+            },
+            "orderQuantity": 1,
+            "orderItemStatus": "in stock"
+        }
+    ],
+    "updatedAt": "2019-12-05T12:14:29.196Z",
+    "orderDate": "2019-12-05T11:34:47.196Z",
+    "customer": {
+        "@type":"Customer",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "type": "delivery",
+    "sellerId": "L329847089",
+    "orderStatus": "SUBMITTED",
+    "deliveryAddress": {
+        "@type": "PostalAddress", 
+        "addressCountry": "USA", 
+        "addressLocality": "Princeton", 
+        "addressRegion": "New Jersey",
+        "postalCode": "08540",
+        "streetAddress": "35 Olden St",
+        //...
+    },
+    "discount": {},
+    "paymentTerm":{
+        "@type": "PaymentTerm",
+        "lifecycleProcessing": "pre fulfillment",
+        "tip": 2.0,
+        "servicePrice": 1.2,
+        "paymentCurrency": "USD",
+        "commissionCharged": 0,
+        "paymentMethod": "PayPal",
+        "status": "processed"
+    }
+}
+```
+Response:
+
+200: OK, order is successfully submitted
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Cancel order Activity
+
+Buyer cancels the order
+```
+PUT api/purchaseapi/buyer/order_cancel
+```
+
+Authorization:
+Required, buyer needs to login to submit the given order
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* updatedAt: `Required`, DateTime, auto-filled with the current time
+* orderStatus: `Required`, String, CANCELLED in this case
+* cancelledBy: `Required`, String, Buyer in this case
+
+Example Request:
+```json
+{
+    "orderNumber": "O328472389570",
+    "updatedAt": "2019-12-05T12:14:29.196Z",
+    "orderStatus": "CANCELLED",
+    "cancelledBy": "Buyer"
+}
+···
+
+Response:
+
+200: OK, order is successfully cancelled
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Get Order Quote Activity
+
+Buyer gets quote of the given order
+```
+GET api/purchaseapi/buyer/order_quote
+```
+
+Authorization:
+Required, buyer needs to login to get the order quote
+
+Parameter:
+* orderNumber: `Required`, String, unique identifier of the order
+
+Example Request:
+```json
+{
+       "orderNumber": "O328472389570"
+}
+```
+
+Response:
+
+200: OK
+```json
+{
+    "totalPrice": 23.54,
+    "currency": "USD",
+    "orderedItems": [
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I102947643728",
+            },
+            "orderQuantity": 2,
+            "orderItemStatus": "in stock"
+        },
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I148952602436",
+            },
+            "orderQuantity": 1,
+            "orderItemStatus": "in stock"
+        }
+    ]
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
 
 #### 5.2.2 Seller Activities
 
-* order_inventory_query
-* order_confirm
-* order_cancel
-* order_update
+##### Confirm Order Activity
+
+Seller confirms the order
+```
+PUT api/purchaseapi/seller/order_confirm
+```
+
+Authorization:
+Required, seller needs to login to confirm the given order
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* updatedAt: `Required`, DateTime, auto-filled with the current time
+* orderStatus: `Required`, String, CONFIRMED in this case
+
+Example Request:
+```json
+{
+    "orderNumber": "O328472389570",
+    "updatedAt": "2019-12-05T12:14:29.196Z",
+    "orderStatus": "CONFIRMED"
+}
+```
+
+Response:
+
+200: OK, order is successfully confirmed
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Cancel Order Activity
+
+Seller cancels the order
+```
+PUT api/purchaseapi/seller/order_cancel
+```
+
+Authorization:
+Required, seller needs to login to confirm the given order
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* updatedAt: `Required`, DateTime, auto-filled with the current time
+* orderStatus: `Required`, String, CANCELLED in this case
+* cancelledBy: `Required`, String, Seller in this case
+
+Example Request:
+```json
+{
+    "orderNumber": "O328472389570",
+    "updatedAt": "2019-12-05T12:14:29.196Z",
+    "orderStatus": "CANCELLED",
+    "cancelledBy": "Seller"
+}
+···
+
+Response:
+
+200: OK, order is successfully cancelled
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+##### Update Order Activity
+
+Seller updates the order by editing the ordered items, discounts applied 
+```
+PUT api/purchaseapi/seller/order_update
+```
+
+Authorization:
+Required, seller needs to login to edit the given order
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* updatedAt: `Required`, DateTime, auto-filled with the current time
+* updatedBy: `Required`, String, Seller in this case
+* orderedItem: `Optional`, Array of OrderItem, menu items added to the order, including items and quantities, auto-filled with the existing value
+* discount: `Optional`, Promotion, coupon applied to the order
+
+Example Request:
+```json
+{
+    "orderNumber": "O328472389570",
+    "orderedItem": [
+        {
+            "@type": "OrderedItem",
+            "orderedItem": {
+                "@type": "MenuItem",
+                "menuItemId": "I102947643728",
+            },
+            "orderQuantity": 5,
+            "orderItemStatus": "in stock"
+        }
+    ],
+    "updatedAt": "2019-12-05T12:04:12.196Z",
+    "updatedBy": "Seller",
+    "discount": {
+        "@type": "Promotion",
+        "content":"10% OFF",
+    }
+}
+```
+
+Response:
+
+200: OK, order is successfully cancelled
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
 
 ### 5.3 Fulfill API
 
@@ -143,28 +1189,6 @@ This is the stage where the buyer receives the order(s), and inspects the item(s
 data examples of the following order lifecycle (in JSON):
 
 ```
-Buyer search (by location, opening hour, cuisine, menu item, etc)=> server return bazzar or restaurants 
-
-Seller create menu => server return response code
-
-Seller update menu => server return response code
-
-Seller delete menu => server return response code
-
-Seller create menu item => server return response code
-
-Seller update menu item => server return response code
-
-Seller delete menu item => server return response code
-
-Buyer create order => server generate order number and return
-
-Buyer update (add items to) order => server return quotes
-
-Buyer submit order => server return response code => notify seller
-
-Buyer cancel order => server return response code => notify seller
-
 Seller send query request about inventory => server return cooresponding query results
 
 Seller confirm => server return response code => notify buyer
@@ -179,7 +1203,7 @@ Courier confirm delivery => server return response code => notify buyer and sell
 
 Courier cancel delivery => server return response code => notify the new assigned courier
 
-Courier update (picked up/delivered) order status => server return response code => notify buyer
+Courier update (arrived/picked up/delivered) order status => server return response code => notify buyer
 
 Buyer send query about order status => server return order status
 

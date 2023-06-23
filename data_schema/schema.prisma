@@ -142,6 +142,7 @@ model Promotion {
     updatedAt     DateTime                   @updatedAt
     openingHours  OpeningHoursSpecfication[]
     Order         Order[]
+    content       String
 }
 
 model Image {
@@ -232,6 +233,7 @@ model Order {
     postalAddressId    String
     referenceOrderId   String
     updatedAt          DateTime             @updatedAt
+    updatedBy          EnumUpdatedBy
     type               EnumFulfillmentModes
     Cancellation       Cancellation[]
     Support            Support[]
@@ -245,6 +247,8 @@ model OrderItem {
     menuItemId      String
     orderQuantity   Int
     orderItemStatus EnumItemStatus
+    Quote           Quote?         @relation(fields: [quoteId], references: [id])
+    quoteId         String?
 }
 
 model PaymentTerm {
@@ -283,7 +287,7 @@ model Menu {
     createdAt        DateTime                   @default(now())
     updatedAt        DateTime                   @updatedAt
     fulfillmentModes EnumFulfillmentModes
-    hasmenuSection   MenuSection[]
+    hasMenuSection   MenuSection[]
     MenuItem         MenuItem[]
 }
 
@@ -319,7 +323,6 @@ model MenuItem {
     updatedAt               DateTime             @updatedAt
     image                   Image[]
     review                  Review[]
-    Quote                   Quote[]
     MenuSection             MenuSection?         @relation(fields: [menuSectionId], references: [id])
     menuSectionId           String?
     nutritionInformationId  String
@@ -353,13 +356,13 @@ model Cancellation {
 }
 
 model Quote {
-    createdAt  DateTime   @default(now())
-    currency   String
-    id         String     @id @default(cuid())
-    menuItems  MenuItem[]
-    timeToLive Int
-    totalPrice Float
-    updatedAt  DateTime   @updatedAt
+    createdAt    DateTime    @default(now())
+    currency     String
+    id           String      @id @default(cuid())
+    orderedItems OrderItem[]
+    timeToLive   Int
+    totalPrice   Float
+    updatedAt    DateTime    @updatedAt
 }
 
 model Support {
@@ -429,6 +432,8 @@ enum EnumGender {
 }
 
 enum EnumOrderStatus {
+    OrderCreated
+    OrderSubmitted
     OrderCancelled
     OrderDelivered
     OrderInTransit
@@ -508,4 +513,10 @@ enum EnumSupportStatus {
     InProgress
     Fixed
     Cancelled
+}
+
+enum EnumUpdatedBy {
+    Seller
+    Buyer
+    Courier
 }
