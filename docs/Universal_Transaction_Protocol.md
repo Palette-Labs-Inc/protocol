@@ -68,7 +68,7 @@ This is the stage where a buyer searches or explores the product(s) or service(s
 
 #### 5.1.1 Buyer Activities
 
-##### Search Activity
+#### Search Activity
 
 Buyer can search bazzars or local businesses by location, opening hour, cuisine, menu item, etc, server return bazzars or local businesses that satisfy the searching requirement. 
 
@@ -137,7 +137,7 @@ Response:
 
 #### 5.1.2 Seller Activities
 
-##### Create Menu Activity
+#### Create Menu Activity
 
 Seller creates menu, sets up names, available hours, description, menu sections etc. 
 
@@ -222,7 +222,7 @@ Response:
 }
 ```
 
-##### Update Menu Activity
+#### Update Menu Activity
 
 Seller updates given menu, edits up names, available hours, description, menu sections etc. 
 
@@ -315,7 +315,7 @@ Menu does not exist
     "error": "Validation failed: Text can't be blank"
 }
 ```
-##### Delete Menu Activity
+#### Delete Menu Activity
 
 Seller deletes given menu
 ```
@@ -353,7 +353,7 @@ Menu does not exist
     "error": "Record not found"
 }
 ```
-##### Create Menu Item Activity
+#### Create Menu Item Activity
 
 Seller creates menu item, sets up names, description, nutritions, price, maximum purchaseable count etc. 
 
@@ -447,7 +447,7 @@ Response:
 }
 ```
 
-##### Update Menu Item Activity
+#### Update Menu Item Activity
 
 Seller updates menu item, edits up names, description, nutritions, price, maximum purchaseable count etc. 
 
@@ -549,7 +549,7 @@ Menu item does not exist
 }
 ```
 
-##### Delete Menu Item Activity
+#### Delete Menu Item Activity
 
 Seller deletes given menu items
 ```
@@ -595,7 +595,7 @@ This is the stage where the buyer creates an order for the selected product(s) o
 
 #### 5.2.1 Buyer Activities
 
-##### Create Order Activity
+#### Create Order Activity
 
 Buyer creates order (not submitted yet) with at least one menu item in the order.
 ```
@@ -671,7 +671,7 @@ Response:
 }
 ```
 
-##### Update Order Activity
+#### Update Order Activity
 
 Buyer updates order (not submitted yet) by adding or deleting items.
 ```
@@ -760,7 +760,7 @@ Order does not exist
 }
 ```
 
-##### Submit Order Activity
+#### Submit Order Activity
 
 Buyer submits the order (cannot change after submission), with ordered items, delivery address (if needed), and payment information
 ```
@@ -866,7 +866,7 @@ Order does not exist
 }
 ```
 
-##### Cancel order Activity
+#### Cancel order Activity
 
 Buyer cancels the order
 ```
@@ -890,7 +890,7 @@ Example Request:
     "orderStatus": "CANCELLED",
     "cancelledBy": "Buyer"
 }
-···
+```
 
 Response:
 
@@ -918,7 +918,7 @@ Order does not exist
 }
 ```
 
-##### Get Order Quote Activity
+#### Get Order Quote Activity
 
 Buyer gets quote of the given order
 ```
@@ -978,7 +978,7 @@ Order does not exist
 
 #### 5.2.2 Seller Activities
 
-##### Confirm Order Activity
+#### Confirm Order Activity
 
 Seller confirms the order
 ```
@@ -1028,7 +1028,7 @@ Order does not exist
 }
 ```
 
-##### Cancel Order Activity
+#### Cancel Order Activity
 
 Seller cancels the order
 ```
@@ -1080,7 +1080,7 @@ Order does not exist
 }
 ```
 
-##### Update Order Activity
+#### Update Order Activity
 
 Seller updates the order by editing the ordered items, discounts applied 
 ```
