@@ -1052,7 +1052,7 @@ Example Request:
     "orderStatus": "CANCELLED",
     "cancelledBy": "Seller"
 }
-···
+```
 
 Response:
 
@@ -1153,17 +1153,298 @@ This is the stage where the seller processes the order, packages the product(s),
 
 #### 5.3.1 Buyer Support Activities
 
-* status_query
+#### Check Order Status Activity
+
+Buyer checks the order status
+```
+GET api/fulfillapi/buyer/status_query
+```
+
+Authorization: 
+Required, buyer needs to login to check the given order
+
+Parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+
+Example Request:
+```json
+{
+     "orderNumber": "O328472389570"
+}
+```
+
+Response:
+
+200: OK
+```json
+{
+    "orderStatus": "CONFIRMED",
+    "updatedAt": "2019-12-05T12:04:12.196Z",
+    "updatedBy": "Seller"
+}
+```
+
+#### Send Message Activity
+
+Buyer communicates with seller or courier
+```
+POST api/fulfillapi/buyer/send_message
+```
+
+Authorization: 
+Required, buyer needs to login to send message
+
+Form data parameters:
+* relatedOrder: `Required`, String, order numbe this message related
+* senderId: `Required`, String, auto-filled with the login account
+* recipientId: `Required`, String, courier id or buyer id or both
+* message: `Required`, String, message content
+
+Example Requests:
+```json
+{
+    "relatedOrder": "O328472389570",
+    "senderId": "C32478609812",
+    "recipientId": "L103085519055545958",
+    "message": "Hi, when will the order be ready?"
+}
+```
+
+Response
+
+200: OK, message is successfully sent
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order/Recipient does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
 
 #### 5.3.2 Seller Support Activities
 
-* inventory_update
+#### Send Message Activity
+
+Seller communicates with buyer or courier
+```
+POST api/fulfillapi/seller/send_message
+```
+
+Authorization: 
+Required, seller needs to login to send message
+
+Form data parameters:
+* relatedOrder: `Required`, String, order numbe this message related
+* senderId: `Required`, String, auto-filled with the login account
+* recipientId: `Required`, String, courier id or buyer id or both
+* message: `Required`, String, message content
+
+Example Requests:
+```json
+{
+    "relatedOrder": "O328472389570",
+    "senderId": "L103085519055545958",
+    "recipientId": "C32478609812",
+    "message": "Hi, the order is ready for pickup"
+}
+```
+
+Response
+
+200: OK, message is successfully sent
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order/Recipient does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+#### Update Order Status Activity
+
+Buyer updates the order status, setting up ready for pickup, delayed etc. 
+```
+PUT api/fulfillapi/seller/order_status_update
+```
+
+Authorization: 
+Required, seller needs to login to edit given order status
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* orderStatus: `Required`, String, latest status update from the seller's perspective
+* updatedAt: `Required`, DateTime, auto-filled with current time
+
+Example Requests:
+```json
+{
+    "orderNumber": "O328472389570",
+    "updatedAt": "2019-12-05T12:14:29.196Z",
+    "orderStatus": "READY FOR PICKUP",
+}
+```
+
+Response:
+
+200: OK, order status is successfully cancelled
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
 
 #### 5.3.3 Courier Support Activities
 
-* delivery_confirm
-* delivery_cancel
-* status_update
+#### Accept/Reject Delivery Activity
+
+Courier accepts or rejects the assigned order
+```
+POST api/fulfillapi/courier/delivery_accept
+```
+
+Authorization: 
+Required, courier needs to login to accept or reject the delivery
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* courierId: `Required`, String, associated courier assign with this order
+* createdAt: `Required`, DateTime, auto-filled with current time
+* accept: `Required`, Boolean, true represents accept and false represents reject
+
+Example Requests:
+```json
+{
+    "orderNumber": "O328472389570",
+    "courierId": "C4389274498357",
+    "createdAt": "2019-12-05T11:34:47.196Z",
+    "accept": true
+}
+```
+
+Response:
+
+200: OK, the delivery is successfully accepted/rejected
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+#### Update Delivery Activity
+
+Courier updates the delivery status
+```
+PUT api/fulfillapi/courier/delivery_update
+```
+
+Authorization: 
+Required, courier needs to login to edit the delivery status
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* courierId: `Required`, String, associated courier assign with this order
+* orderDeliveryStatus: `Required`, String, delivery status, options contain waiting, picked up, delivered
+* updatedAt: `Required`, DateTime, auto-filled with current time
+
+Example Requests:
+```json
+{
+    "orderNumber": "O328472389570",
+    "courierId": "C4389274498357",
+    "orderDeliveryStatus": "picked up",
+    "updatedAt": "2019-12-05T11:34:47.196Z"
+}
+```
+
+Response:
+
+200: OK, the delivery is successfully updated
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+404: Not found
+Order does not exist
+```json
+{
+    "error": "Record not found"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
 
 ### 5.4 Post-fulfill API
 
@@ -1184,44 +1465,6 @@ This is the stage where the buyer receives the order(s), and inspects the item(s
 
 * handle_rating
 * handle_support
-
-#### TODO:
-data examples of the following order lifecycle (in JSON):
-
-```
-Seller send query request about inventory => server return cooresponding query results
-
-Seller confirm => server return response code => notify buyer
-
-Seller cancel order => server return response code => notify buyer
-
-Seller update (ready for pickup) order status=> server return response code => notify buyer and courier or just buyer
-
-Seller update inventory => server return updated results
-
-Courier confirm delivery => server return response code => notify buyer and seller
-
-Courier cancel delivery => server return response code => notify the new assigned courier
-
-Courier update (arrived/picked up/delivered) order status => server return response code => notify buyer
-
-Buyer send query about order status => server return order status
-
-Buyer rate order => server return response code => notify seller
-
-Buyer rate delivery => server return response code => notify courier
-
-Buyer require order support => server return response code => notify buyer or courier or both
-
-Seller reply to rating => server return response code => notify buyer
-
-Seller reply to support requirement => server return response code => notify buyer
-
-Courier reply to rating => server return response code => notify buyer
-
-Courier reply to support requirement => server return response code => notify buyer
-```
-
 
 ## 6. Server to Server Interactions
 

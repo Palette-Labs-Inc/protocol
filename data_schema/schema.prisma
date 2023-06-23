@@ -220,8 +220,11 @@ model Order {
     orderDelivery      OrderDelivery        @relation(fields: [orderDeliveryId], references: [id])
     orderDeliveryId    String
     orderDate          DateTime             @default(now())
-    orderCompleteDate  DateTime
     orderETA           DateTime
+    orderReadyTime     DateTime
+    courierArriedTime  DateTime
+    orderPickedupTime  DateTime
+    orderCompleteDate  DateTime
     customer           Customer             @relation(fields: [customerId], references: [id])
     customerId         String
     discount           Promotion            @relation(fields: [promotionId], references: [id])
@@ -237,6 +240,7 @@ model Order {
     type               EnumFulfillmentModes
     Cancellation       Cancellation[]
     Support            Support[]
+    Messages           Messages[]
 }
 
 model OrderItem {
@@ -271,10 +275,12 @@ model PaymentTerm {
 }
 
 model OrderDelivery {
-    id        String  @id @default(cuid())
+    id        String   @id @default(cuid())
     Order     Order[]
-    courier   Courier @relation(fields: [courierId], references: [id])
+    courier   Courier  @relation(fields: [courierId], references: [id])
     courierId String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }
 
 model Menu {
@@ -386,6 +392,16 @@ model Node {
     operatorType    EnumNodeOperatorType
     updatedAt       DateTime             @updatedAt
     postalAddressId String
+}
+
+model Messages {
+    id           String   @id @default(cuid())
+    sendAt       DateTime @default(now())
+    senderId     String
+    recipentId   String
+    message      String
+    relatedOrder Order    @relation(fields: [orderNumber], references: [orderNumber])
+    orderNumber  String
 }
 
 enum EnumPaymentAccepted {
