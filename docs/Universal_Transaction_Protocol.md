@@ -81,21 +81,21 @@ Not required
 
 Parameters:
 * byLocation: `Optional`, Array of Float, longitude and latitude, current location specified by the buyer, search for bazzars or local businesses nearby the specified location
-* byOpening_hour: `Optional`, DateTime, time specified by the buyer, search for bazzars or local businesses available at the specified time
-* by_Cuisine: `Optional`, String, cuisine specified by the buyer, e.g., Thai food, search for bazzars or local businesses provide the specified type of cuisine
+* byOpeningHour: `Optional`, DateTime, time specified by the buyer, search for bazzars or local businesses available at the specified time
+* byCuisine: `Optional`, String, cuisine specified by the buyer, e.g., Thai food, search for bazzars or local businesses provide the specified type of cuisine
 * byMenuItem: `Optional`, String, menu item specified by the buyer, e.g., chicken salad, earch for bazzars or local businesses provide the specified menu item
 
 Example Request:
 ```json
 {
     "byLcation": "[40.350720,-74.652070]",
-    "byOpening_hour":"2020-03-05T22:38:12.196Z",
+    "byOpeningHour":"2020-03-05T22:38:12.196Z",
     "byCuisine": "Thai",
     "byMenuItem": "Salad"
 },
 {
     "byLocation": "[]",
-    "byOpening_hour":"",
+    "byOpeningHour":"",
     "byCuisine": "Thai",
     "byMenuItem": ""
 }
@@ -633,6 +633,7 @@ Example Request:
     "orderDate": "2019-12-05T11:34:47.196Z",
     "customer": {
         "@type":"Customer",
+        "id": "C3948563098",
         "givenName": "Yuhan",
         "familyName": "Liu",
         //...
@@ -1452,25 +1453,355 @@ This is the stage where the buyer receives the order(s), and inspects the item(s
 
 #### 5.4.1 Buyer Support Activities
 
-* rate_order
-* rate_delivery
-* require_support
+#### Rate Order Activity
+
+Buyer rates order after the order is delivered
+```
+POST api/postfulfillapi/buyer/rate_order
+```
+
+Authorization: 
+Required, buyer needs to login to rate the order
+
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* customer: `Required`, Customer, auto-filled with the login account
+* createdAt: `Required`, DateTime, auto-filled with current time
+* rating: `Required`, Float, rating given to the order
+* review: `Optional`, String, review of the order
+
+Example Requests:
+```json
+{
+    "orderNumber": "O328472389570",
+    "customer": {
+        "@type":"Customer",
+        "id": "C3948563098",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "createdAt": "2019-12-05T11:34:47.196Z",
+    "rating": 4.5,
+    "review": "good"
+
+}
+```
+
+Response:
+
+200: OK, the rating is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+#### Rate Delivery Activity
+
+Buyer rates delivery after the order is delivered
+```
+POST api/postfulfillapi/buyer/rate_delivery
+```
+
+Authorization: 
+Required, buyer needs to login to rate the delivery
+
+
+Form data parameters:
+* orderDeliveryNumber: `Required`, String, unique identifier of the delivery
+* customer: `Required`, Customer, auto-filled with the login account
+* createdAt: `Required`, DateTime, auto-filled with current time
+* rating: `Required`, Float, rating given to the order
+* review: `Optional`, String, review of the order
+
+Example Requests:
+```json
+{
+    "orderDeliveryNumber": "D328472389570",
+    "customer": {
+        "@type":"Customer",
+        "id": "C3948563098",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "createdAt": "2019-12-05T11:34:47.196Z",
+    "rating": 5.0,
+    "review": "pretty fast"
+
+}
+```
+
+Response:
+
+200: OK, the rating is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+#### Submit Support Ticket Activity
+
+Buy requires customer support for specific order
+
+```
+POST api/postfulfillapi/buyer/require_support
+```
+
+Authorization: 
+Required, buyer needs to login to require customer support
+
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+* customer: `Required`, Customer, auto-filled with the login account
+* createdAt: `Required`, DateTime, auto-filled with current time
+* detail: `Required`, String, details of the request of customer support
+* status: `Required`, String, "CREATED" in this case
+* photo: `Optional`, Array of String, URLs of uploaded photo about the ticket
+
+Example Requests:
+```json
+{
+    "orderNumber": "O328472389570",
+    "customer": {
+        "@type":"Customer",
+        "id": "C3948563098",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "createdAt": "2019-12-05T11:34:47.196Z",
+    "detail": "The Diet Coke is missing in the order",
+    "photo":[],
+    "status": "CREATED"
+
+}
+```
+
+Response: 
+
+200: OK, the ticket is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+#### Update Support Ticket Activity
+
+Buy updates the status, details or photos of the customer support ticket
+
+```
+PUT api/postfulfillapi/buyer/require_support
+```
+
+Authorization: 
+Required, buyer needs to login to require customer support
+
+
+Form data parameters:
+* orderNumber: `Optional`, String, unique identifier of the order, auto-filled with the existing value
+* customer: `Optional`, Customer, auto-filled with the login account, auto-filled with the existing value
+* updatedAt: `Required`, DateTime, auto-filled with current time
+* detail: `Optional`, String, details of the request of customer support, auto-filled with the existing value, if any
+* status: `Required`, String, "CREATED", "CANCELLED" or "SOLVED" in this case
+* photo: `Optional`, Array of String, URLs of uploaded photo about the ticket, auto-filled with the existing value, if any
+
+Example Requests:
+```json
+{
+    "orderNumber": "O328472389570",
+    "customer": {
+        "@type":"Customer",
+        "id": "C3948563098",
+        "givenName": "Yuhan",
+        "familyName": "Liu",
+        //...
+    },
+    "updatedAt": "2019-12-05T11:34:47.196Z",
+    "detail": "The Diet Coke is missing in the order",
+    "photo":[],
+    "status": "SOLVED"
+
+}
+```
+
+Response: 
+
+200: OK, the ticket is successfully updated
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
 
 #### 5.4.2 Seller Support Activities
 
-* handle_rating
-* handle_support
+#### Reply to Rating Activity
+
+Seller replies to the rating given by the buyer
+```
+POST api/postfulfillapi/seller/reply_rating
+```
+
+Authorization: 
+Required, seller needs to login to reply to the rating
+
+Form data parameters:
+* reviewId: `Required`, String, the unique identifier of the review
+* seller: `Required`, LocalBusiness, auto-filled with the login account
+* createdAt: `Required`, DateTime, auto-filled with current time
+* reply: `Required`, String, content of the reply 
+
+Example Request:
+```json
+{
+    "reviewId": "R94382",
+    "seller": {
+        "@type": "LocalBusiness",
+        "id": "L103085519055545958",
+        "name": "cutecats",
+        "logo": "https://unsplash.com/photos/nKC772R_qog",
+        //...
+    },
+    "createdAt": "2019-12-05T11:34:47.196Z",
+    "reply": "Thank you!"
+}
+```
+
+Response: 
+
+200: OK, the reply is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
+
+#### Handle Support Activity
+
+Seller handles the customer support request
+```
+POST api/postfulfillapi/seller/handle_support
+```
+
+Authorization: 
+Required, seller needs to login to reply to the rating
+
+Form data parameters:
+* orderNumber: `Required`, String, unique identifier of the order
+*  
 
 #### 5.4.3 Courier Support Activities
 
-* handle_rating
-* handle_support
+#### Reply to Rating Activity
+
+Courier replies to the rating given by the buyer
+```
+POST api/postfulfillapi/courier/reply_rating
+```
+
+Authorization: 
+Required, courier needs to login to reply to the rating
+
+Form data parameters:
+* reviewId: `Required`, String, the unique identifier of the review
+* courier: `Required`, Courier, auto-filled with the login account
+* createdAt: `Required`, DateTime, auto-filled with current time
+* reply: `Required`, String, content of the reply 
+
+Example Request:
+```json
+{
+    "reviewId": "R94382",
+    "courier": {
+        "@type": "Courier",
+        "id": "C4389274498357",
+        //...
+    },
+    "createdAt": "2019-12-05T11:34:47.196Z",
+    "reply": "Thank you!"
+}
+```
+
+Response: 
+
+200: OK, the reply is successfully created
+
+401: Unauthorized
+```json
+{
+    "error": "The access token is invalid"
+}
+```
+
+422: Unprocessable entity
+```json
+{
+    "error": "Validation failed: Text can't be blank"
+}
+```
 
 ## 6. Server to Server Interactions
 
-In UTP, clients only interact with local servers, client's interaction with remote server is fulfilled with the local server as a proxy. Server to server interaction is fulfilled by a SMTP-like protocal, here we call federation protocol. 
+In UTP, clients only interact with local servers, client's interaction with remote server is fulfilled with the local server as a proxy. Server to server interaction is fulfilled by a protocal combined X and SMTP, here we call federation protocol. 
 
-The server to server interactions follows the communication defined by SMTP. The basic commands in server to server interactions are:
+### 6.1 Data Broadcast - X
+
+
+
+### 6.1 Peer-to-Peer Communication - SMTP
+
+The peer-to-peer communication in our protocol follows SMTP. The basic commands in server to server interactions are:
 
 * HELO: identifies the sending host
 * MAIL FROM: specifies the sender
@@ -1480,7 +1811,6 @@ The server to server interactions follows the communication defined by SMTP. The
 * DATA: defines information as the data text of the mail body
 * NOOP: checks whether the server is still connected 
 * QUIT: stops the processing
-
 
 ## 7. Security Conisderations
 
