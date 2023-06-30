@@ -17,6 +17,33 @@ model Bazaar {
     Courier          Courier[]
 }
 
+model MenuItem {
+    id                      String               @id @default(cuid())
+    OrderItem               OrderItem[]
+    Menu                    Menu?                @relation(fields: [menuId], references: [id])
+    menuId                  String?
+    name                    String
+    nutrition               NutritionInformation @relation(fields: [nutritionInformationId], references: [id])
+    description             String
+    //hasmenuAddOn            MenuItem[]           @relation(name: "menuAddOn")
+    //menuAddon               MenuItem[]           @relation(name: "menuAddOn")
+    price                   Float
+    priceCurrency           String
+    quantity                Int
+    maximumPurchasableCount Int
+    minimumPurchasableCount Int
+    itemStatus              EnumItemStatus
+    fulfillmentMode         EnumFulfillmentModes
+    createAt                DateTime             @default(now())
+    updatedAt               DateTime             @updatedAt
+    image                   Image[]
+    review                  Review[]
+    MenuSection             MenuSection?         @relation(fields: [menuSectionId], references: [id])
+    menuSectionId           String?
+    nutritionInformationId  String
+    suitableForDiet         EnumDiet
+}
+
 model LocalBusiness {
     id                        String                     @id @default(cuid())
     name                      String
@@ -308,32 +335,6 @@ model MenuSection {
     MenuSection    MenuSection[] @relation("MenuSection")
 }
 
-model MenuItem {
-    id                      String               @id @default(cuid())
-    OrderItem               OrderItem[]
-    Menu                    Menu?                @relation(fields: [menuId], references: [id])
-    menuId                  String?
-    name                    String
-    nutrition               NutritionInformation @relation(fields: [nutritionInformationId], references: [id])
-    description             String
-    hasmenuAddOn            MenuItem[]           @relation(name: "menuAddOn")
-    menuAddon               MenuItem[]           @relation(name: "menuAddOn")
-    price                   Float
-    priceCurrency           String
-    quantity                Int
-    maximumPurchasableCount Int
-    minimumPurchasableCount Int
-    itemStatus              EnumItemStatus
-    fulfillmentMode         EnumFulfillmentModes
-    createAt                DateTime             @default(now())
-    updatedAt               DateTime             @updatedAt
-    image                   Image[]
-    review                  Review[]
-    MenuSection             MenuSection?         @relation(fields: [menuSectionId], references: [id])
-    menuSectionId           String?
-    nutritionInformationId  String
-    suitableForDiet         EnumDiet
-}
 
 model NutritionInformation {
     id                    String     @id @default(cuid())
