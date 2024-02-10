@@ -44,9 +44,36 @@ MediaImage:
 MediaFile:
   $ref: './atoms/MediaFile.yaml'
 
-# molecules
-SearchIntent:
-     $ref: './molecules/SearchIntent.yaml'
 
+FulfillmentStage:
+    $ref: './atoms/FulfillmentStage.yaml'
+
+FulfillmentMode:
+    $ref: './atoms/FulfillmentMode.yaml'
+
+# molecules
 Location: 
     $ref: './molecules/Location.yaml'
+
+Descriptor:
+  $ref: './molecules/Descriptor.yaml'
+
+
+# io 
+SearchIntent:
+  $ref: './components/io/SearchIntent.yaml'
+
+
+# terms 
+PaymentTerm:
+  $ref: './components/terms/PaymentTerm.yaml'
+
+CancellationTerm:
+  $ref: './components/terms/CancellationTerm.yaml'
+
+RefundTerm:
+  $ref: './components/terms/RefundTerm.yaml'
+
+Terms:
+  $ref: './components/terms/Terms.yaml'
+

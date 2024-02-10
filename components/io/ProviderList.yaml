@@ -1,0 +1,31 @@
+title: Provider List
+description: >
+  This outlines the products or services a Provider Supporting Node offers, responding to a search query from a Buyer Supporting Node. It encompasses payment terms, and fulfillment options the Provider Supporting Node supports. Products or services can be organized hierarchically within the catalog, utilizing the 'parent_category_id' for categorization. Additionally, a 'time to live' (ttl) may be provided, indicating how long the Buyer Supporting Node is permitted to cache and utilize the catalog data. Key elements include 'provider/descriptor', 'provider/categories', 'provider/fulfillments', 'provider/payments', 'provider/offers', 'provider/providers', and 'exp'.
+
+  Application Context:
+  - Primarily during the discovery phase, this serves to convey the Provider Supporting Node's product and service offerings in response to the Buyer Supporting Node's search inquiry.type: object
+properties:
+  descriptor:
+    description: Description of the provider list
+    $ref: "#/components/schemas/Descriptor.yaml"
+  fulfillment_modes:
+    description: Fulfillment modes offered at the BPP level. This is used when a BPP itself offers fulfillments on behalf of the providers it has onboarded. 
+    type: array
+    items:
+      $ref: "#/components/schemas/FulfillmentMode"
+  payments:
+    description: Payment terms offered by the BPP for all transactions. This can be overriden at the provider level. 
+    type: array
+    items:
+      $ref: "#/components/schemas/PaymentTerm.yaml"
+  providers:
+    type: array
+    items:
+      $ref: "#/components/schemas/Provider"
+  exp:
+    description: Timestamp after which list will expire
+    type: string
+    format: date-time
+  ttl:
+    description: Duration in seconds after which this catalog will expire
+    type: string

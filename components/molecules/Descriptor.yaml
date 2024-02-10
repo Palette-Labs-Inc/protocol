@@ -35,7 +35,7 @@ properties:
       $ref: '#/components/schemas/Image'
   links:
     type: array
-    description: Web links related to the item, including social media, official websites, or additional resources.
+    description: Web links, including social media, official websites, or additional resources.
     items:
       type: object
       properties:

@@ -34,3 +34,5 @@ properties:
     type: string
   countryCode:
     $ref: '#/components/schemas/CountryCode'
+  coordinates: 
+    $ref: '#/components/schemas/Coordinates'
