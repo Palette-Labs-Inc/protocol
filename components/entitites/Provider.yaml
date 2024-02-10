@@ -8,10 +8,11 @@ properties:
   descriptor:
     $ref: "#/components/Descriptor"
   location: 
+    description: the physical location of the provider, if the provider has a specific location
     $ref: '#/components/schemas/Location'
   supported_merchant_category_codes:
-    type: array
     description: Array of category codes, each adhering to the MerchantCategoryCode schema
+    type: array
     items:
       $ref: '#/components/schemas/MerchantCategoryCode'
   country_code:
@@ -20,6 +21,10 @@ properties:
     $ref: '#/components/schemas/LanguageCode'
   currency_code:
     $ref: '#/components/schemas/CurrencyCode'
+  categories:
+    type: array
+    items:
+      $ref: '#/components/schemas/Category'
   operational_status:
     description: Defines the operational state of a business at the time of the request and is calculated by the SSN as a reference to the composite of Menu Schedules   
     type: string

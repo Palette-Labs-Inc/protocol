@@ -58,10 +58,22 @@ Location:
 Descriptor:
   $ref: './molecules/Descriptor.yaml'
 
+Schedule:
+  $ref: './molecules/Schedule.yaml'
+
+Catalog:
+  $ref: './molecules/Catalog.yaml'
+
+Category:
+  $ref: './molecules/Category.yaml'
+
 
 # io 
 SearchIntent:
   $ref: './components/io/SearchIntent.yaml'
+
+ProviderList:
+  $ref: './components/io/ProviderList.yaml'
 
 
 # terms 

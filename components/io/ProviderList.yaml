@@ -1,31 +1,31 @@
 title: Provider List
 description: >
-  This outlines the products or services a Provider Supporting Node offers, responding to a search query from a Buyer Supporting Node. It encompasses payment terms, and fulfillment options the Provider Supporting Node supports. Products or services can be organized hierarchically within the catalog, utilizing the 'parent_category_id' for categorization. Additionally, a 'time to live' (ttl) may be provided, indicating how long the Buyer Supporting Node is permitted to cache and utilize the catalog data. Key elements include 'provider/descriptor', 'provider/categories', 'provider/fulfillments', 'provider/payments', 'provider/offers', 'provider/providers', and 'exp'.
-
-  Application Context:
-  - Primarily during the discovery phase, this serves to convey the Provider Supporting Node's product and service offerings in response to the Buyer Supporting Node's search inquiry.type: object
+    - The providers that a Provider Supporting Node represents. Typically sent in response to a search query from a Buyer Supporting Node. It encompasses payment terms, and fulfillment options the Provider Supporting Node supports. A ttl can be provided, indicating how long the Buyer Supporting Node is permitted to cache and utilize the provider list.
+    - The PSN must respond with at least a list of providers, the level of detail that the response contains is up to the PSN. If the BSN requires more informaton about a provider, they can trigger another research for the specific provider targeted at the PSN.
+type: object
 properties:
   descriptor:
-    description: Description of the provider list
-    $ref: "#/components/schemas/Descriptor.yaml"
+    description: A comprehensive description of the provider catalog.
+    $ref: '#/components/schemas/Descriptor'
   fulfillment_modes:
-    description: Fulfillment modes offered at the BPP level. This is used when a BPP itself offers fulfillments on behalf of the providers it has onboarded. 
+    description: Modes of fulfillment directly supported by the PSN, subject to provider-specific overrides.
     type: array
     items:
-      $ref: "#/components/schemas/FulfillmentMode"
-  payments:
-    description: Payment terms offered by the BPP for all transactions. This can be overriden at the provider level. 
+      $ref: '#/components/schemas/FulfillmentMode'
+  terms:
+    description: Standard payment terms applicable across transactions, subject to provider-specific overrides.
     type: array
     items:
-      $ref: "#/components/schemas/PaymentTerm.yaml"
+      $ref: '#/components/schemas/terms'
   providers:
+    description: A list of providers managed by the PSN, detailing their offerings.
     type: array
     items:
-      $ref: "#/components/schemas/Provider"
-  exp:
-    description: Timestamp after which list will expire
+      $ref: '#/components/schemas/Provider'
+  expiration_time:
+    description: Expiry timestamp indicating when the provider list becomes obsolete.
     type: string
     format: date-time
-  ttl:
-    description: Duration in seconds after which this catalog will expire
-    type: string
+  time_to_live:
+    description: Time in seconds before the provider list should be refreshed. 
+    type: integer

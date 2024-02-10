@@ -1,0 +1,16 @@
+title: Catalog
+description: Defines a specific collection of <code>CatalogItem</code>'s available for purchase
+type: object
+properties: 
+    descriptor:
+        $ref: '#/components/schemas/Descriptor'
+    schedules:
+        description: Defines the availability of the items within this catalog
+        type: array
+        items: 
+            $ref: '#/components/schemas/Schedule'
+    categories:
+        description: Defines different collections of items within this catalog. Used to breakup items into useful categories (e.g. Appetizers, Desserts, etc.)
+        type: array
+        items:
+            $ref: "#/components/schemas/CatalogCategoryId"
