@@ -1,5 +1,6 @@
 title: Schedule
-description: Defines a range of date times in local time for a specific day when products or services are available to purchase
+description: >
+  Defines a range of date times in local time for a specific day when products or services are available to purchase.
 type: object
 properties:
   day:
@@ -13,36 +14,40 @@ properties:
       - SATURDAY
       - SUNDAY
   available_hours:
-    description: Defines an array of time intervals defining availability of products or services within a menu 
+    description: Defines an array of time intervals for the availability of products or services.
     type: array
     items:
       type: object
-      description: Defines a range of intervals defining the time of day 
       properties:
-        from_hour: 
-          description: Beginning hour interval in local time.
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 23
-        to_hour: 
-          description: Ending hour interval in local time.
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 23
-        from_minute: 
-          description: Beginning minute interval in local time.
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 59
-        to_minute: 
-          description: Ending minute interval in local time.
-          type: integer
-          format: int32
-          minimum: 0
-          maximum: 59
-          
-
-    
+        open:
+          type: object
+          description: Opening time in local time.
+          properties:
+            hour:
+              type: integer
+              format: int32
+              description: Opening hour in local time.
+              minimum: 0
+              maximum: 23
+            minute:
+              type: integer
+              format: int32
+              description: Opening minute in local time.
+              minimum: 0
+              maximum: 59
+        close:
+          type: object
+          description: Closing time in local time.
+          properties:
+            hour:
+              type: integer
+              format: int32
+              description: Closing hour in local time.
+              minimum: 0
+              maximum: 23
+            minute:
+              type: integer
+              format: int32
+              description: Closing minute in local time.
+              minimum: 0
+              maximum: 59
