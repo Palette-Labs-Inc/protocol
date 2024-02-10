@@ -96,13 +96,16 @@ CatalogItemId:
 CatalogModifierGroupId:
     $ref: './molecules/CatalogModifierGroup.yaml#/properties/id'
 
+# entities
+Provider:
+    $ref: './entities/Provider.yaml'
 
 # io 
 SearchIntent:
-  $ref: './components/io/SearchIntent.yaml'
+  $ref: './io/SearchIntent.yaml'
 
 ProviderList:
-  $ref: './components/io/ProviderList.yaml'
+  $ref: './io/ProviderList.yaml'
 
 
 # terms 

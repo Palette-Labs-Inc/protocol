@@ -4,8 +4,8 @@ properties:
   search_string:
     description: A raw free text search string describing the name or description of a seller.
     type: string
-  provider:
-    $ref: "#/components/Provider"
+  provider_id:
+    $ref: "#/components/schemas/ProviderId"
   merchant_category_codes:
     type: array
     items:

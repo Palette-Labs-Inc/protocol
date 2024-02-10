@@ -45,6 +45,7 @@ files[] = {"path":"components/molecules/Descriptor.yaml","metaData":{}}
 files[] = {"path":"components/molecules/Location.yaml","metaData":{}}
 files[] = {"path":"components/molecules/Schedule.yaml","metaData":{}}
 files[] = {"path":"components/requestBodies.yaml","metaData":{}}
+files[] = {"path":"components/requestBodies/OnSearch.yaml","metaData":{}}
 files[] = {"path":"components/requestBodies/Search.yaml","metaData":{}}
 files[] = {"path":"components/Response.yaml","metaData":{}}
 files[] = {"path":"components/responses.yaml","metaData":{}}
@@ -55,6 +56,7 @@ files[] = {"path":"components/terms/PaymentTerm.yaml","metaData":{}}
 files[] = {"path":"components/terms/RefundTerm.yaml","metaData":{}}
 files[] = {"path":"components/terms/Terms.yaml","metaData":{}}
 files[] = {"path":"index.yaml","metaData":{}}
+files[] = {"path":"paths/discover/OnSearch.yaml","metaData":{}}
 files[] = {"path":"paths/discover/Search.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]

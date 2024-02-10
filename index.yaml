@@ -11,6 +11,9 @@ paths:
   /search:
     post:
       $ref: './paths/discover/Search.yaml'
+  /on_search:
+    post:
+      $ref: './paths/discover/OnSearch.yaml'
 components:
   securitySchemes:
     $ref: './components/securitySchemes.yaml'
