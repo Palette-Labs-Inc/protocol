@@ -1,0 +1,4 @@
+Authorization:
+    schema:
+        type: string
+        description: 'Signature keyId="{registry_node_id}",algorithm="ecdsa-p256-keccak256",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64url(secp256k1(signing string))"'

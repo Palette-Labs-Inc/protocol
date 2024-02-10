@@ -1,0 +1,3 @@
+# merchant
+Search:
+    $ref: './requestBodies/Search.yaml'

@@ -1,0 +1,9 @@
+summary: Search
+tags:
+  - Provider Supporting Node (PSN)
+description: The <code>BSN</code> broadcasts the buyer's request for goods and services
+requestBody:
+  $ref: '#/components/requestBodies/Search'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

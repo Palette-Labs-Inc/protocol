@@ -1,0 +1,52 @@
+# atoms
+Ack: 
+    $ref: './atoms/Ack.yaml'
+
+Error: 
+    $ref: './atoms/Error.yaml'
+
+LanguageCode: 
+    $ref: './atoms/LanguageCode.yaml'
+
+CurrencyCode: 
+    $ref: '/atoms/CurrencyCode.yaml'
+
+CountryCode: 
+    $ref: '/atoms/CountryCode.yaml'
+
+Coordinates: 
+    $ref: '/atoms/Coordinates.yaml'
+
+H3Array: 
+    $ref: '/atoms/H3Array.yaml'
+
+NodeEntry: 
+  $ref: './atoms/NodeEntry.yaml'
+
+NetworkRole: 
+  $ref: './atoms/NetworkRole.yaml'
+
+Money: 
+  $ref: './atoms/Money.yaml'
+
+Fee: 
+  $ref: './atoms/Fee.yaml'
+
+MerchantCategoryCode: 
+  $ref: './atoms/MerchantCategoryCode.yaml'
+
+Url:
+  $ref: './atoms/Url.yaml'
+
+MediaImage:
+  $ref: './atoms/MediaImage.yaml'
+
+MediaFile:
+  $ref: './atoms/MediaFile.yaml'
+
+# molecules
+SearchIntent:
+     $ref: './molecules/SearchIntent.yaml'
+
+Location: 
+    $ref: './molecules/Location.yaml'

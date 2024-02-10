@@ -1,0 +1,13 @@
+description: Request body for finding nearby merchants
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        message:
+          type: object
+          properties:
+            intent:
+              $ref: "#/components/schemas/SearchIntent"
+      required:
+        - message

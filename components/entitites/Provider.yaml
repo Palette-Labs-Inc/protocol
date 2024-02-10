@@ -1,0 +1,35 @@
+title: Provider
+type: object 
+description: Defines details about a provider and specifies information that a Buyer Supporting Node (BSN) can display to it's users.
+properties:
+  id:
+    type: string
+    description: A globally unique ID of the provider in the Provider Supporting Node's (PSN) system
+  name:
+    type: string
+    description: The public facing display name of the provider.
+  location: 
+    $ref: '#/components/schemas/Location'
+  coordinates: 
+    $ref: '#/components/schemas/Coordinates'
+  supported_merchant_category_codes:
+    type: array
+    items:
+      $ref: '#/components/schemas/MerchantCategoryCode'
+    description: Array of category codes, each adhering to the MerchantCategoryCode schema
+  description:
+    type: string
+    description: A public facing description of the business to display to the buyer.
+  country_code:
+    $ref: '#/components/schemas/CountryCode'
+  language_code:
+      $ref: '#/components/schemas/LanguageCode'
+  currency_code:
+    $ref: '#/components/schemas/CurrencyCode'
+  operational_status:
+    description: Defines the operational state of a business at the time of the request and is calculated by the SSN as a reference to the composite of Menu Schedules   
+    type: string
+    enum:
+      - OPEN
+      - CLOSED
+      - CLOSING_SOON

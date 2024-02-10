@@ -1,0 +1,7 @@
+title: Network Role
+description: The role of node in the network
+type: string
+enum:
+  - BSN # Buyer Supporting Node
+  - PSN # Provider Supporting Node
+  - GP # Gateway Provider
