@@ -1,4 +1,10 @@
 # atoms
+Decimal: 
+    $ref: './atoms/Decimal.yaml'
+
+Value: 
+    $ref: './atoms/Value.yaml'
+
 Ack: 
     $ref: './atoms/Ack.yaml'
 
@@ -44,12 +50,15 @@ MediaImage:
 MediaFile:
   $ref: './atoms/MediaFile.yaml'
 
-
 FulfillmentStage:
     $ref: './atoms/FulfillmentStage.yaml'
 
 FulfillmentMode:
     $ref: './atoms/FulfillmentMode.yaml'
+
+ItemType:
+    $ref: './atoms/ItemType.yaml'
+
 
 # molecules
 Location: 
@@ -64,8 +73,28 @@ Schedule:
 Catalog:
   $ref: './molecules/Catalog.yaml'
 
-Category:
-  $ref: './molecules/Category.yaml'
+CatalogCategory:
+  $ref: './molecules/CatalogCategory.yaml'
+
+CatalogItem:
+  $ref: './molecules/CatalogItem.yaml'
+
+CatalogModifierGroup: 
+    $ref: './molecules/CatalogModifierGroup.yaml'
+
+
+## catalog identifiers
+CatalogId:
+    $ref: './molecules/Catalog.yaml#/properties/id'
+
+CatalogCategoryId:
+    $ref: './molecules/CatalogCategory.yaml#/properties/id'
+
+CatalogItemId:
+    $ref: './molecules/CatalogItem.yaml#/properties/id'
+
+CatalogModifierGroupId:
+    $ref: './molecules/CatalogModifierGroup.yaml#/properties/id'
 
 
 # io 

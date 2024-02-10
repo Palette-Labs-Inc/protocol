@@ -4,7 +4,7 @@ description: Defines details about a provider and specifies information that a B
 properties:
   id:
     type: string
-    description: A globally unique ID of the provider in the Provider Supporting Node's (PSN) system
+    description: A globally unique ID of the provider in the Provider Supporting Node's (PSN) system. Can be used to query the specific provider for detailed information in another, directed search request.
   descriptor:
     $ref: "#/components/Descriptor"
   location: 
@@ -21,10 +21,11 @@ properties:
     $ref: '#/components/schemas/LanguageCode'
   currency_code:
     $ref: '#/components/schemas/CurrencyCode'
-  categories:
+  catalogs:
+    description: The catalogs for this provider. If empty, the PSN did not return catalogs for the initial search.
     type: array
     items:
-      $ref: '#/components/schemas/Category'
+      $ref: '#/components/schemas/Catalog'
   operational_status:
     description: Defines the operational state of a business at the time of the request and is calculated by the SSN as a reference to the composite of Menu Schedules   
     type: string

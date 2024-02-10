@@ -1,0 +1,29 @@
+title: Catalog Modifier Group
+description: A modifier group that contains <code>Modifier</code>'s' to handle specifications related to <code>CatalogItem</code>'s.
+type: object
+properties:
+    id: 
+        description: A unique identifier for this <code>CatalogModifierGroup</code>
+        type: string
+    descriptor: 
+        $ref: '#/components/schemas/Descriptor'
+    minimum_selection_requirement: 
+        description: The minimum number of <CatalogItemModifier>'s selections to satisfy
+        type: integer
+        default: 1
+        format: int32
+    maximum_selection_requirement: 
+        description: The minimum number of <CatalogItemModifier>'s selections to satisfy
+        type: integer
+        default: 1
+        format: int32
+    max_per_modifier_selection_quantity: 
+        description: Maximum number of selections customers can make for each modifier item in this ModifierGroup. 0 means there is no limit to how many times they can select a single modifier item. If not specified, a value of 1 will be used as the default value.
+        type: integer
+        default: 1
+        format: int32
+    modifier_item_ids: 
+        description: A list of <code>CatalogItem</code>'s listed under this modifier group. Modifier Items are represented as Catalog Items.
+        type: array
+        items:
+            $ref: '#/components/schemas/CatalogItemId'

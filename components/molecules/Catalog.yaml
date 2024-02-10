@@ -9,8 +9,18 @@ properties:
         type: array
         items: 
             $ref: '#/components/schemas/Schedule'
-    categories:
-        description: Defines different collections of items within this catalog. Used to breakup items into useful categories (e.g. Appetizers, Desserts, etc.)
+    catalog_categories: 
+        description: <code>CatalogCategory</code> items affiliated with this catalog
         type: array
         items:
-            $ref: "#/components/schemas/CatalogCategoryId"
+            $ref: '#/components/schemas/CatalogCategory'
+    catalog_items: 
+        description: <code>CatalogItem</code>'s listed in this catalog
+        type: array
+        items:
+            $ref: '#/components/schemas/CatalogItem'
+    catalog_modifier_groups: 
+        description: <code>CatalogModifierGroup</code> items affiliated with this catalog
+        type: array
+        items:
+            $ref: '#/components/schemas/CatalogModifierGroup'
