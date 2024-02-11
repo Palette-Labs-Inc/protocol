@@ -1,0 +1,20 @@
+description: Describes a person as any individual
+type: object
+properties:
+  id:
+    type: string
+    description: Describes the identity of the person
+  name:
+    description: the name of the person
+    type: string
+  image:
+    description: image of the person
+    $ref: "#/components/schemas/ImageFile"
+  dob:
+    description: Date of birth of the person
+    type: string
+    format: date
+  languages:
+    type: array
+    items:
+      $ref: "#/components/schemas/LanguageCode"

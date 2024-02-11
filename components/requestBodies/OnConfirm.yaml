@@ -1,0 +1,13 @@
+description: The newly created active order.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        message:
+          type: object
+          properties:
+            order:
+              $ref: "#/components/schemas/Order"
+      required:
+        - message

@@ -1,0 +1,9 @@
+summary: The BSN attempts to update a Cart or an Order
+tags:
+  - Provider Supporting Node (PSN)
+description: The <code>Buyer</code> confirms their order by agreeing to the terms set by the PSN
+requestBody:
+  $ref: '#/components/requestBodies/Confirm'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

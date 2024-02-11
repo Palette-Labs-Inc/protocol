@@ -3,6 +3,7 @@ description: Defines the status of an order
 type: string
 enum:
   - PRE-ORDER
+  - AT-CHECKOUT
   - PRE-FULFILLMENT
   - ON-FULFILLMENT
   - POST-FULFILLMENT

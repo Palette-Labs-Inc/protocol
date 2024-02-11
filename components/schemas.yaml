@@ -56,6 +56,9 @@ FulfillmentStage:
 FulfillmentMode:
     $ref: './atoms/FulfillmentMode.yaml'
 
+FulfillmentStatus:
+    $ref: './atoms/FulfillmentStatus.yaml'
+
 ItemType:
     $ref: './atoms/ItemType.yaml'
 
@@ -72,6 +75,11 @@ Descriptor:
 Cancellation: 
   $ref: './molecules/Cancellation.yaml'
 
+Fulfillment: 
+   $ref: './molecules/Fulfillment.yaml'
+
+Contact: 
+   $ref: './molecules/Contact.yaml'
 
 
 ## catalog 
@@ -144,6 +152,16 @@ Provider:
 
 NodeEntry: 
   $ref: './entities/NodeEntry.yaml'
+
+Person: 
+  $ref: './entities/Person.yaml'
+
+Agent: 
+  $ref: './entities/Agent.yaml'
+
+Organization: 
+  $ref: './entities/Organization.yaml'
+
 
 ## entity identifiers
 ProviderId:

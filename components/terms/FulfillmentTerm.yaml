@@ -3,7 +3,7 @@ type: object
 description: The terms for fulfilling this order. Typically, this is used when the order is still open and not yet confirmed.
 properties:
   available_fulfillment_modes:
-    description: The available fulfillment methods for this order.
+    description: The available fulfillment methods for the cart. Required to be included in the OnInit callback. Not Required in the OnConfirm callback. Witht he OnConfirm callback, the selected_fulfillment_mode should have already been solidified.
     type: array
     items:
       $ref: '#/components/schemas/FulfillmentMode'

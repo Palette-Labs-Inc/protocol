@@ -2,7 +2,6 @@ title: Order Status
 description: Status of the order. Allowed values can be defined by the network policy
 type: string
 enum:
-  - DRAFT # when the order has not yet been confirmed 
   - SCHEDULED # when there is a time component related to the delivery
   - NEW_ORDER # just created and waiting for merchant to confirm or reject
   - CONFIRMED # accepted by the provider

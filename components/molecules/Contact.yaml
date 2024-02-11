@@ -1,0 +1,8 @@
+description: Describes the contact information of an entity
+type: object
+cell_phone_number:
+  description: A publicly listed cell phone number for the merchant.
+  $ref: '#/components/schemas/CellPhone'
+email_address:
+  description: The email address associated with the customer profile.
+  type: string

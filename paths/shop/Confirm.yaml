@@ -1,0 +1,9 @@
+summary: The Buyer Confirms a Cart and the terms Initialized in the Init request.
+tags:
+  - Provider Supporting Node (PSN)
+description: The <code>Buyer</code> confirms their order by agreeing to the terms set by the PSN
+requestBody:
+  $ref: '#/components/requestBodies/Confirm'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

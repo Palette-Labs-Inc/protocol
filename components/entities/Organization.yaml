@@ -1,0 +1,15 @@
+description: An organization. Usually a business entity like an LLC.
+type: object
+properties:
+  name:
+    description: the name of the person
+    type: string
+  image:
+    description: image of the person
+    $ref: "#/components/schemas/ImageFile"
+  location:
+    description: The postal address of the organization
+    allOf:
+      - $ref: "#/components/schemas/Location"
+  contact:
+    $ref: "#/components/schemas/Contact"
