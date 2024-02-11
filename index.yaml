@@ -20,6 +20,12 @@ paths:
   /on_select:
     post:
       $ref: './paths/shop/OnSelect.yaml'
+  /init:
+    post:
+      $ref: './paths/shop/Init.yaml'
+  /on_init:
+    post:
+      $ref: './paths/shop/OnInit.yaml'
 components:
   securitySchemes:
     $ref: './components/securitySchemes.yaml'

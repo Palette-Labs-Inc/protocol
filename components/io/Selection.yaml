@@ -1,13 +1,13 @@
 description: Represents the action of a <code>Buyer</code> to add a <code>CatalogItem</code> to a <code>Cart</code>. 
 type: object
 properties:
-  provider:
+  provider_id:
     description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
     $ref: '#/components/schemas/ProviderId'
   selected_fulfillment_mode:
     description: The currently selected fulfillment mode for this cart
     $ref: '#/components/schemas/FulfillmentMode'
-  buyer_location:
+  buyer_details:
     description: The location of the buyer
     $ref: '#/components/schemas/Location'
   fulfillment_time: 

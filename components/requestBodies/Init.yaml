@@ -1,0 +1,15 @@
+description: a <code>Buyer<code>'s information to initialize the Cart.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        message:
+          type: object
+          properties:
+            cart_id:
+              $ref: "#/components/schemas/Cart/properties/id"
+            buyer_details: 
+              $ref:  "#/components/schemas/Buyer"
+      required:
+        - message

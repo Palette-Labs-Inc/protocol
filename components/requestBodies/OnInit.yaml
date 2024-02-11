@@ -1,4 +1,4 @@
-description: a <code>Buyer<code>'s cart object
+description: a <code>Buyer<code>'s cart and the required payment, cancellation, fulfillment and refund terms that must be met to successfully fulfill this order.
 content:
   application/json:
     schema:
@@ -9,5 +9,7 @@ content:
           properties:
             cart:
               $ref: "#/components/schemas/Cart"
+            terms: 
+              $ref: "#/components/schemas/Terms"
       required:
         - message

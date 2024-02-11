@@ -1,0 +1,9 @@
+summary: The Buyer Initializes a Cart by providing fulfillment and contact information
+tags:
+  - Provider Supporting Node (PSN)
+description: The <code>Buyer</code> initializes their order by providing personal information and fulfillment details
+requestBody:
+  $ref: '#/components/requestBodies/Init'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

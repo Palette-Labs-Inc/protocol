@@ -11,3 +11,10 @@ Select:
 
 OnSelect:
     $ref: './requestBodies/OnSelect.yaml'
+
+# init
+Init:
+    $ref: './requestBodies/Init.yaml'
+
+OnInit:
+    $ref: './requestBodies/OnInit.yaml'

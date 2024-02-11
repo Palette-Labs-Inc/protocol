@@ -1,0 +1,9 @@
+summary: OnInit Callback, includes the latest cart and the refund, cancellation, payment, and fulfillment terms of the <code>PSN</code>
+tags:
+  - Buyer Supporting Node (BSN)
+description: The <code>PSN</code> responds to an initialized cart with full payment terms, refund terms, cancellation terms, etc. Typically this callback provides data for the <code>Buyer</code> in a checkout screen in a client application
+requestBody:
+  $ref: '#/components/requestBodies/OnInit'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

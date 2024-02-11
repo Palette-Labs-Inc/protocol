@@ -26,9 +26,6 @@ Coordinates:
 H3Array: 
     $ref: '/atoms/H3Array.yaml'
 
-NodeEntry: 
-  $ref: './atoms/NodeEntry.yaml'
-
 NetworkRole: 
   $ref: './atoms/NetworkRole.yaml'
 
@@ -107,9 +104,6 @@ ItemQuantityAvailable:
 Cart: 
     $ref: './io/Cart.yaml'
 
-CartFulfillment: 
-    $ref: './io/CartFulfillment.yaml'
-
 CartLineItem: 
     $ref: './io/CartLineItem.yaml'
 
@@ -137,17 +131,25 @@ CatalogItemId:
 CatalogModifierGroupId:
     $ref: './molecules/CatalogModifierGroup.yaml#/properties/id'
 
-CatalogModifierItemId:
-    $ref: './molecules/CatalogModifierItem.yaml#/properties/id'
+CatalogItemModifierId:
+    $ref: './molecules/CatalogItemModifier.yaml#/properties/id'
 
 
 # entities
+Buyer: 
+  $ref: './entities/Buyer.yaml'
+
 Provider:
     $ref: './entities/Provider.yaml'
+
+NodeEntry: 
+  $ref: './entities/NodeEntry.yaml'
 
 ## entity identifiers
 ProviderId:
     $ref: './entities/Provider.yaml#/properties/id'
+
+
 
 # io 
 SearchIntent:

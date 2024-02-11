@@ -10,11 +10,17 @@ properties:
   selected_fulfillment_mode:
     description: The currently selected fulfillment mode for this cart
     $ref: '#/components/schemas/FulfillmentMode'
-  provider_location:
+  provider_details:
     $ref: '#/components/schemas/Location' # included for ease of display by BSN client.
-  buyer_location:
+  buyer_details:
     description: The location of the buyer
     $ref: '#/components/schemas/Location'
   fulfillment_time: 
     description: a date-time specifying when this order should be fulfilled.
     format: date-time
+
+required:
+  - available_fulfillment_modes
+  - selected_fulfillment_modes
+  - provider_details
+  - buyer_details

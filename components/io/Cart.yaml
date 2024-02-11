@@ -21,8 +21,6 @@ properties:
     type: array
     items:
       $ref: '#/components/schemas/CartLineItem'
-  fulfillment_details:
-    $ref: '#/components/schemas/CartFulfillment'
   order_notes:
     description: special instructions needed to fulfill this order. For example, a note for a merchant from a buyer about a specific request with their order.
     type: string
@@ -31,4 +29,3 @@ required:
   - id
   - cost
   - cart_line_items
-  - fulfillment_details
