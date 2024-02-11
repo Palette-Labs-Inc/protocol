@@ -49,12 +49,3 @@ properties:
     description: Tags or keywords associated with the item for easier categorization and search.
     items:
       type: string
-  categories:
-    type: array
-    description: Categories or classifications the item belongs to.
-    items:
-      type: string
-  additionalDetails:
-    type: object
-    additionalProperties: true
-    description: An object for any extra, undefined properties that might be necessary to describe unique aspects of the item.
