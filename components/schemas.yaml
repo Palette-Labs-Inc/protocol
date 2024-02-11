@@ -81,6 +81,9 @@ Fulfillment:
 Contact: 
    $ref: './molecules/Contact.yaml'
 
+Tracking:
+   $ref: './molecules/Tracking.yaml'
+
 
 ## catalog 
 Catalog:

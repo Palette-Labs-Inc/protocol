@@ -33,11 +33,9 @@ properties:
   terms: 
     description: the contractual terms of this order when a Cart was confirmed, cancellation, payment, and fulfillment terms of this order
     $ref: '#/components/schemas/Terms'
-  fulfillments:
-    description: The fulfillments involved in completing this order
-    type: array
-    items:
-        $ref: "#/components/schemas/Fulfillment.yaml"
+  fulfillment_details:
+    description: The fulfillment involved in completing this order
+    $ref: "#/components/schemas/Fulfillment.yaml"
   cancellation:
     description: details of this orders cancellation
     $ref: '#/components/schemas/Cancellation'

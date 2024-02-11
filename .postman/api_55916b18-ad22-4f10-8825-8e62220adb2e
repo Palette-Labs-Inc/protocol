@@ -64,6 +64,7 @@ files[] = {"path":"components/molecules/Fulfillment.yaml","metaData":{}}
 files[] = {"path":"components/molecules/Location.yaml","metaData":{}}
 files[] = {"path":"components/molecules/Order.yaml","metaData":{}}
 files[] = {"path":"components/molecules/Schedule.yaml","metaData":{}}
+files[] = {"path":"components/molecules/Tracking.yaml","metaData":{}}
 files[] = {"path":"components/requestBodies.yaml","metaData":{}}
 files[] = {"path":"components/requestBodies/Confirm.yaml","metaData":{}}
 files[] = {"path":"components/requestBodies/Init.yaml","metaData":{}}

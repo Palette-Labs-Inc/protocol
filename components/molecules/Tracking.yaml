@@ -1,0 +1,20 @@
+description: Contains tracking information about tracking details related to an Order
+type: object
+properties:
+  id:
+    description: A unique tracking reference number 
+    type: string
+  url:
+    description: A URL to a tracking endpoint 
+    type: string
+    format: uri
+  location:
+    description: If the url does not provide realtime tracking information, this value can contain the location of the agent fulfilling the order.
+    allOf:
+    - $ref: "#/components/schemas/Location"
+  status:
+    description: This value indicates if the tracking is currently active or not. If this value is `active`, then the BAP can begin tracking the order. If this value is `inactive`, the tracking URL is considered to be expired and the BAP should stop tracking the order.
+    type: string
+    enum:
+      - ACTIVE
+      - COMPLETE
