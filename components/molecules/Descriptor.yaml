@@ -32,7 +32,7 @@ properties:
     type: array
     description: A collection of image files associated with the item.
     items:
-      $ref: '#/components/schemas/Image'
+      $ref: '#/components/schemas/ImageFile'
   links:
     type: array
     description: Web links, including social media, official websites, or additional resources.

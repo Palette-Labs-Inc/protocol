@@ -12,11 +12,6 @@ properties:
     type: array
     items:
       $ref: '#/components/schemas/FulfillmentMode'
-  terms:
-    description: Standard terms applicable across transactions, subject to provider-specific overrides.
-    type: array
-    items:
-      $ref: '#/components/schemas/terms'
   providers:
     description: A list of providers managed by the PSN, detailing their offerings.
     type: array

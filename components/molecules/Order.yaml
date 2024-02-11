@@ -35,7 +35,7 @@ properties:
     $ref: '#/components/schemas/Terms'
   fulfillment_details:
     description: The fulfillment involved in completing this order
-    $ref: "#/components/schemas/Fulfillment.yaml"
+    $ref: "#/components/schemas/Fulfillment"
   cancellation:
     description: details of this orders cancellation
     $ref: '#/components/schemas/Cancellation'

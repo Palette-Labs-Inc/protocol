@@ -6,7 +6,7 @@ properties:
     type: string
     description: A globally unique ID of the provider in the Provider Supporting Node's (PSN) system. Can be used to query the specific provider for detailed information in another, directed search request.
   descriptor:
-    $ref: "#/components/Descriptor"
+    $ref: "#/components/schemas/Descriptor"
   location: 
     description: the physical location of the provider, if the provider has a specific location
     $ref: '#/components/schemas/Location'

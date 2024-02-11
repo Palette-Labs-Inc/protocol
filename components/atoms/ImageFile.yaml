@@ -1,4 +1,4 @@
-title: Media Image
+title: Image File
 description: Defines an image that can be affiliated with an entity or object
 type: object
 properties: 

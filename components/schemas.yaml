@@ -15,16 +15,16 @@ LanguageCode:
     $ref: './atoms/LanguageCode.yaml'
 
 CurrencyCode: 
-    $ref: '/atoms/CurrencyCode.yaml'
+    $ref: './atoms/CurrencyCode.yaml'
 
 CountryCode: 
-    $ref: '/atoms/CountryCode.yaml'
+    $ref: './atoms/CountryCode.yaml'
 
 Coordinates: 
-    $ref: '/atoms/Coordinates.yaml'
+    $ref: './atoms/Coordinates.yaml'
 
 H3Array: 
-    $ref: '/atoms/H3Array.yaml'
+    $ref: './atoms/H3Array.yaml'
 
 NetworkRole: 
   $ref: './atoms/NetworkRole.yaml'
@@ -44,8 +44,8 @@ CellPhone:
 Url:
   $ref: './atoms/Url.yaml'
 
-MediaImage:
-  $ref: './atoms/MediaImage.yaml'
+ImageFile:
+  $ref: './atoms/ImageFile.yaml'
 
 MediaFile:
   $ref: './atoms/MediaFile.yaml'

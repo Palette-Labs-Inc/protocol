@@ -7,7 +7,7 @@ content:
         message:
           type: object
           properties:
-            intent:
+            providers:
               $ref: "#/components/schemas/ProviderList"
       required:
         - message
