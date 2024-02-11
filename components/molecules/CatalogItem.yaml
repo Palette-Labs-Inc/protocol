@@ -9,7 +9,7 @@ properties:
         $ref: '#/components/schemas/Descriptor'
     item_type:
         $ref: '#/components/schemas/ItemType'
-    price:
+    item_price:
         $ref: '#/components/schemas/Money'
     ordinal: 
         description: Determines the position of this <code>CatalogItem></code> in the <code>Category</code>

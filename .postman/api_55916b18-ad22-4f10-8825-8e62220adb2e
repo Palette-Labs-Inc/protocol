@@ -14,6 +14,7 @@ rootDirectory = postman/collections
 
 [config.relations.apiDefinition]
 files[] = {"path":"components/atoms/Ack.yaml","metaData":{}}
+files[] = {"path":"components/atoms/CellPhone.yaml","metaData":{}}
 files[] = {"path":"components/atoms/Coordinates.yaml","metaData":{}}
 files[] = {"path":"components/atoms/CountryCode.yaml","metaData":{}}
 files[] = {"path":"components/atoms/CurrencyCode.yaml","metaData":{}}
@@ -38,6 +39,10 @@ files[] = {"path":"components/atoms/Url.yaml","metaData":{}}
 files[] = {"path":"components/atoms/Value.yaml","metaData":{}}
 files[] = {"path":"components/entities/Provider.yaml","metaData":{}}
 files[] = {"path":"components/headers.yaml","metaData":{}}
+files[] = {"path":"components/io/Cart.yaml","metaData":{}}
+files[] = {"path":"components/io/CartFulfillment.yaml","metaData":{}}
+files[] = {"path":"components/io/CartLineItem.yaml","metaData":{}}
+files[] = {"path":"components/io/CartLineItemModifier.yaml","metaData":{}}
 files[] = {"path":"components/io/ProviderList.yaml","metaData":{}}
 files[] = {"path":"components/io/SearchIntent.yaml","metaData":{}}
 files[] = {"path":"components/io/Selection.yaml","metaData":{}}

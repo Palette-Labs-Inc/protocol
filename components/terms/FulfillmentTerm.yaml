@@ -15,6 +15,6 @@ properties:
   buyer_location:
     description: The location of the buyer
     $ref: '#/components/schemas/Location'
-  fulfillment_time_range: 
-    description: a range used to specify a <code>Buyer</code>'s expected fulfillment time. Used in the context of LOCAL-DELIVERY and LOCAL-PICKUP
-    $ref: '#/components/schemas/Location'
+  fulfillment_time: 
+    description: a date-time specifying when this order should be fulfilled.
+    format: date-time

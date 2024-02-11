@@ -4,7 +4,7 @@ description: Describes a purchase order. It contains the complete details of the
 properties:
   id:
     type: string
-    description: A globally unique ID of the <code>Cart</code>
+    description: A globally unique ID of the <code>Order</code>
   created_at:
     description: The date-time of creation of this order
     type: string

@@ -15,6 +15,11 @@ properties:
     type: array
     items:
       $ref: '#/components/schemas/MerchantCategoryCode'
+  supported_fulfillment_modes:
+    description: Array of fulfillment modes supported by this provider, each adhering to the FulfillmentMode schema
+    type: array
+    items:
+      $ref: '#/components/schemas/FulfillmentMode'
   country_code:
     $ref: '#/components/schemas/CountryCode'
   language_code:

@@ -41,6 +41,9 @@ Fee:
 MerchantCategoryCode: 
   $ref: './atoms/MerchantCategoryCode.yaml'
 
+CellPhone:
+    $ref: './atoms/CellPhone.yaml'
+
 Url:
   $ref: './atoms/Url.yaml'
 
@@ -98,6 +101,20 @@ ItemQuantitySelection:
 
 ItemQuantityAvailable: 
     $ref: './atoms/ItemQuantity.yaml#/properties/available'
+
+
+## cart
+Cart: 
+    $ref: './io/Cart.yaml'
+
+CartFulfillment: 
+    $ref: './io/CartFulfillment.yaml'
+
+CartLineItem: 
+    $ref: './io/CartLineItem.yaml'
+
+CartLineItemModifier: 
+    $ref: './io/CartLineItemModifier.yaml'
 
 
 ## order

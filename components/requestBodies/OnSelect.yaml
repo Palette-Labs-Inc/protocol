@@ -8,6 +8,6 @@ content:
           type: object
           properties:
             order:
-              $ref: "#/components/schemas/Order"
+              $ref: "#/components/schemas/Cart"
       required:
         - message
