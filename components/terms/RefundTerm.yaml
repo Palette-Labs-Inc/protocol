@@ -2,11 +2,11 @@ title: Refund Term
 description: Defines the refund term of an order. 
 type: object
 properties:
-  fulfillmentStage:
+  fulfillment_stage:
     description: The stage of fulfillment during which this term is applicable.
     type: array
     items:
       $ref: "#/components/schemas/FulfillmentStage"
-  refundEligible:
+  refund_eligible:
     description: Indicates if a cancellation will result in a refund
     type: boolean

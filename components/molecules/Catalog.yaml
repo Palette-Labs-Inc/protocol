@@ -15,12 +15,17 @@ properties:
         items:
             $ref: '#/components/schemas/CatalogCategory'
     catalog_items: 
-        description: <code>CatalogItem</code>'s listed in this catalog
+        description: all <code>CatalogItem</code>'s in this catalog
         type: array
         items:
             $ref: '#/components/schemas/CatalogItem'
     catalog_modifier_groups: 
-        description: <code>CatalogModifierGroup</code> items affiliated with this catalog
+        description: all <code>CatalogModifierGroup</code>'s' in this catalog
         type: array
         items:
             $ref: '#/components/schemas/CatalogModifierGroup'
+    catalog_item_modifiers: 
+            description: all <code>CatalogItemModifier</code>'s in this catalog
+            type: array
+            items:
+                $ref: '#/components/schemas/CatalogItemModifier'

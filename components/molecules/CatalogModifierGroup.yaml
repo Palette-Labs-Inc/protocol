@@ -26,4 +26,4 @@ properties:
         description: A list of <code>CatalogItem</code>'s listed under this modifier group. Modifier Items are represented as Catalog Items.
         type: array
         items:
-            $ref: '#/components/schemas/CatalogItemId'
+            $ref: '#/components/schemas/CatalogModifierItemId'

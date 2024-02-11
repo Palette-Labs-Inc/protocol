@@ -1,0 +1,20 @@
+title: Fulfillment Term
+type: object
+description: The terms for fulfilling this order. Typically, this is used when the order is still open and not yet confirmed.
+properties:
+  available_fulfillment_modes:
+    description: The available fulfillment methods for this order.
+    type: array
+    items:
+      $ref: '#/components/schemas/FulfillmentMode'
+  selected_fulfillment_mode:
+    description: The currently selected fulfillment mode for this cart
+    $ref: '#/components/schemas/FulfillmentMode'
+  provider_location:
+    $ref: '#/components/schemas/Location' # included for ease of display by BSN client.
+  buyer_location:
+    description: The location of the buyer
+    $ref: '#/components/schemas/Location'
+  fulfillment_time_range: 
+    description: a range used to specify a <code>Buyer</code>'s expected fulfillment time. Used in the context of LOCAL-DELIVERY and LOCAL-PICKUP
+    $ref: '#/components/schemas/Location'

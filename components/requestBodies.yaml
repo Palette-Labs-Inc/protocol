@@ -6,3 +6,8 @@ OnSearch:
     $ref: './requestBodies/OnSearch.yaml'
 
 # select
+Select:
+    $ref: './requestBodies/Select.yaml'
+
+OnSelect:
+    $ref: './requestBodies/OnSelect.yaml'

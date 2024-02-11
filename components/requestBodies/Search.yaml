@@ -1,4 +1,4 @@
-description: Request body for finding nearby merchants
+description: a <code>Buyer<code>'s search request
 content:
   application/json:
     schema:

@@ -2,12 +2,14 @@ title: Terms
 description: Transactional terms as defined by the Provider Supporting Node (PSN)
 type: object
 properties:
-    id: 
-        description: a unique identifer for the <code>PSN</code> terms. Terms are returned during search, and when <code>Cart</code>'s are modified. The <code>BSN</code> uses this identifier when establishing a payment intent with an <code>PSN</code>
-        type: string
-    payment_term: 
-        $ref: '#/components/schemas/PaymentTerm'
-    cancellation_term:
-        $ref: '#/components/schemas/CancellationTerm'
-    refund_term:
-        $ref: '#/components/schemas/RefundTerm'
+  id: 
+    description: a unique identifer for the <code>PSN</code> terms. Terms are returned during search, and when <code>Cart</code>'s are modified. The <code>BSN</code> uses this identifier when establishing a payment intent with an <code>PSN</code>
+    type: string
+  payment_term: 
+    $ref: '#/components/schemas/PaymentTerm'
+  cancellation_term:
+    $ref: '#/components/schemas/CancellationTerm'
+  refund_term:
+    $ref: '#/components/schemas/RefundTerm'
+  fulfillment_term:
+    $ref: '#/components/schemas/FulfillmentTerm'

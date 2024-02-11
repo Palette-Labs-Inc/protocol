@@ -59,6 +59,8 @@ FulfillmentMode:
 ItemType:
     $ref: './atoms/ItemType.yaml'
 
+OrderStatus:
+    $ref: './atoms/OrderStatus.yaml'
 
 # molecules
 Location: 
@@ -67,9 +69,12 @@ Location:
 Descriptor:
   $ref: './molecules/Descriptor.yaml'
 
-Schedule:
-  $ref: './molecules/Schedule.yaml'
+Cancellation: 
+  $ref: './molecules/Cancellation.yaml'
 
+
+
+## catalog 
 Catalog:
   $ref: './molecules/Catalog.yaml'
 
@@ -82,6 +87,25 @@ CatalogItem:
 CatalogModifierGroup: 
     $ref: './molecules/CatalogModifierGroup.yaml'
 
+CatalogItemModifier: 
+    $ref: './molecules/CatalogItemModifier.yaml'
+
+ItemQuantity: 
+    $ref: './atoms/ItemQuantity.yaml'
+
+ItemQuantitySelection: 
+    $ref: './atoms/ItemQuantity.yaml#/properties/selected'
+
+ItemQuantityAvailable: 
+    $ref: './atoms/ItemQuantity.yaml#/properties/available'
+
+
+## order
+Order: 
+  $ref: './molecules/Order.yaml'
+
+Cost: 
+  $ref: './molecules/Cost.yaml'
 
 ## catalog identifiers
 CatalogId:
@@ -96,9 +120,17 @@ CatalogItemId:
 CatalogModifierGroupId:
     $ref: './molecules/CatalogModifierGroup.yaml#/properties/id'
 
+CatalogModifierItemId:
+    $ref: './molecules/CatalogModifierItem.yaml#/properties/id'
+
+
 # entities
 Provider:
     $ref: './entities/Provider.yaml'
+
+## entity identifiers
+ProviderId:
+    $ref: './entities/Provider.yaml#/properties/id'
 
 # io 
 SearchIntent:
@@ -107,17 +139,35 @@ SearchIntent:
 ProviderList:
   $ref: './io/ProviderList.yaml'
 
+Selection: 
+  $ref: './io/Selection.yaml'
+
 
 # terms 
 PaymentTerm:
-  $ref: './components/terms/PaymentTerm.yaml'
+  $ref: './terms/PaymentTerm.yaml'
 
 CancellationTerm:
-  $ref: './components/terms/CancellationTerm.yaml'
+  $ref: './terms/CancellationTerm.yaml'
 
 RefundTerm:
-  $ref: './components/terms/RefundTerm.yaml'
+  $ref: './terms/RefundTerm.yaml'
+
+FulfillmentTerm:
+  $ref: './terms/FulfillmentTerm.yaml'
 
 Terms:
-  $ref: './components/terms/Terms.yaml'
+  $ref: './terms/Terms.yaml'
+
+
+# Time
+TimeRange:
+    $ref: './atoms/TimeRange.yaml'
+
+Schedule:
+  $ref: './molecules/Schedule.yaml'
+
+
+
+
 

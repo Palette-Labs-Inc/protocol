@@ -1,0 +1,15 @@
+title: Order Status
+description: Status of the order. Allowed values can be defined by the network policy
+type: string
+enum:
+  - DRAFT # when the order has not yet been confirmed 
+  - SCHEDULED # when there is a time component related to the delivery
+  - NEW_ORDER # just created and waiting for merchant to confirm or reject
+  - CONFIRMED # accepted by the provider
+  - PICKED_UP # picked up by a delivery agent
+  - CANCELED
+  - FULFILLED # done
+  - PREPARED # prepared by a provider
+  - REJECTED # rejected by a provider after confirmation
+  - FAILED_TO_CREATE # unable to avail
+  - UNKNOWN # at the moment unused

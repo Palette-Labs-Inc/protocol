@@ -1,0 +1,21 @@
+description: Describes the count or amount of an item
+type: object
+properties:
+  available:
+    description: This represents the exact quantity available for purchase of the item. The buyer can only purchase multiples of this
+    type: object
+    properties:
+      count:
+        type: integer
+        minimum: 0
+      measure:
+        $ref: "./Value.yaml"
+  selected:
+    description: This represents the quantity selected for purchase of the item
+    type: object
+    properties:
+      count:
+        type: integer
+        minimum: 0
+      measure:
+        $ref: "./Value.yaml"

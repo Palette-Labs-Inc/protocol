@@ -13,7 +13,7 @@ properties:
     items:
       $ref: '#/components/schemas/FulfillmentMode'
   terms:
-    description: Standard payment terms applicable across transactions, subject to provider-specific overrides.
+    description: Standard terms applicable across transactions, subject to provider-specific overrides.
     type: array
     items:
       $ref: '#/components/schemas/terms'

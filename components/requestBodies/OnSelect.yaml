@@ -1,4 +1,4 @@
-description: a PSN's response to a <code>Buyer<code>'s search request
+description: a <code>Buyer<code>'s order object
 content:
   application/json:
     schema:
@@ -7,7 +7,7 @@ content:
         message:
           type: object
           properties:
-            intent:
-              $ref: "#/components/schemas/ProviderList"
+            order:
+              $ref: "#/components/schemas/Order"
       required:
         - message

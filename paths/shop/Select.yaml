@@ -1,0 +1,9 @@
+summary: Select Item
+tags:
+  - Provider Supporting Node (PSN)
+description: The <code>Buyer</code> selects items from the catalog
+requestBody:
+  $ref: '#/components/requestBodies/Select'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

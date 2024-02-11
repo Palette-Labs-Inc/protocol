@@ -14,6 +14,12 @@ paths:
   /on_search:
     post:
       $ref: './paths/discover/OnSearch.yaml'
+  /select:
+    post:
+      $ref: './paths/shop/Select.yaml'
+  /on_select:
+    post:
+      $ref: './paths/shop/OnSelect.yaml'
 components:
   securitySchemes:
     $ref: './components/securitySchemes.yaml'
