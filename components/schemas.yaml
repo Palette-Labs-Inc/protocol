@@ -179,6 +179,8 @@ ProviderList:
 Selection: 
   $ref: './io/Selection.yaml'
 
+FulfillmentIntent:
+  $ref: './io/FulfillmentIntent.yaml'
 
 # terms 
 PaymentTerm:

@@ -13,6 +13,9 @@ properties:
     description: The date-time of updated of this cart
     type: string
     format: date-time
+  provider: 
+    description: the provider for this cart
+    $ref: '#/components/schemas/Provider'
   cost:
     description: The estimated costs that will be charged to the Buyer. If the order has not been initialized, the costs are subject to change. The PaymentTerm returned when the cart is initialized represents when the cost object can no longer be modified.
     $ref: '#/components/schemas/Cost'

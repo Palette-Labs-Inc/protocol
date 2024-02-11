@@ -1,4 +1,4 @@
-description: The newly created active order. Typically, this order would be in a NEW_ORDER status.
+description: The updated Order.
 content:
   application/json:
     schema:

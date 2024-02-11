@@ -18,3 +18,10 @@ Init:
 
 OnInit:
     $ref: './requestBodies/OnInit.yaml'
+
+# status
+Status:
+    $ref: './requestBodies/Status.yaml'
+
+OnStatus:
+    $ref: './requestBodies/OnStatus.yaml'

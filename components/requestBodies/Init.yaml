@@ -9,7 +9,24 @@ content:
           properties:
             cart_id:
               $ref: "#/components/schemas/Cart/properties/id"
-            buyer_details: 
-              $ref:  "#/components/schemas/Buyer"
+            fulfillment_intent:
+                description: Represents the action of a <code>Buyer</code> to update fulfillment specifications such as time, mode, and location.
+                type: object
+                properties:
+                    buyer_details:
+                        description: The details about the buyer
+                        $ref: '#/components/schemas/Buyer'
+                    fulfillment_mode:
+                        $ref: '#/components/schemas/FulfillmentMode'
+                    order_notes:
+                        description: A note that's associated with the cart. For example, a note for a merchant from a buyer about a specific request with their order.
+                        type: string
+                    fulfillment_time: 
+                        type: integer
+                        format: date-time
+                required:
+                    - buyer_details
+                    - fulfillment_mode
+                    
       required:
         - message

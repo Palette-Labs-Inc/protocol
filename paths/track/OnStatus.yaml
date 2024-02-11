@@ -1,0 +1,9 @@
+summary: OnStatus Callback, the <code>PSN</code> responds with the most recent Order
+tags:
+  - Buyer Supporting Node (BSN)
+description: The <code>PSN</code> responds with the Order object
+requestBody:
+  $ref: '#/components/requestBodies/OnStatus'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

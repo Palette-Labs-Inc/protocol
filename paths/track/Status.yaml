@@ -1,0 +1,9 @@
+summary: The BSN attempts to get the status of an Order
+tags:
+  - Provider Supporting Node (PSN)
+description: The <code>Buyer</code> checks for the status of an order from the <code>PSN</code>
+requestBody:
+  $ref: '#/components/requestBodies/Status'
+responses:
+  default: 
+    $ref: '#/components/responses/default'

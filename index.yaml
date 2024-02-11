@@ -26,6 +26,12 @@ paths:
   /on_init:
     post:
       $ref: './paths/shop/OnInit.yaml'
+  /status:
+    post:
+      $ref: './paths/track/Status.yaml'
+  /on_status:
+    post:
+      $ref: './paths/track/OnStatus.yaml'
 components:
   securitySchemes:
     $ref: './components/securitySchemes.yaml'

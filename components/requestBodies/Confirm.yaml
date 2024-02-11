@@ -1,4 +1,4 @@
-description: The <code>Buyer<code>'s information to initialize the Cart.
+description: The <code>Buyer<code>'s cart and transaction_id from the payment to create an Order with the <code>PSN</code>.
 content:
   application/json:
     schema:

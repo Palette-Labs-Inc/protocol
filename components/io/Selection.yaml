@@ -4,20 +4,9 @@ properties:
   provider_id:
     description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
     $ref: '#/components/schemas/ProviderId'
-  selected_fulfillment_mode:
-    description: The currently selected fulfillment mode for this cart
-    $ref: '#/components/schemas/FulfillmentMode'
-  buyer_details:
-    description: The location of the buyer
-    $ref: '#/components/schemas/Location'
-  fulfillment_time: 
-    description: a date-time specifying when this order should be fulfilled. If null, the <code>PSN</code> will interperet as needing to fulfill the order as soon as possible.
-    $ref: '#/components/schemas/FulfillmentTerm/properties/fulfillment_time'
-  order_notes:
-    description: special instructions needed to fulfill this order. For example, a note for a merchant from a buyer about a specific request with their order.
-    type: string
+  fulfillment_intent:
+    $ref: '#/components/schemas/FulfillmentIntent'
   catalog_items:
-    minItems: 1
     type: array
     items:
       type: object

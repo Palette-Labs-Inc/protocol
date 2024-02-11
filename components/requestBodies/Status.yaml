@@ -1,4 +1,4 @@
-description: The newly created active order. Typically, this order would be in a NEW_ORDER status.
+description: The Order's unique identifier.
 content:
   application/json:
     schema:
@@ -7,7 +7,7 @@ content:
         message:
           type: object
           properties:
-            order:
-              $ref: "#/components/schemas/Order"
+            order_id:
+              $ref: "#/components/schemas/Order/properties/id"
       required:
         - message
