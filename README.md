@@ -12,5 +12,5 @@ sudo npm install -g swagger-cli
 - In the root directory, run:
 
 ```
-swagger-cli bundle index.yaml --outfile api/lifecycle/build/api.yaml --type yaml
+swagger-cli bundle ./index.yaml --outfile build/api.yaml --type yaml
 ```
