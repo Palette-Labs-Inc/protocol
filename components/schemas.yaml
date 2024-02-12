@@ -207,7 +207,7 @@ FulfillmentTerm:
   $ref: './schemas/handshakes/FulfillmentTerm.yaml'
 
 Terms:
-  $ref: './schemas/handshakes/schemas/handshakes.yaml'
+  $ref: './schemas/handshakes/Terms.yaml'
 
 
 # Time
