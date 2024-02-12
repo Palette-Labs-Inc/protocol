@@ -15,13 +15,13 @@ content:
             type: object
             properties:
                 order_id:
-                    $ref: "../schemas/Order.yaml#/properties/id"
+                    $ref: '../schemas/Order.yaml#/properties/id'
                 reason:
                     description: The reason for cancellation
                     type: string
                 additional_description:
                     description: Additional information regarding the cancellation event
-                    $ref: "../schemas/Descriptor.yaml"
+                    $ref: '../schemas/Descriptor.yaml'
             required:
                 - order_id
                 - reason

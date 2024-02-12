@@ -15,9 +15,9 @@ content:
             type: object
             properties:
                 cart:
-                    $ref: "#/components/schemas/Cart"
+                    $ref: "../schemas/Cart.yaml"
                 terms: 
-                    $ref: "#/components/schemas/Terms"
+                    $ref: "../schemas/handshakes/Terms.yaml"
             required:
                 - cart
                 - terms

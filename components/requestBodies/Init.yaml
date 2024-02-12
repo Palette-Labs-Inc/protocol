@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 cart_id:
-                    $ref: "#/components/schemas/Cart/properties/id"
+                    $ref: "../schemas/Cart.yaml#/properties/id"
                 fulfillment_intent:
                     description: Represents the action of a <code>Buyer</code> to update fulfillment specifications such as time, mode, and location.
                     type: object

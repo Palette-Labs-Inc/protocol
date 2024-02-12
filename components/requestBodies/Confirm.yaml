@@ -15,10 +15,10 @@ content:
             type: object
             properties:
                 cart_id:
-                    $ref: "../schemas/Cart.yaml#/properties/id"
+                    $ref: '../schemas/Cart.yaml#/properties/id'
                 payment_id: 
                     description: TODO - figure out payment strategy.
-                    $ref:  "../schemas/handshakes/PaymentTerm.yaml#/properties/transaction_id"
+                    $ref:  '../schemas/handshakes/PaymentTerm.yaml#/properties/transaction_id'
             required:
                 - cart_id
                 - payment_id

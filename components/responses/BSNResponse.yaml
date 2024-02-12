@@ -10,11 +10,11 @@ content:
           type: object
           properties:
             ack:
-              $ref: "#/components/schemas/Ack"
+              $ref: '../schemas/primitives/Ack.yaml'
           required:
             - ack
         error:
-          $ref: "#/components/schemas/Error"
+          $ref: '../schemas/primitivesError'
       required:
         - message
         - bsn_parameters

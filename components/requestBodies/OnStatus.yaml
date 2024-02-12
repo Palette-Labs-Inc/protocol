@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 order:
-                    $ref: "#/components/schemas/Order"
+                    $ref: "../schemas/Order.yaml"
             required:
                 - order
       required:

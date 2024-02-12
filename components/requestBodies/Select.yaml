@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 selected:
-                    $ref: "#/components/schemas/Selection"
+                    $ref: '../schemas/Selection.yaml'
             required:
                 - selected
       required:

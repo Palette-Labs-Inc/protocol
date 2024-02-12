@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 order_id:
-                    $ref: "#/components/schemas/Order/properties/id"
+                    $ref: '../schemas/Order.yaml#/properties/id'
             required:
                 - order_id
       required:
