@@ -12,10 +12,12 @@ content:
         psn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
-          type: object
-          properties:
-            providers:
-              $ref: "#/components/schemas/ProviderList"
+            type: object
+            properties:
+                providers:
+                    $ref: "#/components/schemas/ProviderList"
+            required:
+                - providers
       required:
         - action
         - message

@@ -12,10 +12,13 @@ content:
         bsn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
-          type: object
-          properties:
-            intent:
-              $ref: "#/components/schemas/SearchIntent"
+            type: object
+            properties:
+                intent:
+                    $ref: "#/components/schemas/SearchIntent"
+            required: 
+                - intent
+         
       required:
         - action
         - message

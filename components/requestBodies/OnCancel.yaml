@@ -1,4 +1,4 @@
-description: a <code>Buyer<code>'s item selections
+description: The updated Order.
 content:
   application/json:
     schema:
@@ -6,20 +6,20 @@ content:
       properties:
         action:
             enum:
-                - SELECT
+                - ON_CANCEL
         callback_reference: 
             $ref: '#/components/schemas/CallbackReferenceParameters'
-        bsn_parameters:
+        psn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
             type: object
             properties:
-                selected:
-                    $ref: "#/components/schemas/Selection"
+                order:
+                    $ref: "#/components/schemas/Order"
             required:
-                - selected
+                - order
       required:
         - action
         - message
         - callback_reference
-        - bsn_parameters
+        - psn_parameters

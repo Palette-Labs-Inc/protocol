@@ -2,23 +2,18 @@ title: Fulfillment Term
 type: object
 description: The terms for fulfilling this order. Typically, this is used when the order is still open and not yet confirmed.
 properties:
-  available_fulfillment_modes:
-    description: The available fulfillment methods for the cart. Required to be included in the OnInit callback. Not Required in the OnConfirm callback. Witht he OnConfirm callback, the selected_fulfillment_mode should have already been solidified.
-    type: array
-    items:
-      $ref: '#/components/schemas/FulfillmentMode'
+
   selected_fulfillment_mode:
     description: The currently selected fulfillment mode for this cart
     $ref: '#/components/schemas/FulfillmentMode'
   provider_details:
-    $ref: '#/components/schemas/Provider' # included for ease of display by BSN client.
+    $ref: '#/components/schemas/Provider'
   buyer_details:
     description: The location of the buyer
-    $ref: '#/components/schemas/Buyer'
+    $ref: '#/components/schemas/Buyer' 
   fulfillment_time: 
     description: a date-time specifying when this order should be fulfilled.
     format: date-time
-
 required:
   - available_fulfillment_modes
   - selected_fulfillment_modes

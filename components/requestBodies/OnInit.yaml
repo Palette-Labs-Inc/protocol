@@ -12,12 +12,15 @@ content:
         psn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
-          type: object
-          properties:
-            cart:
-              $ref: "#/components/schemas/Cart"
-            terms: 
-              $ref: "#/components/schemas/Terms"
+            type: object
+            properties:
+                cart:
+                    $ref: "#/components/schemas/Cart"
+                terms: 
+                    $ref: "#/components/schemas/Terms"
+            required:
+                - cart
+                - terms
       required:
         - action
         - message

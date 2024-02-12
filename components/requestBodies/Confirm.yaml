@@ -12,12 +12,16 @@ content:
         bsn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
-          type: object
-          properties:
-            cart_id:
-              $ref: "#/components/schemas/Cart/properties/id"
-            transaction_id: 
-              $ref:  "#/components/schemas/PaymentTerm/properties/transaction_id"
+            type: object
+            properties:
+                cart_id:
+                    $ref: "#/components/schemas/Cart/properties/id"
+                payment_id: 
+                    description: TODO - figure out payment strategy.
+                    $ref:  "#/components/schemas/PaymentTerm/properties/transaction_id"
+            required:
+                - cart_id
+                - payment_id
       required:
         - action
         - message

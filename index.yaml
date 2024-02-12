@@ -28,10 +28,16 @@ paths:
       $ref: './paths/shop/OnInit.yaml'
   /status:
     post:
-      $ref: './paths/track/Status.yaml'
+      $ref: './paths/fulfill/Status.yaml'
   /on_status:
     post:
-      $ref: './paths/track/OnStatus.yaml'
+      $ref: './paths/fulfill/OnStatus.yaml'
+  /cancel:
+    post:
+      $ref: './paths/fulfill/Cancel.yaml'
+  /on_cancel:
+    post:
+      $ref: './paths/fulfill/OnCancel.yaml'
 components:
   securitySchemes:
     $ref: './components/securitySchemes.yaml'

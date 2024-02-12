@@ -33,13 +33,9 @@ properties:
   terms: 
     description: the contractual terms of this order when a Cart was confirmed, cancellation, payment, and fulfillment terms of this order
     $ref: '#/components/schemas/Terms'
-  fulfillment_details:
-    description: The fulfillment involved in completing this order
-    $ref: "#/components/schemas/Fulfillment"
   cancellation:
     description: details of this orders cancellation
     $ref: '#/components/schemas/Cancellation'
-
 required:
     - id
     - created_at
@@ -48,3 +44,5 @@ required:
     - cart_line_items 
     - status
     - provider 
+    - terms 
+    - fulfillment_details

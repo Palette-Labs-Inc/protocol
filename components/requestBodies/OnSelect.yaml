@@ -12,12 +12,15 @@ content:
         psn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
-          type: object
-          properties:
-            cart:
-              $ref: "#/components/schemas/Cart"
-            fulfillment_term:
-              $ref: "#/components/schemas/FulfillmentTerm"
+            type: object
+            properties:
+                cart:
+                    $ref: "#/components/schemas/Cart"
+                fulfillment_term:
+                    $ref: "#/components/schemas/FulfillmentTerm"
+            required:
+                - cart
+                - fulfillment_term
       required:
         - action
         - message

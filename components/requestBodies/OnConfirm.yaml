@@ -12,10 +12,12 @@ content:
         psn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
-          type: object
-          properties:
-            order:
-              $ref: "#/components/schemas/Order"
+            type: object
+            properties:
+                order:
+                    $ref: "#/components/schemas/Order"
+            required:
+                - order
       required:
         - action
         - message

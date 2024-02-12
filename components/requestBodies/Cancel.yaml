@@ -1,4 +1,4 @@
-description: A <code>Buyer</code>'s status request for an Order
+description: A <code>Buyer</code>'s request to cancel an Order
 content:
   application/json:
     schema:
@@ -6,7 +6,7 @@ content:
       properties:
         action:
             enum:
-                - STATUS
+                - CANCEL
         callback_reference: 
             $ref: '#/components/schemas/CallbackReferenceParameters'
         bsn_parameters:
@@ -16,8 +16,15 @@ content:
             properties:
                 order_id:
                     $ref: "#/components/schemas/Order/properties/id"
+                reason:
+                    description: The reason for cancellation
+                    type: string
+                additional_description:
+                    description: Additional information regarding the cancellation event
+                    $ref: "#/components/schemas/Descriptor"
             required:
                 - order_id
+                - reason
       required:
         - action
         - message

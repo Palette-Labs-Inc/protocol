@@ -25,3 +25,10 @@ Status:
 
 OnStatus:
     $ref: './requestBodies/OnStatus.yaml'
+
+# cancel
+Cancel:
+    $ref: './requestBodies/Status.yaml'
+
+OnCancel:
+    $ref: './requestBodies/OnCancel.yaml'
