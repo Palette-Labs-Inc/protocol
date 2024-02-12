@@ -1,6 +1,6 @@
 # schemas
 Location: 
-    $ref: './schemas/Location.yaml'
+  $ref: './schemas/Location.yaml'
 
 Descriptor:
   $ref: './schemas/Descriptor.yaml'
@@ -9,43 +9,43 @@ Cancellation:
   $ref: './schemas/Cancellation.yaml'
 
 Fulfillment: 
-   $ref: './schemas/Fulfillment.yaml'
+  $ref: './schemas/Fulfillment.yaml'
 
 Contact: 
-   $ref: './schemas/Contact.yaml'
+  $ref: './schemas/Contact.yaml'
 
 Tracking:
-   $ref: './schemas/Tracking.yaml'
+  $ref: './schemas/Tracking.yaml'
 
 
 
 # /schemas/primitives
 Decimal: 
-    $ref: './schemas/primitives/Decimal.yaml'
+  $ref: './schemas/primitives/Decimal.yaml'
 
 Value: 
-    $ref: './schemas/primitives/Value.yaml'
+  $ref: './schemas/primitives/Value.yaml'
 
 Ack: 
-    $ref: './schemas/primitives/Ack.yaml'
+  $ref: './schemas/primitives/Ack.yaml'
 
 Error: 
-    $ref: './schemas/primitives/Error.yaml'
+  $ref: './schemas/primitives/Error.yaml'
 
 LanguageCode: 
-    $ref: './schemas/primitives/LanguageCode.yaml'
+  $ref: './schemas/primitives/LanguageCode.yaml'
 
 CurrencyCode: 
-    $ref: './schemas/primitives/CurrencyCode.yaml'
+  $ref: './schemas/primitives/CurrencyCode.yaml'
 
 CountryCode: 
-    $ref: './schemas/primitives/CountryCode.yaml'
+  $ref: './schemas/primitives/CountryCode.yaml'
 
 Coordinates: 
-    $ref: './schemas/primitives/Coordinates.yaml'
+  $ref: './schemas/primitives/Coordinates.yaml'
 
 H3Array: 
-    $ref: './schemas/primitives/H3Array.yaml'
+  $ref: './schemas/primitives/H3Array.yaml'
 
 NetworkRole: 
   $ref: './schemas/primitives/NetworkRole.yaml'
@@ -60,7 +60,7 @@ MerchantCategoryCode:
   $ref: './schemas/primitives/MerchantCategoryCode.yaml'
 
 CellPhone:
-    $ref: './schemas/primitives/CellPhone.yaml'
+  $ref: './schemas/primitives/CellPhone.yaml'
 
 Url:
   $ref: './schemas/primitives/Url.yaml'
@@ -72,19 +72,19 @@ MediaFile:
   $ref: './schemas/primitives/MediaFile.yaml'
 
 FulfillmentStage:
-    $ref: './schemas/primitives/FulfillmentStage.yaml'
+  $ref: './schemas/primitives/FulfillmentStage.yaml'
 
 FulfillmentMode:
-    $ref: './schemas/primitives/FulfillmentMode.yaml'
+  $ref: './schemas/primitives/FulfillmentMode.yaml'
 
 FulfillmentStatus:
-    $ref: './schemas/primitives/FulfillmentStatus.yaml'
+  $ref: './schemas/primitives/FulfillmentStatus.yaml'
 
 ItemType:
-    $ref: './schemas/primitives/ItemType.yaml'
+  $ref: './schemas/primitives/ItemType.yaml'
 
 OrderStatus:
-    $ref: './schemas/primitives/OrderStatus.yaml'
+  $ref: './schemas/primitives/OrderStatus.yaml'
 
 ## catalog 
 Catalog:
@@ -97,19 +97,19 @@ CatalogItem:
   $ref: './schemas/CatalogItem.yaml'
 
 CatalogModifierGroup: 
-    $ref: './schemas/CatalogModifierGroup.yaml'
+  $ref: './schemas/CatalogModifierGroup.yaml'
 
 CatalogItemModifier: 
-    $ref: './schemas/CatalogItemModifier.yaml'
+  $ref: './schemas/CatalogItemModifier.yaml'
 
 ItemQuantity: 
-    $ref: './schemas/primitives/ItemQuantity.yaml'
+  $ref: './schemas/primitives/ItemQuantity.yaml'
 
 ItemQuantitySelection: 
-    $ref: './schemas/primitives/ItemQuantity.yaml#/properties/selected'
+  $ref: './schemas/primitives/ItemQuantity.yaml#/properties/selected'
 
 ItemQuantityAvailable: 
-    $ref: './schemas/primitives/ItemQuantity.yaml#/properties/available'
+  $ref: './schemas/primitives/ItemQuantity.yaml#/properties/available'
 
 
 ## order
@@ -121,19 +121,19 @@ Cost:
 
 ## catalog identifiers
 CatalogId:
-    $ref: './schemas/Catalog.yaml#/properties/id'
+  $ref: './schemas/Catalog.yaml#/properties/id'
 
 CatalogCategoryId:
-    $ref: './schemas/CatalogCategory.yaml#/properties/id'
+  $ref: './schemas/CatalogCategory.yaml#/properties/id'
 
 CatalogItemId:
-    $ref: './schemas/CatalogItem.yaml#/properties/id'
+  $ref: './schemas/CatalogItem.yaml#/properties/id'
 
 CatalogModifierGroupId:
-    $ref: './schemas/CatalogModifierGroup.yaml#/properties/id'
+  $ref: './schemas/CatalogModifierGroup.yaml#/properties/id'
 
 CatalogItemModifierId:
-    $ref: './schemas/CatalogItemModifier.yaml#/properties/id'
+  $ref: './schemas/CatalogItemModifier.yaml#/properties/id'
 
 
 # entities
@@ -141,7 +141,7 @@ Buyer:
   $ref: './schemas/entities/Buyer.yaml'
 
 Provider:
-    $ref: './schemas/entities/Provider.yaml'
+  $ref: './schemas/entities/Provider.yaml'
 
 Node: 
   $ref: './schemas/entities/Node.yaml'
@@ -158,7 +158,7 @@ Organization:
 
 ## entity identifiers
 ProviderId:
-    $ref: './schemas/entities/Provider.yaml#/properties/id'
+  $ref: './schemas/entities/Provider.yaml#/properties/id'
 
 
 
@@ -184,13 +184,13 @@ NodeParameters:
 
 ## cart
 Cart: 
-    $ref: './schemas/Cart.yaml'
+  $ref: './schemas/Cart.yaml'
 
 CartLineItem: 
-    $ref: './schemas/CartLineItem.yaml'
+  $ref: './schemas/CartLineItem.yaml'
 
 CartLineItemModifier: 
-    $ref: './schemas/CartLineItemModifier.yaml'
+  $ref: './schemas/CartLineItemModifier.yaml'
 
 
 # terms/handshakes - contracts specifying terms between nodes 
@@ -212,7 +212,7 @@ Terms:
 
 # Time
 TimeRange:
-    $ref: './schemas/primitives/TimeRange.yaml'
+  $ref: './schemas/primitives/TimeRange.yaml'
 
 Schedule:
   $ref: './schemas/Schedule.yaml'
