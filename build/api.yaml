@@ -495,7 +495,6 @@ components:
           enum:
             - ACTIVE
             - COMPLETE
-    Decimal: !<tag:yaml.org,2002:js/undefined> ''
     Value:
       description: Describes a value
       type: object
