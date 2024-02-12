@@ -105,12 +105,6 @@ CatalogItemModifier:
 ItemQuantity: 
   $ref: './schemas/primitives/ItemQuantity.yaml'
 
-ItemQuantitySelection: 
-  $ref: './schemas/primitives/ItemQuantity.yaml#/properties/selected'
-
-ItemQuantityAvailable: 
-  $ref: './schemas/primitives/ItemQuantity.yaml#/properties/available'
-
 
 ## order
 Order: 
@@ -118,23 +112,6 @@ Order:
 
 Cost: 
   $ref: './schemas/Cost.yaml'
-
-## catalog identifiers
-CatalogId:
-  $ref: './schemas/Catalog.yaml#/properties/id'
-
-CatalogCategoryId:
-  $ref: './schemas/CatalogCategory.yaml#/properties/id'
-
-CatalogItemId:
-  $ref: './schemas/CatalogItem.yaml#/properties/id'
-
-CatalogModifierGroupId:
-  $ref: './schemas/CatalogModifierGroup.yaml#/properties/id'
-
-CatalogItemModifierId:
-  $ref: './schemas/CatalogItemModifier.yaml#/properties/id'
-
 
 # entities
 Buyer: 
@@ -154,12 +131,6 @@ Agent:
 
 Organization: 
   $ref: './schemas/entities/Organization.yaml'
-
-
-## entity identifiers
-ProviderId:
-  $ref: './schemas/entities/Provider.yaml#/properties/id'
-
 
 
 # io 
