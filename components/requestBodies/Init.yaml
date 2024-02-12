@@ -4,6 +4,13 @@ content:
     schema:
       type: object
       properties:
+        action:
+            enum:
+                - INITIALIZE
+        callback_reference: 
+            $ref: '#/components/schemas/CallbackParameters'
+        bsn_parameters:
+            $ref: '#/components/schemas/NodeParameters'
         message:
           type: object
           properties:
@@ -29,4 +36,7 @@ content:
                     - fulfillment_mode
                     
       required:
+        - action
         - message
+        - callback_reference
+        - bsn_parameters

@@ -153,8 +153,8 @@ Buyer:
 Provider:
     $ref: './entities/Provider.yaml'
 
-NodeEntry: 
-  $ref: './entities/NodeEntry.yaml'
+Node: 
+  $ref: './entities/Node.yaml'
 
 Person: 
   $ref: './entities/Person.yaml'
@@ -184,6 +184,15 @@ Selection:
 
 FulfillmentIntent:
   $ref: './io/FulfillmentIntent.yaml'
+
+## network requests
+
+CallbackParameters:
+  $ref: './io/CallbackParameters.yaml'
+
+NodeParameters:
+  $ref: './io/NodeParameters.yaml'
+
 
 # terms 
 PaymentTerm:

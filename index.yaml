@@ -1,6 +1,6 @@
 openapi: '3.0.0'
 info:
-  title: The Universal Transaction Protocol (UTP)
+  title: protocol api specification
   description: transaction lifecycle specification
   version: 0.0.0
   contact:
