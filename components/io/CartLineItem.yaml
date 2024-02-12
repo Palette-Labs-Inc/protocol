@@ -1,0 +1,34 @@
+title: A CatalogItem selected by a Buyer, in the cart returned by the OnSelect Callback
+description: An single <CatalogItem> reference with a quantity and the <code>Buyer</code>s <code>CatalogItemModifier</code> selections.
+type: object
+properties:
+  id: 
+    description: a globally unique identifier for this specific customer's Catalog selections in a <code>Cart</code>
+    type: string
+  catalog_item_id:
+        description: The identifier of the <code>CatalogItem</code> from the <code>Catalog</code> in the <code>SSN</code> server
+        $ref: '#/components/schemas/CatalogItemId'
+  quantity: 
+    type: integer
+    format: int32
+  cart_line_item_modifiers: 
+    type: array
+    items:
+      $ref: '#/components/schemas/CartLineItemModifier'
+  special_instructions: 
+    description: represents a specific, item level note. Typically used by a Merchant to fulfill a specific request form the Buyer that is not satisified within the core CatalogItem specificaiton.
+    type: string
+  item_price:
+      $ref: '#/components/schemas/Money'
+  images: 
+      type: array
+      items: 
+          $ref: '#/components/schemas/ImageFile'
+  featured_image: 
+      description: Functionally equivalent to <code>descriptor.images(first:1)</code>
+      $ref: '#/components/schemas/ImageFile'
+required:
+  - id
+  - catalog_item_id # a reference to the ID of the item in the catalog
+  - quantity
+  - price

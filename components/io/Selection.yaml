@@ -1,0 +1,45 @@
+description: Represents the action of a <code>Buyer</code> to add a <code>CatalogItem</code> to a <code>Cart</code>. 
+type: object
+properties:
+  provider_id:
+    description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
+    $ref: '#/components/schemas/ProviderId'
+  fulfillment_intent:
+    $ref: '#/components/schemas/FulfillmentIntent'
+  catalog_items:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          description: the <code>CatalogItemId</code> from the <code>CatalogItem</code> selection
+          $ref: '#/components/schemas/CatalogItemId'
+        quantity:
+          type: integer
+          description: The quantity of the selection
+          format: int32
+        special_instructions: 
+          description: special instructions for the selected item 
+          type: string
+        catalog_item_modifiers: 
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/CatalogItemModifierId'
+              quantity: 
+                type: integer
+                description: The quantity of the selections for the modifier
+                format: int32
+            required:
+              - id
+              - quantity
+      required: 
+        - id
+        - quantity
+    required:
+        - provider
+        - selected_fulfillment_mode
+        - catalog_items
+        - buyer_location

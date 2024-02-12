@@ -1,0 +1,29 @@
+description: The <code>Buyer<code>'s cart and transaction_id from the payment to create an Order with the <code>PSN</code>.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        action:
+            enum:
+                - CONFIRM
+        callback_reference: 
+            $ref: '#/components/schemas/CallbackReferenceParameters'
+        bsn_parameters:
+            $ref: '#/components/schemas/NodeParameters'
+        message:
+            type: object
+            properties:
+                cart_id:
+                    $ref: "#/components/schemas/Cart/properties/id"
+                payment_id: 
+                    description: TODO - figure out payment strategy.
+                    $ref:  "#/components/schemas/PaymentTerm/properties/transaction_id"
+            required:
+                - cart_id
+                - payment_id
+      required:
+        - action
+        - message
+        - callback_reference
+        - bsn_parameters

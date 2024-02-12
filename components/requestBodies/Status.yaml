@@ -1,0 +1,25 @@
+description: A <code>Buyer</code>'s status request for an Order
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        action:
+            enum:
+                - STATUS
+        callback_reference: 
+            $ref: '#/components/schemas/CallbackReferenceParameters'
+        bsn_parameters:
+            $ref: '#/components/schemas/NodeParameters'
+        message:
+            type: object
+            properties:
+                order_id:
+                    $ref: "#/components/schemas/Order/properties/id"
+            required:
+                - order_id
+      required:
+        - action
+        - message
+        - callback_reference
+        - bsn_parameters

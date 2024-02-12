@@ -1,0 +1,45 @@
+description: a <code>Buyer<code>'s information to initialize the Cart.
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        action:
+            enum:
+                - INITIALIZE
+        callback_reference: 
+            $ref: '#/components/schemas/CallbackReferenceParameters'
+        bsn_parameters:
+            $ref: '#/components/schemas/NodeParameters'
+        message:
+            type: object
+            properties:
+                cart_id:
+                    $ref: "#/components/schemas/Cart/properties/id"
+                fulfillment_intent:
+                    description: Represents the action of a <code>Buyer</code> to update fulfillment specifications such as time, mode, and location.
+                    type: object
+                    properties:
+                        buyer_details:
+                            description: The details about the buyer
+                            $ref: '#/components/schemas/Buyer'
+                        fulfillment_mode:
+                            $ref: '#/components/schemas/FulfillmentMode'
+                        order_notes:
+                            description: A note that's associated with the cart. For example, a note for a merchant from a buyer about a specific request with their order.
+                            type: string
+                        fulfillment_time: 
+                            type: integer
+                            format: date-time
+                    required:
+                        - buyer_details
+                        - fulfillment_mode
+            required:
+            - cart_id
+            - fulfillment_intent
+
+      required:
+        - action
+        - message
+        - callback_reference
+        - bsn_parameters

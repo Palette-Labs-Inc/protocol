@@ -1,0 +1,9 @@
+summary: OnConfirm Callback, includes the active order and the finalized refund, cancellation, payment, and fulfillment terms. After receiving this callback, the Buyer's client application would typically navigate the user to an order tracking or receipt view.
+tags:
+  - Buyer Supporting Node (BSN)
+description: The <code>PSN</code> responds with the active Order object
+requestBody:
+  $ref: '#/components/requestBodies/OnInit'
+responses:
+  default: 
+    $ref: '#/components/responses/BSNResponse'

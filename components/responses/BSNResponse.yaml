@@ -1,0 +1,20 @@
+description: Acknowledgement of message received by the BSN after successful validation of schema and signature
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        bsn_parameters:
+            $ref: '#/components/schemas/NodeParameters'
+        message:
+          type: object
+          properties:
+            ack:
+              $ref: "#/components/schemas/Ack"
+          required:
+            - ack
+        error:
+          $ref: "#/components/schemas/Error"
+      required:
+        - message
+        - bsn_parameters

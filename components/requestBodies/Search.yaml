@@ -1,0 +1,26 @@
+description: a <code>Buyer<code>'s search request
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        action:
+            enum:
+                - SEARCH
+        callback_reference: 
+            $ref: '#/components/schemas/CallbackReferenceParameters'
+        bsn_parameters:
+            $ref: '#/components/schemas/NodeParameters'
+        message:
+            type: object
+            properties:
+                intent:
+                    $ref: "#/components/schemas/SearchIntent"
+            required: 
+                - intent
+         
+      required:
+        - action
+        - message
+        - callback_reference
+        - bsn_parameters

@@ -1,0 +1,31 @@
+title: Catalog
+description: Defines a specific collection of <code>CatalogItem</code>'s available for purchase
+type: object
+properties: 
+    descriptor:
+        $ref: '#/components/schemas/Descriptor'
+    schedules:
+        description: Defines the availability of the items within this catalog
+        type: array
+        items: 
+            $ref: '#/components/schemas/Schedule'
+    catalog_categories: 
+        description: <code>CatalogCategory</code> items affiliated with this catalog
+        type: array
+        items:
+            $ref: '#/components/schemas/CatalogCategory'
+    catalog_items: 
+        description: all <code>CatalogItem</code>'s in this catalog
+        type: array
+        items:
+            $ref: '#/components/schemas/CatalogItem'
+    catalog_modifier_groups: 
+        description: all <code>CatalogModifierGroup</code>'s' in this catalog
+        type: array
+        items:
+            $ref: '#/components/schemas/CatalogModifierGroup'
+    catalog_item_modifiers: 
+            description: all <code>CatalogItemModifier</code>'s in this catalog
+            type: array
+            items:
+                $ref: '#/components/schemas/CatalogItemModifier'

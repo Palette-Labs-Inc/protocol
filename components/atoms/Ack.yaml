@@ -1,0 +1,9 @@
+description: Describes the acknowledgement sent in response to an API call. If the implementation utilizes HTTP/S, then Acknowledgment must be returned in the same session. Every API call to a Provider Supporting Node must be responded to with an Acknowledgment whether the Provider Supporting Node intends to respond with a callback or not. This has one property named `status` that indicates the status of the Acknowledgment.
+type: object
+properties:
+  status:
+    type: string
+    description: The status of the acknowledgment. If the request meets the validation criteria of the Provider Supporting Node, then this is set to ACK. If a Provider Supporting Node responds with status = `ACK` to a request, it is obligated to respond with a callback. If the request does not meet the validation criteria, then this is set to NACK. Additionally, if a Provider Supporting Node does not intend to respond with a callback even after the request meets the validation criteria, it should set this value to `NACK`.
+    enum:
+      - ACK
+      - NACK

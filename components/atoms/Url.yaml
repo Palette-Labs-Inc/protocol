@@ -1,0 +1,4 @@
+title: URL
+type: string
+description: Represents an RFC 3986-compliant URI string, limited to HTTPS protocol.
+pattern: '^https:\/\/[^\s/$.?#].[^\s]*$'

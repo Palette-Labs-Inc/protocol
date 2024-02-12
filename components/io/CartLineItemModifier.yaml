@@ -1,0 +1,27 @@
+title: A Modifier selected for a CatalogItem by a Buyer. This data is represented in the Cart returned by the OnSelect Callback
+description: An single <CatalogItem> reference with a quantity and the <code>Buyer</code>s <code>CatalogItemModifier</code> selections.
+type: object
+properties:
+  id: 
+    description: a globally unique identifier for this specific customer's Catalog selections in a <code>Cart</code>
+    type: string
+  catalog_modfifier_item_id:
+        description: The identifier of the <code>CatalogItem</code> from the <code>Catalog</code> in the <code>SSN</code> server
+        $ref: '#/components/schemas/CatalogItemModifierId'
+  quantity: 
+    type: integer
+    format: int32
+  item_price:
+      $ref: '#/components/schemas/Money'
+  images: 
+      type: array
+      items: 
+          $ref: '#/components/schemas/ImageFile'
+  featured_image: 
+      description: Functionally equivalent to <code>descriptor.images(first:1)</code>
+      $ref: '#/components/schemas/ImageFile'
+required:
+  - id
+  - catalog_modfifier_item_id # a reference to the ID of the item in the catalog
+  - quantity
+  - price

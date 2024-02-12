@@ -1,0 +1,12 @@
+description: Time Range
+type: object
+properties:
+  range:
+    type: object
+    properties:
+      start:
+        type: string
+        format: date-time
+      end:
+        type: string
+        format: date-time

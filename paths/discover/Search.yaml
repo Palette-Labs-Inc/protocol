@@ -1,0 +1,10 @@
+summary: Search
+tags:
+  - Provider Supporting Node (PSN)
+  - Gateway Provider (GP)
+description: The <code>BSN</code> broadcasts the buyer's request for goods and services
+requestBody:
+  $ref: '#/components/requestBodies/Search'
+responses:
+  default: 
+    $ref: '#/components/responses/PSNResponse'

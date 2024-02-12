@@ -1,0 +1,224 @@
+# atoms
+Decimal: 
+    $ref: './atoms/Decimal.yaml'
+
+Value: 
+    $ref: './atoms/Value.yaml'
+
+Ack: 
+    $ref: './atoms/Ack.yaml'
+
+Error: 
+    $ref: './atoms/Error.yaml'
+
+LanguageCode: 
+    $ref: './atoms/LanguageCode.yaml'
+
+CurrencyCode: 
+    $ref: './atoms/CurrencyCode.yaml'
+
+CountryCode: 
+    $ref: './atoms/CountryCode.yaml'
+
+Coordinates: 
+    $ref: './atoms/Coordinates.yaml'
+
+H3Array: 
+    $ref: './atoms/H3Array.yaml'
+
+NetworkRole: 
+  $ref: './atoms/NetworkRole.yaml'
+
+Money: 
+  $ref: './atoms/Money.yaml'
+
+Fee: 
+  $ref: './atoms/Fee.yaml'
+
+MerchantCategoryCode: 
+  $ref: './atoms/MerchantCategoryCode.yaml'
+
+CellPhone:
+    $ref: './atoms/CellPhone.yaml'
+
+Url:
+  $ref: './atoms/Url.yaml'
+
+ImageFile:
+  $ref: './atoms/ImageFile.yaml'
+
+MediaFile:
+  $ref: './atoms/MediaFile.yaml'
+
+FulfillmentStage:
+    $ref: './atoms/FulfillmentStage.yaml'
+
+FulfillmentMode:
+    $ref: './atoms/FulfillmentMode.yaml'
+
+FulfillmentStatus:
+    $ref: './atoms/FulfillmentStatus.yaml'
+
+ItemType:
+    $ref: './atoms/ItemType.yaml'
+
+OrderStatus:
+    $ref: './atoms/OrderStatus.yaml'
+
+# molecules
+Location: 
+    $ref: './molecules/Location.yaml'
+
+Descriptor:
+  $ref: './molecules/Descriptor.yaml'
+
+Cancellation: 
+  $ref: './molecules/Cancellation.yaml'
+
+Fulfillment: 
+   $ref: './molecules/Fulfillment.yaml'
+
+Contact: 
+   $ref: './molecules/Contact.yaml'
+
+Tracking:
+   $ref: './molecules/Tracking.yaml'
+
+
+## catalog 
+Catalog:
+  $ref: './molecules/Catalog.yaml'
+
+CatalogCategory:
+  $ref: './molecules/CatalogCategory.yaml'
+
+CatalogItem:
+  $ref: './molecules/CatalogItem.yaml'
+
+CatalogModifierGroup: 
+    $ref: './molecules/CatalogModifierGroup.yaml'
+
+CatalogItemModifier: 
+    $ref: './molecules/CatalogItemModifier.yaml'
+
+ItemQuantity: 
+    $ref: './atoms/ItemQuantity.yaml'
+
+ItemQuantitySelection: 
+    $ref: './atoms/ItemQuantity.yaml#/properties/selected'
+
+ItemQuantityAvailable: 
+    $ref: './atoms/ItemQuantity.yaml#/properties/available'
+
+
+## cart
+Cart: 
+    $ref: './io/Cart.yaml'
+
+CartLineItem: 
+    $ref: './io/CartLineItem.yaml'
+
+CartLineItemModifier: 
+    $ref: './io/CartLineItemModifier.yaml'
+
+
+## order
+Order: 
+  $ref: './molecules/Order.yaml'
+
+Cost: 
+  $ref: './molecules/Cost.yaml'
+
+## catalog identifiers
+CatalogId:
+    $ref: './molecules/Catalog.yaml#/properties/id'
+
+CatalogCategoryId:
+    $ref: './molecules/CatalogCategory.yaml#/properties/id'
+
+CatalogItemId:
+    $ref: './molecules/CatalogItem.yaml#/properties/id'
+
+CatalogModifierGroupId:
+    $ref: './molecules/CatalogModifierGroup.yaml#/properties/id'
+
+CatalogItemModifierId:
+    $ref: './molecules/CatalogItemModifier.yaml#/properties/id'
+
+
+# entities
+Buyer: 
+  $ref: './entities/Buyer.yaml'
+
+Provider:
+    $ref: './entities/Provider.yaml'
+
+Node: 
+  $ref: './entities/Node.yaml'
+
+Person: 
+  $ref: './entities/Person.yaml'
+
+Agent: 
+  $ref: './entities/Agent.yaml'
+
+Organization: 
+  $ref: './entities/Organization.yaml'
+
+
+## entity identifiers
+ProviderId:
+    $ref: './entities/Provider.yaml#/properties/id'
+
+
+
+# io 
+SearchIntent:
+  $ref: './io/SearchIntent.yaml'
+
+ProviderList:
+  $ref: './io/ProviderList.yaml'
+
+Selection: 
+  $ref: './io/Selection.yaml'
+
+FulfillmentIntent:
+  $ref: './io/FulfillmentIntent.yaml'
+
+## network requests
+
+CallbackReferenceParameters:
+  $ref: './io/CallbackReferenceParameters.yaml'
+
+NodeParameters:
+  $ref: './io/NodeParameters.yaml'
+
+
+# terms 
+PaymentTerm:
+  $ref: './terms/PaymentTerm.yaml'
+
+CancellationTerm:
+  $ref: './terms/CancellationTerm.yaml'
+
+RefundTerm:
+  $ref: './terms/RefundTerm.yaml'
+
+FulfillmentTerm:
+  $ref: './terms/FulfillmentTerm.yaml'
+
+Terms:
+  $ref: './terms/Terms.yaml'
+
+
+# Time
+TimeRange:
+    $ref: './atoms/TimeRange.yaml'
+
+Schedule:
+  $ref: './molecules/Schedule.yaml'
+
+
+
+
+

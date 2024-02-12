@@ -1,0 +1,53 @@
+title: Schedule
+description: >
+  Defines a range of date times in local time for a specific day when products or services are available to purchase.
+type: object
+properties:
+  day:
+    type: string
+    enum:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+  available_hours:
+    description: Defines an array of time intervals for the availability of products or services.
+    type: array
+    items:
+      type: object
+      properties:
+        open:
+          type: object
+          description: Opening time in local time.
+          properties:
+            hour:
+              type: integer
+              format: int32
+              description: Opening hour in local time.
+              minimum: 0
+              maximum: 23
+            minute:
+              type: integer
+              format: int32
+              description: Opening minute in local time.
+              minimum: 0
+              maximum: 59
+        close:
+          type: object
+          description: Closing time in local time.
+          properties:
+            hour:
+              type: integer
+              format: int32
+              description: Closing hour in local time.
+              minimum: 0
+              maximum: 23
+            minute:
+              type: integer
+              format: int32
+              description: Closing minute in local time.
+              minimum: 0
+              maximum: 59

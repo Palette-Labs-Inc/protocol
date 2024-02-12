@@ -1,0 +1,51 @@
+openapi: '3.0.0'
+info:
+  title: protocol api specification
+  description: transaction lifecycle specification
+  version: 0.0.0
+  contact:
+    email: engineering@noshdelivery.io
+security:
+  - NodeAuth: []
+paths:
+  /search:
+    post:
+      $ref: './paths/discover/Search.yaml'
+  /on_search:
+    post:
+      $ref: './paths/discover/OnSearch.yaml'
+  /select:
+    post:
+      $ref: './paths/shop/Select.yaml'
+  /on_select:
+    post:
+      $ref: './paths/shop/OnSelect.yaml'
+  /init:
+    post:
+      $ref: './paths/shop/Init.yaml'
+  /on_init:
+    post:
+      $ref: './paths/shop/OnInit.yaml'
+  /status:
+    post:
+      $ref: './paths/fulfill/Status.yaml'
+  /on_status:
+    post:
+      $ref: './paths/fulfill/OnStatus.yaml'
+  /cancel:
+    post:
+      $ref: './paths/fulfill/Cancel.yaml'
+  /on_cancel:
+    post:
+      $ref: './paths/fulfill/OnCancel.yaml'
+components:
+  securitySchemes:
+    $ref: './components/securitySchemes.yaml'
+  schemas:
+    $ref: './components/schemas.yaml'
+  requestBodies: 
+    $ref: './components/requestBodies.yaml'
+  responses: 
+    $ref: './components/responses.yaml'
+  headers:
+    $ref: './components/headers.yaml'

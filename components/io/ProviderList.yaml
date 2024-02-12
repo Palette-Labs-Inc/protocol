@@ -1,0 +1,26 @@
+title: Provider List
+description: >
+    - The providers that a Provider Supporting Node represents. Typically sent in response to a search query from a Buyer Supporting Node. It encompasses payment terms, and fulfillment options the Provider Supporting Node supports. A ttl can be provided, indicating how long the Buyer Supporting Node is permitted to cache and utilize the provider list.
+    - The PSN must respond with a list of providers, the level of detail that the response contains is up to the PSN. If the BSN requires more informaton about a provider, they can trigger another research for the specific provider targeted at the PSN.
+type: object
+properties:
+  descriptor:
+    description: A comprehensive description of the provider catalog.
+    $ref: '#/components/schemas/Descriptor'
+  fulfillment_modes:
+    description: Modes of fulfillment directly supported by the PSN, subject to provider-specific overrides.
+    type: array
+    items:
+      $ref: '#/components/schemas/FulfillmentMode'
+  providers:
+    description: A list of providers managed by the PSN, detailing their offerings.
+    type: array
+    items:
+      $ref: '#/components/schemas/Provider'
+  expiration_time:
+    description: Expiry timestamp indicating when the provider list becomes obsolete.
+    type: string
+    format: date-time
+  time_to_live:
+    description: Time in seconds before the provider list should be refreshed. 
+    type: integer

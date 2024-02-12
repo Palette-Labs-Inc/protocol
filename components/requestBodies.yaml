@@ -1,0 +1,34 @@
+# search 
+Search:
+    $ref: './requestBodies/Search.yaml'
+
+OnSearch:
+    $ref: './requestBodies/OnSearch.yaml'
+
+# select
+Select:
+    $ref: './requestBodies/Select.yaml'
+
+OnSelect:
+    $ref: './requestBodies/OnSelect.yaml'
+
+# init
+Init:
+    $ref: './requestBodies/Init.yaml'
+
+OnInit:
+    $ref: './requestBodies/OnInit.yaml'
+
+# status
+Status:
+    $ref: './requestBodies/Status.yaml'
+
+OnStatus:
+    $ref: './requestBodies/OnStatus.yaml'
+
+# cancel
+Cancel:
+    $ref: './requestBodies/Status.yaml'
+
+OnCancel:
+    $ref: './requestBodies/OnCancel.yaml'

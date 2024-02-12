@@ -1,0 +1,5 @@
+PSNResponse: 
+    $ref: './responses/PSNResponse.yaml'
+
+BSNResponse: 
+    $ref: './responses/BSNResponse.yaml'

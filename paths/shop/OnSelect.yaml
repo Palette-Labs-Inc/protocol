@@ -1,0 +1,9 @@
+summary: On Select Callback
+tags:
+  - Buyer Supporting Node (BSN)
+description: The <code>Buyer</code> selects items from the catalog
+requestBody:
+  $ref: '#/components/requestBodies/OnSelect'
+responses:
+  default: 
+    $ref: '#/components/responses/BSNResponse'
