@@ -3,7 +3,7 @@ type: object
 properties:
   provider_id:
     description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
-    $ref: '#/components/schemas/ProviderId'
+    $ref: './entities/Provider.yaml#/properties/id'
   fulfillment_intent:
     $ref: './FulfillmentIntent.yaml'
   catalog_items:
@@ -13,7 +13,7 @@ properties:
       properties:
         id:
           description: the <code>CatalogItemId</code> from the <code>CatalogItem</code> selection
-          $ref: '#/components/schemas/CatalogItemId'
+          $ref: './CatalogItem.yaml#/properties/id'
         quantity:
           type: integer
           description: The quantity of the selection
@@ -27,7 +27,7 @@ properties:
             type: object
             properties:
               id:
-                $ref: '#/components/schemas/CatalogItemModifierId'
+                $ref: './CatalogItemModifier.yaml#/properties/id'
               quantity: 
                 type: integer
                 description: The quantity of the selections for the modifier

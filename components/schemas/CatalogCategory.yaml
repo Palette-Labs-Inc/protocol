@@ -11,7 +11,7 @@ properties:
         description: A list of <code>CatalogItem</code>'s affiliated with this category
         type: array
         items:
-            $ref: '#/components/schemas/CatalogItemId'
+            $ref: './CatalogItem.yaml#/properties/id'
     ordinal: 
         description: Determines the PSNs intended position of this <code>CatalogCategory></code> appears in the <code>Catalog</code>
         type: integer

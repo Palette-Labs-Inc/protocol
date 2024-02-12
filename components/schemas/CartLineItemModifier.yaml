@@ -7,7 +7,7 @@ properties:
     type: string
   catalog_modfifier_item_id:
         description: The identifier of the <code>CatalogItem</code> from the <code>Catalog</code> in the <code>SSN</code> server
-        $ref: '#/components/schemas/CatalogItemModifierId'
+        $ref: './CatalogItemModifier.yaml#/properties/id'
   quantity: 
     type: integer
     format: int32

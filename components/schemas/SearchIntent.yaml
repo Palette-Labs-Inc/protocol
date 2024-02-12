@@ -24,7 +24,7 @@ properties:
                 description: The name of the provider, allowing for specific provider level search queries like 'Bob's Pizza'.
                 type: string
             id:
-                $ref: '#/components/schemas/ProviderId'
+                $ref: './entities/Provider.yaml#/properties/id'
   merchant_category_codes:
     type: array
     items:
@@ -41,7 +41,7 @@ properties:
                 description: The name of the item, allowing for specific item level search queries like 'Bread and Milk'.
                 type: string
             id:
-                $ref: '#/components/schemas/CatalogItemId'
+                $ref: './CatalogItem.yaml#/properties/id'
   cuisine_types:
     description: Details of the cuisine types that the Buyer wants to avail.
     type: array

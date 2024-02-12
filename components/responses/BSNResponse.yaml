@@ -14,7 +14,7 @@ content:
           required:
             - ack
         error:
-          $ref: '../schemas/primitivesError'
+          $ref: '../schemas/primitives/Error.yaml'
       required:
         - message
         - bsn_parameters

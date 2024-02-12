@@ -31,4 +31,4 @@ properties:
     modifier_group_ids:
         type: array
         items:
-            $ref: '#/components/schemas/CatalogModifierGroupId'
+            $ref: './CatalogModifierGroup.yaml#/properties/id'
