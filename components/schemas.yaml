@@ -187,8 +187,8 @@ FulfillmentIntent:
 
 ## network requests
 
-CallbackParameters:
-  $ref: './io/CallbackParameters.yaml'
+CallbackReferenceParameters:
+  $ref: './io/CallbackReferenceParameters.yaml'
 
 NodeParameters:
   $ref: './io/NodeParameters.yaml'

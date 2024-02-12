@@ -1,11 +1,11 @@
 NodeAuth:
   type: apiKey
   in: header
-  name: Authorization
+  name: Signature
   description: >
     This header authenticates requests using a digital signature. The format for the `Authorization` header is as follows:
     
-    `Authorization: Signature keyId="{registry_node_id}",algorithm="ecdsa-p256-keccak256",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64url(secp256k1(signing string))"`
+    `Signature keyId="{registry_node_uid}",algorithm="ecdsa-p256-keccak256",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64url(secp256k1(signing string))"`
     
     Where:
     - `keyId` combines the node's identifier, the unique registry identifier, and the signature algorithm.
