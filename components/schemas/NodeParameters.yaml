@@ -1,9 +1,0 @@
-title: Node Parameters
-type: object
-properties:
-    uid: 
-        $ref: './entities/Node.yaml#/properties/uid'
-    name: 
-        $ref: './entities/Node.yaml#/properties/name'
-    callback_url: 
-        $ref: './entities/Node.yaml#/properties/callback_url'
