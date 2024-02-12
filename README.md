@@ -14,3 +14,5 @@ sudo npm install -g swagger-cli
 ```
 swagger-cli bundle ./index.yaml --outfile build/api.yaml --type yaml
 ```
+
+Your generated API can be found at `/build/api.yaml`
