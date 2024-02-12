@@ -16,5 +16,5 @@ properties:
   additional_description:
     description: Additional information regarding the cancellation event
     allOf:
-      - $ref: "#/components/schemas/Descriptor"
+      - $ref: '#/components/schemas/Descriptor'
 

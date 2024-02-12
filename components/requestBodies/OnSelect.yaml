@@ -15,9 +15,9 @@ content:
             type: object
             properties:
                 cart:
-                    $ref: "../schemas/Cart.yaml"
+                    $ref: '../schemas/Cart.yaml'
                 fulfillment_term:
-                    $ref: "../schemas/handshakes/FulfillmentTerm.yaml"
+                    $ref: '../schemas/handshakes/FulfillmentTerm.yaml'
             required:
                 - cart
                 - fulfillment_term

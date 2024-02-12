@@ -6,10 +6,10 @@ properties:
     type: string
   image:
     description: image of the person
-    $ref: "#/components/schemas/ImageFile"
+    $ref: '#/components/schemas/ImageFile'
   location:
     description: The postal address of the organization
     allOf:
-      - $ref: "#/components/schemas/Location"
+      - $ref: '#/components/schemas/Location'
   contact:
-    $ref: "#/components/schemas/Contact"
+    $ref: '#/components/schemas/Contact'

@@ -15,10 +15,10 @@ properties:
     format: date-time
   provider: 
     description: the provider for this cart
-    $ref: './entities/Provider.yaml'
+    $ref: '#/components/schemas/Provider'
   cost:
     description: The estimated costs that will be charged to the Buyer. If the order has not been initialized, the costs are subject to change. The PaymentTerm returned when the cart is initialized represents when the cost object can no longer be modified.
-    $ref: './Cost.yaml'
+    $ref: '#/components/schemas/Cost'
   cart_line_items:
     description: An array of currently selected <code>CatalogItem</code>s in this order.
     type: array

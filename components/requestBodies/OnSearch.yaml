@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 providers:
-                    $ref: "../schemas/ProviderList.yaml"
+                    $ref: '../schemas/ProviderList.yaml'
             required:
                 - providers
       required:

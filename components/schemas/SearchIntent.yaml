@@ -9,7 +9,7 @@ properties:
     properties:
         coordinates:
             description: A location based search describing the position in space where the product or service is to be availed. 
-            $ref: "#/components/schemas/Coordinates"
+            $ref: '#/components/schemas/Coordinates'
         fulfillment_mode: 
             description: the <code>Buyer</code>'s intended means of recieving the goods or services
             $ref: './primitives/FulfillmentMode.yaml'
@@ -21,10 +21,10 @@ properties:
         type: object
         properties:
             name:
-                description: The name of the provider, allowing for specific provider level search queries like "Bob's Pizza".
+                description: The name of the provider, allowing for specific provider level search queries like 'Bob's Pizza'.
                 type: string
             id:
-                $ref: "#/components/schemas/ProviderId"
+                $ref: '#/components/schemas/ProviderId'
   merchant_category_codes:
     type: array
     items:
@@ -41,7 +41,7 @@ properties:
                 description: The name of the item, allowing for specific item level search queries like 'Bread and Milk'.
                 type: string
             id:
-                $ref: "#/components/schemas/CatalogItemId"
+                $ref: '#/components/schemas/CatalogItemId'
   cuisine_types:
     description: Details of the cuisine types that the Buyer wants to avail.
     type: array

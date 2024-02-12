@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 intent:
-                    $ref: "../schemas/SearchIntent.yaml"
+                    $ref: '../schemas/SearchIntent.yaml'
             required: 
                 - intent
          

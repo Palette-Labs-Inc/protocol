@@ -15,7 +15,7 @@ content:
             type: object
             properties:
                 order:
-                    $ref: "../schemas/Order.yaml#/properties/id"
+                    $ref: '../schemas/Order.yaml#/properties/id'
             required:
                 - order
       required:
