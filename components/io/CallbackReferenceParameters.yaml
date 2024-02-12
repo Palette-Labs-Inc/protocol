@@ -1,5 +1,5 @@
 title: Network Callback Reference Identifiers
-description: the reference identifiers used during a buyer <> provider transaction lifecycle to connect the requests over the network.
+description: the reference identifiers used during a buyer <> provider transaction lifecycle to connect the requests over multiple network requests and callback cycles.
 type: object
 properties:
     transaction_id:
