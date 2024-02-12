@@ -3,7 +3,7 @@ tags:
   - Provider Supporting Node (PSN)
 description: The <code>Buyer</code> initializes their order by providing personal information and fulfillment details
 requestBody:
-  $ref: '#/components/requestBodies/Init'
+  $ref: '../../components/requestBodies/Init.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/PSNResponse'
+    $ref: '../../components/responses/PSNResponse.yaml'

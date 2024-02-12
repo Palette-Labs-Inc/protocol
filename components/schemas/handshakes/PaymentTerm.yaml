@@ -4,10 +4,10 @@ type: object
 properties:
     charged_at:
         description: The stage of an Order when the payment is to be processed.
-        $ref: '#/components/schemas/FulfillmentStage'
+        $ref: '../primitives/FulfillmentStage.yaml'
     processed_at:
         description: The stage of an Order when the payment is to be processed.
-        $ref: '#/components/schemas/FulfillmentStage'
+        $ref: '../primitives/FulfillmentStage.yaml'
     transaction_id: 
         description: A globally unique reference identifier associated with this transaction
 required:

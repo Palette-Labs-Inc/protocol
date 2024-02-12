@@ -3,7 +3,7 @@ tags:
   - Provider Supporting Node (PSN)
 description: The <code>Buyer</code> checks for the status of an order from the <code>PSN</code>
 requestBody:
-  $ref: '#/components/requestBodies/Cancel'
+  $ref: '../../components/requestBodies/Cancel.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/PSNResponse'
+    $ref: '../../components/responses/PSNResponse.yaml'

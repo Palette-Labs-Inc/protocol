@@ -6,17 +6,17 @@ type: object
 properties:
   descriptor:
     description: A comprehensive description of the provider catalog.
-    $ref: '#/components/schemas/Descriptor'
+    $ref: './Descriptor.yaml'
   fulfillment_modes:
     description: Modes of fulfillment directly supported by the PSN, subject to provider-specific overrides.
     type: array
     items:
-      $ref: '#/components/schemas/FulfillmentMode'
+      $ref: './primitives/FulfillmentMode.yaml'
   providers:
     description: A list of providers managed by the PSN, detailing their offerings.
     type: array
     items:
-      $ref: '#/components/schemas/Provider'
+      $ref: './entities/Provider.yaml'
   expiration_time:
     description: Expiry timestamp indicating when the provider list becomes obsolete.
     type: string

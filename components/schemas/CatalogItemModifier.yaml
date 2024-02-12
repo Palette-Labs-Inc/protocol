@@ -6,9 +6,9 @@ properties:
         description: A unique identifier for this <code>CatalogItemModifier</code>
         type: string
     descriptor: 
-        $ref: '#/components/schemas/Descriptor'
+        $ref: './Descriptor.yaml'
     price:
-        $ref: '#/components/schemas/Money'
+        $ref: './primitives/Money.yaml'
     ordinal: 
         description: Determines where this <code>CatalogItemModifier></code> appears in a <code>CatalogModifierGroup</code>
         type: integer
@@ -23,11 +23,11 @@ properties:
     supported_fulfillment_modes: 
         type: array
         items:
-        $ref: '#/components/schemas/FulfillmentMode'
+        $ref: './primitives/FulfillmentMode.yaml'
     images: 
         type: array
         items: 
-            $ref: '#/components/schemas/ImageFile'
+            $ref: './primitives/ImageFile.yaml'
     featured_image: 
         description: Functionally equivalent to <code>descriptor.images(first:1)</code>
-        $ref: '#/components/schemas/ImageFile'
+        $ref: './primitives/ImageFile.yaml'

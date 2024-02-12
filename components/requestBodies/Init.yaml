@@ -8,9 +8,9 @@ content:
             enum:
                 - INITIALIZE
         callback_reference: 
-            $ref: '#/components/schemas/CallbackReferenceParameters'
+            $ref: '../schemas/CallbackReferenceParameters.yaml'
         bsn_parameters:
-            $ref: '#/components/schemas/NodeParameters'
+            $ref: '../schemas/NodeParameters.yaml'
         message:
             type: object
             properties:
@@ -22,9 +22,9 @@ content:
                     properties:
                         buyer_details:
                             description: The details about the buyer
-                            $ref: '#/components/schemas/Buyer'
+                            $ref: '../schemas/entities/Buyer.yaml'
                         fulfillment_mode:
-                            $ref: '#/components/schemas/FulfillmentMode'
+                            $ref: '../schemas/primitives/FulfillmentMode.yaml'
                         order_notes:
                             description: A note that's associated with the cart. For example, a note for a merchant from a buyer about a specific request with their order.
                             type: string

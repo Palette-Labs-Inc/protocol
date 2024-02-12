@@ -12,7 +12,7 @@ properties:
             $ref: "#/components/schemas/Coordinates"
         fulfillment_mode: 
             description: the <code>Buyer</code>'s intended means of recieving the goods or services
-            $ref: '#/components/schemas/FulfillmentMode'
+            $ref: './primitives/FulfillmentMode.yaml'
   provider:
     description: Details of the provider that the Buyer wants to order from, including a detailed descriptor for name-based searches.
     type: object
@@ -28,7 +28,7 @@ properties:
   merchant_category_codes:
     type: array
     items:
-      $ref: '#/components/schemas/MerchantCategoryCode'
+      $ref: './primitives/MerchantCategoryCode.yaml'
     description: Array of merchant category codes
   item:
     description: Details of the item that the Buyer wants to order, including a detailed descriptor for name-based searches.
@@ -52,4 +52,4 @@ properties:
     description: The mode's of fulfillment that that the Buyer is interested in 
     type: array
     items:
-      $ref: '#/components/schemas/FulfillmentMode'
+      $ref: './primitives/FulfillmentMode.yaml'

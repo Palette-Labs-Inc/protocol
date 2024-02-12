@@ -8,9 +8,9 @@ content:
             enum:
                 - ON_CANCEL
         callback_reference: 
-            $ref: '#/components/schemas/CallbackReferenceParameters'
+            $ref: '../schemas/CallbackReferenceParameters.yaml'
         psn_parameters:
-            $ref: '#/components/schemas/NodeParameters'
+            $ref: '../schemas/NodeParameters.yaml'
         message:
             type: object
             properties:

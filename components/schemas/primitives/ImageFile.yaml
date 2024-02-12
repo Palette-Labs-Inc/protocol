@@ -3,7 +3,7 @@ description: Defines an image that can be affiliated with an entity or object
 type: object
 properties: 
     image_url:
-        $ref: '#/components/schemas/Url'
+        $ref: './Url.yaml'
     width:
       description: Width of the image in pixels
       type: string

@@ -10,34 +10,34 @@ security:
 paths:
   /search:
     post:
-      $ref: './paths/discover/Search.yaml'
+      $ref: './components/requestBodies/Search.yaml'
   /on_search:
     post:
-      $ref: './paths/discover/OnSearch.yaml'
+      $ref: './components/requestBodies/OnSearch.yaml'
   /select:
     post:
-      $ref: './paths/shop/Select.yaml'
+      $ref: './components/requestBodies/Select.yaml'
   /on_select:
     post:
-      $ref: './paths/shop/OnSelect.yaml'
+      $ref: './components/requestBodies/OnSelect.yaml'
   /init:
     post:
-      $ref: './paths/shop/Init.yaml'
+      $ref: './components/requestBodies/Init.yaml'
   /on_init:
     post:
-      $ref: './paths/shop/OnInit.yaml'
+      $ref: './components/requestBodies/OnInit.yaml'
   /status:
     post:
-      $ref: './paths/fulfill/Status.yaml'
+      $ref: './components/requestBodies/Status.yaml'
   /on_status:
     post:
-      $ref: './paths/fulfill/OnStatus.yaml'
+      $ref: './components/requestBodies/OnStatus.yaml'
   /cancel:
     post:
-      $ref: './paths/fulfill/Cancel.yaml'
+      $ref: './components/requestBodies/Cancel.yaml'
   /on_cancel:
     post:
-      $ref: './paths/fulfill/OnCancel.yaml'
+      $ref: './components/requestBodies/OnCancel.yaml'
 components:
   securitySchemes:
     $ref: './components/securitySchemes.yaml'

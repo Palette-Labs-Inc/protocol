@@ -12,7 +12,7 @@ properties:
     description: The chargeable amount of this <code>Fee</code>
     type: string
   currency_code:
-    $ref: '#/components/schemas/CurrencyCode'
+    $ref: './CurrencyCode.yaml'
 required:
   - title
   - description

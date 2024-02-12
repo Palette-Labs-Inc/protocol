@@ -9,4 +9,4 @@ properties:
     description: Indicates whether a reason is required to cancel the order
     type: boolean
   cancellation_fee:
-    $ref: '#/components/schemas/Fee'
+    $ref: '../primitives/Fee.yaml'

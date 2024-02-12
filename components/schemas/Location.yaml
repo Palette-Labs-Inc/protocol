@@ -33,6 +33,6 @@ properties:
     description: The address's postal code. For a full list of field meanings by country.
     type: string
   countryCode:
-    $ref: '#/components/schemas/CountryCode'
+    $ref: './primitives/CountryCode.yaml'
   coordinates: 
-    $ref: '#/components/schemas/Coordinates'
+    $ref: './primitives/Coordinates.yaml'

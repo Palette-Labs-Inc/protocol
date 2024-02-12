@@ -12,14 +12,14 @@ properties:
     type: integer
     format: int32
   item_price:
-      $ref: '#/components/schemas/Money'
+      $ref: './primitives/Money.yaml'
   images: 
       type: array
       items: 
-          $ref: '#/components/schemas/ImageFile'
+          $ref: './primitives/ImageFile.yaml'
   featured_image: 
       description: Functionally equivalent to <code>descriptor.images(first:1)</code>
-      $ref: '#/components/schemas/ImageFile'
+      $ref: './primitives/ImageFile.yaml'
 required:
   - id
   - catalog_modfifier_item_id # a reference to the ID of the item in the catalog

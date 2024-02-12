@@ -4,7 +4,7 @@ tags:
   - Gateway Provider (GP)
 description: The <code>BSN</code> responds the buyer's request for goods and services with a provider list.
 requestBody:
-  $ref: '#/components/requestBodies/OnSearch'
+  $ref: '../../components/requestBodies/OnSearch.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/BSNResponse'
+    $ref: '../../components/responses/BSNResponse.yaml'

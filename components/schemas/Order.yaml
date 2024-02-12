@@ -15,27 +15,27 @@ properties:
     format: date-time
   cost:
     description: The final cost object.
-    $ref: '#/components/schemas/Cost'
+    $ref: './Cost.yaml'
   cart_line_items:
     description: An array of selected <code>CartLineItem</code>s in this order.
     type: array
     items:
-      $ref: '#/components/schemas/CartLineItem'
+      $ref: './CartLineItem.yaml'
   status:
     description: Status of the order.
-    $ref: '#/components/schemas/OrderStatus'
+    $ref: './primitives/OrderStatus.yaml'
   provider:
     description: the provider fulfilling this order.
-    $ref: '#/components/schemas/Provider'
+    $ref: './entities/Provider.yaml'
   order_notes:
     description: special instructions needed to fulfill this order. For example, a note for a merchant from a buyer about a specific request with their order.
     type: string
   terms: 
     description: the contractual terms of this order when a Cart was confirmed, cancellation, payment, and fulfillment terms of this order
-    $ref: '#/components/schemas/Terms'
+    $ref: './handshakes/Terms.yaml'
   cancellation:
     description: details of this orders cancellation
-    $ref: '#/components/schemas/Cancellation'
+    $ref: './Cancellation.yaml'
 required:
     - id
     - created_at

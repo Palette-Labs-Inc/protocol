@@ -6,7 +6,7 @@ properties:
         description: A unique identifier for this <code>CatalogCategory</code>
         type: string
     descriptor: 
-        $ref: '#/components/schemas/Descriptor'
+        $ref: './Descriptor.yaml'
     item_ids: 
         description: A list of <code>CatalogItem</code>'s affiliated with this category
         type: array

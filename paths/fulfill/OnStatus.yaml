@@ -3,7 +3,7 @@ tags:
   - Buyer Supporting Node (BSN)
 description: The <code>PSN</code> responds with the Order object
 requestBody:
-  $ref: '#/components/requestBodies/OnStatus'
+  $ref: '../../components/requestBodies/OnStatus.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/BSNResponse'
+    $ref: '../../components/responses/BSNResponse.yaml'

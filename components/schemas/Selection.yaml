@@ -5,7 +5,7 @@ properties:
     description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
     $ref: '#/components/schemas/ProviderId'
   fulfillment_intent:
-    $ref: '#/components/schemas/FulfillmentIntent'
+    $ref: './FulfillmentIntent.yaml'
   catalog_items:
     type: array
     items:

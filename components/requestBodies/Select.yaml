@@ -8,9 +8,9 @@ content:
             enum:
                 - SELECT
         callback_reference: 
-            $ref: '#/components/schemas/CallbackReferenceParameters'
+            $ref: '../schemas/CallbackReferenceParameters.yaml'
         bsn_parameters:
-            $ref: '#/components/schemas/NodeParameters'
+            $ref: '../schemas/NodeParameters.yaml'
         message:
             type: object
             properties:

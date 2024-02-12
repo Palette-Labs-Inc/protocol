@@ -6,5 +6,5 @@ properties:
     type: string
   url:
     description: The URL of the file
-    $ref: '#/components/schemas/Url'
+    $ref: './Url.yaml'
 

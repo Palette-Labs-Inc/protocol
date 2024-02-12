@@ -14,9 +14,9 @@ properties:
     description: The last name of the customer
     maxLength: 100
   default_address: 
-    $ref: '#/components/schemas/Location'
+    $ref: '../Location.yaml'
   contact_information:
-     $ref: '#/components/schemas/Contact'
+     $ref: '../Contact.yaml'
 required:
   - id
   - first_name

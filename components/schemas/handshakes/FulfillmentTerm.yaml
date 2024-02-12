@@ -5,12 +5,12 @@ properties:
 
   selected_fulfillment_mode:
     description: The currently selected fulfillment mode for this cart
-    $ref: '#/components/schemas/FulfillmentMode'
+    $ref: '../primitives/FulfillmentMode.yaml'
   provider_details:
-    $ref: '#/components/schemas/Provider'
+    $ref: '../entities/Provider.yaml'
   buyer_details:
     description: The location of the buyer
-    $ref: '#/components/schemas/Buyer' 
+    $ref: '../entities/Buyer.yaml' 
   fulfillment_time: 
     description: a date-time specifying when this order should be fulfilled.
     format: date-time

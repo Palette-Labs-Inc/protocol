@@ -6,11 +6,11 @@ properties:
         description: A unique identifier for this <code>CatalogItem</code>
         type: string
     descriptor:
-        $ref: '#/components/schemas/Descriptor'
+        $ref: './Descriptor.yaml'
     item_type:
-        $ref: '#/components/schemas/ItemType'
+        $ref: './primitives/ItemType.yaml'
     item_price:
-        $ref: '#/components/schemas/Money'
+        $ref: './primitives/Money.yaml'
     ordinal: 
         description: Determines the position of this <code>CatalogItem></code> in the <code>Category</code>
         type: integer
@@ -23,11 +23,11 @@ properties:
             - NOT_FOR_SALE
             - LOW_QUANTITY
     preparation_time:
-        $ref: '#/components/schemas/Value'
+        $ref: './primitives/Value.yaml'
     supported_fulfillment_modes: 
         type: array
         items:
-        $ref: '#/components/schemas/FulfillmentMode'
+        $ref: './primitives/FulfillmentMode.yaml'
     modifier_group_ids:
         type: array
         items:

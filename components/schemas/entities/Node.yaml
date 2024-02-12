@@ -12,11 +12,11 @@ properties:
         description: Name of the node
     callback_url:
         description: The publicly hosted url of the node's protocol server.
-        $ref: '#/components/schemas/Url'
+        $ref: '../primitives/Url.yaml'
     serviceable_region:
-        $ref: '#/components/schema/H3Array'
+        $ref: '../primitives/H3Array.yaml'
     industry_code:
         type: string
         description: Industry code relevant to the node.
     node_type:
-        $ref: '#/components/schema/NetworkRole'
+        $ref: '../primitives/NetworkRole.yaml'

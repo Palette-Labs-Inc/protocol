@@ -5,7 +5,7 @@ content:
       type: object
       properties:
         bsn_parameters:
-            $ref: '#/components/schemas/NodeParameters'
+            $ref: '../schemas/NodeParameters.yaml'
         message:
           type: object
           properties:

@@ -9,28 +9,28 @@ properties:
     $ref: "#/components/schemas/Descriptor"
   location: 
     description: the physical location of the provider, if the provider has a specific location
-    $ref: '#/components/schemas/Location'
+    $ref: '../Location.yaml'
   supported_merchant_category_codes:
     description: Array of category codes, each adhering to the MerchantCategoryCode schema
     type: array
     items:
-      $ref: '#/components/schemas/MerchantCategoryCode'
+      $ref: '../primitives/MerchantCategoryCode.yaml'
   supported_fulfillment_modes:
     description: Array of fulfillment modes supported by this provider, each adhering to the FulfillmentMode schema
     type: array
     items:
-      $ref: '#/components/schemas/FulfillmentMode'
+      $ref: '../primitives/FulfillmentMode.yaml'
   country_code:
-    $ref: '#/components/schemas/CountryCode'
+    $ref: '../primitives/CountryCode.yaml'
   language_code:
-    $ref: '#/components/schemas/LanguageCode'
+    $ref: '../primitives/LanguageCode.yaml'
   currency_code:
-    $ref: '#/components/schemas/CurrencyCode'
+    $ref: '../primitives/CurrencyCode.yaml'
   catalogs:
     description: The catalogs for this provider. If empty, the PSN did not return catalogs for the initial search.
     type: array
     items:
-      $ref: '#/components/schemas/Catalog'
+      $ref: '../Catalog.yaml'
   operational_status:
     description: Defines the operational state of a business at the time of the request and is calculated by the SSN as a reference to the composite of Menu Schedules   
     type: string

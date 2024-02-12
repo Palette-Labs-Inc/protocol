@@ -6,10 +6,10 @@ properties:
     description: a unique identifer for the <code>PSN</code> terms. Terms are returned during search, and when <code>Cart</code>'s are modified. The <code>BSN</code> uses this identifier when establishing a payment intent with an <code>PSN</code>
     type: string
   payment_term: 
-    $ref: '#/components/schemas/PaymentTerm'
+    $ref: './PaymentTerm.yaml'
   cancellation_term:
-    $ref: '#/components/schemas/CancellationTerm'
+    $ref: './CancellationTerm.yaml'
   refund_term:
-    $ref: '#/components/schemas/RefundTerm'
+    $ref: './RefundTerm.yaml'
   fulfillment_term:
-    $ref: '#/components/schemas/FulfillmentTerm'
+    $ref: './FulfillmentTerm.yaml'
