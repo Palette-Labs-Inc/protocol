@@ -133,15 +133,6 @@ Organization:
   $ref: './schemas/entities/Organization.yaml'
 
 
-# io 
-## network requests
-CallbackReferenceParameters:
-  $ref: './schemas/CallbackReferenceParameters.yaml'
-
-NodeParameters:
-  $ref: './schemas/NodeParameters.yaml'
-
-
 ## cart
 Cart: 
   $ref: './schemas/Cart.yaml'

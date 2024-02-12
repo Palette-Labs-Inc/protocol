@@ -5,7 +5,18 @@ content:
       type: object
       properties:
         bsn_parameters:
-            $ref: '../schemas/NodeParameters.yaml'
+          type: object
+          properties:
+            uid: 
+                $ref: '../schemas/entities/Node.yaml#/properties/uid'
+            name: 
+                $ref: '../schemas/entities/Node.yaml#/properties/name'
+            callback_url: 
+                $ref: '../schemas/entities/Node.yaml#/properties/callback_url'
+          required:
+            - uid
+            - name 
+            - callback_url
         message:
           type: object
           properties:
