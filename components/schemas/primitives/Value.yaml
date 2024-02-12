@@ -7,17 +7,17 @@ properties:
       - CONSTANT
       - VARIABLE
   value:
-    $ref: '#/components/schemas/Decimal'
+    $ref: './Decimal.yaml'
   estimated_value:
-    $ref: '#/components/schemas/Decimal'
+    $ref: './Decimal.yaml'
   computed_value:
-    $ref: '#/components/schemas/Decimal'
+    $ref: './Decimal.yaml'
   range:
     type: object
     properties:
       min:
-        $ref: '#/components/schemas/Decimal'
+        $ref: './Decimal.yaml'
       max:
-        $ref: '#/components/schemas/Decimal'
+        $ref: './Decimal.yaml'
   unit:
     type: string

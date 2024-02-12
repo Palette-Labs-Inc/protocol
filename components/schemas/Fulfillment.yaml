@@ -10,21 +10,21 @@ properties:
   status:
     description: The current state of fulfillment. The BPP must set this value whenever the state of the order fulfillment changes and fire an unsolicited `on_status` call.
     allOf: 
-      - $ref: '#/components/schemas/FulfillmentStatus'
+      - $ref: './primitives/FulfillmentStatus.yaml'
   expected_fulfillment_time:
     description: the expected fulfillment time of the Order in the local time of the Buyer.
     type: integer
     format: date-time 
   tracking_details:
-    $ref: '#/components/schemas/Tracking'
+    $ref: './Tracking.yaml'
   agent:
     description: The agent that is currently handling the fulfillment of the order
     allOf:
-      - $ref: '#/components/schemas/Agent'
+      - $ref: './entities/Agent.yaml'
   contact:
-    $ref: '#/components/schemas/Contact'
+    $ref: './Contact.yaml'
   delivery_waypoints:
     description: The list of logical stops during the fulfillment of an order. 
     type: array
     items:
-      $ref: '#/components/schemas/Location'
+      $ref: './Location.yaml'

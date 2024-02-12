@@ -9,7 +9,7 @@ properties:
     properties:
         coordinates:
             description: A location based search describing the position in space where the product or service is to be availed. 
-            $ref: '#/components/schemas/Coordinates'
+            $ref: './primitives/Coordinates.yaml'
         fulfillment_mode: 
             description: the <code>Buyer</code>'s intended means of recieving the goods or services
             $ref: './primitives/FulfillmentMode.yaml'

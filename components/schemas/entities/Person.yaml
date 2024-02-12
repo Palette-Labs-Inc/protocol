@@ -9,7 +9,7 @@ properties:
     type: string
   image:
     description: image of the person
-    $ref: '#/components/schemas/ImageFile'
+    $ref: '../primitives/ImageFile.yaml'
   dob:
     description: Date of birth of the person
     type: string
@@ -17,4 +17,4 @@ properties:
   languages:
     type: array
     items:
-      $ref: '#/components/schemas/LanguageCode'
+      $ref: '../primitives/LanguageCode.yaml'
