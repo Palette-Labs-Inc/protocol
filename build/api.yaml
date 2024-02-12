@@ -10,7 +10,7 @@ security:
 paths:
   /search:
     post:
-      description: a <code>Buyer<code>'s search request
+      description: a Buyer's search request
       content:
         application/json:
           schema:
@@ -27,9 +27,63 @@ paths:
                 type: object
                 properties:
                   intent:
-                    $ref: '#/components/schemas/SearchIntent'
-                required:
-                  - intent
+                    description: A Buyers search intent to purchase or avail items from the network.
+                    type: object
+                    properties:
+                      search_string:
+                        description: A raw free text search string describing the name or description of a seller.
+                        type: string
+                      fulfillment:
+                        type: object
+                        properties:
+                          coordinates:
+                            description: A location based search describing the position in space where the product or service is to be availed.
+                            $ref: '#/components/schemas/Coordinates'
+                          fulfillment_mode:
+                            description: the Buyer's intended means of receiving the goods or services
+                            $ref: '#/components/schemas/FulfillmentMode'
+                      provider:
+                        description: 'Details of the provider that the Buyer wants to order from, including a detailed descriptor for name-based searches.'
+                        type: object
+                        properties:
+                          descriptor:
+                            type: object
+                            properties:
+                              name:
+                                description: 'The name of the provider, allowing for specific provider level search queries like ''Bob''s Pizza''.'
+                                type: string
+                              id:
+                                $ref: '#/components/schemas/Provider/properties/id'
+                      merchant_category_codes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MerchantCategoryCode'
+                        description: Array of merchant category codes
+                      item:
+                        description: 'Details of the item that the Buyer wants to order, including a detailed descriptor for name-based searches.'
+                        type: object
+                        properties:
+                          descriptor:
+                            type: object
+                            properties:
+                              name:
+                                description: 'The name of the item, allowing for specific item level search queries like ''Bread and Milk''.'
+                                type: string
+                              id:
+                                $ref: '#/components/schemas/CatalogItem/properties/id'
+                      cuisine_types:
+                        description: Details of the cuisine types that the Buyer wants to avail.
+                        type: array
+                        items:
+                          description: 'The network defined array of strings, i.e., Burger, Pizza'
+                          type: string
+                      fulfillment_modes:
+                        description: The modes of fulfillment that the Buyer is interested in
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/FulfillmentMode'
+                    required:
+                      - intent
             required:
               - action
               - message
@@ -37,7 +91,7 @@ paths:
               - bsn_parameters
   /on_search:
     post:
-      description: a PSN's response to a <code>Buyer<code>'s search request
+      description: a PSN's response to a Buyer's search request
       content:
         application/json:
           schema:
@@ -54,7 +108,31 @@ paths:
                 type: object
                 properties:
                   providers:
-                    $ref: '#/components/schemas/ProviderList'
+                    title: Provider List
+                    description: |
+                      - The providers that a Provider Supporting Node represents. Typically sent in response to a search query from a Buyer Supporting Node. It encompasses payment terms, and fulfillment options the Provider Supporting Node supports. A ttl can be provided, indicating how long the Buyer Supporting Node is permitted to cache and utilize the provider list. - The PSN must respond with a list of providers, the level of detail that the response contains is up to the PSN. If the BSN requires more information about a provider, they can trigger another research for the specific provider targeted at the PSN.
+                    type: object
+                    properties:
+                      descriptor:
+                        description: A comprehensive description of the provider catalog.
+                        $ref: '#/components/schemas/Descriptor'
+                      fulfillment_modes:
+                        description: 'Modes of fulfillment directly supported by the PSN, subject to provider-specific overrides.'
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/FulfillmentMode'
+                      providers:
+                        description: 'A list of providers managed by the PSN, detailing their offerings.'
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Provider'
+                      expiration_time:
+                        description: Expiry timestamp indicating when the provider list becomes obsolete.
+                        type: string
+                        format: date-time
+                      time_to_live:
+                        description: Time in seconds before the provider list should be refreshed.
+                        type: integer
                 required:
                   - providers
             required:
@@ -80,10 +158,65 @@ paths:
               message:
                 type: object
                 properties:
-                  selected:
-                    $ref: '#/components/schemas/Selection'
-                required:
-                  - selected
+                  provider_id:
+                    description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
+                    $ref: '#/components/schemas/Provider/properties/id'
+                  fulfillment_intent:
+                    description: 'Represents the action of a <code>Buyer</code> to update fulfillment specifications such as time, mode, and location.'
+                    type: object
+                    properties:
+                      buyer_details:
+                        description: The details about the buyer
+                        $ref: '#/components/schemas/Buyer'
+                      fulfillment_mode:
+                        description: should be one of the available fulfillment modes
+                        $ref: '#/components/schemas/FulfillmentMode'
+                      order_notes:
+                        description: 'A note that''s associated with the cart. For example, a note for a merchant from a buyer about a specific request with their order.'
+                        type: string
+                      fulfillment_time:
+                        type: integer
+                        format: date-time
+                    required:
+                      - buyer_details
+                      - fulfillment_mode
+                  catalog_items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          description: the <code>CatalogItemId</code> from the <code>CatalogItem</code> selection
+                          $ref: '#/components/schemas/CatalogItem/properties/id'
+                        quantity:
+                          type: integer
+                          description: The quantity of the selection
+                          format: int32
+                        special_instructions:
+                          description: special instructions for the selected item
+                          type: string
+                        catalog_item_modifiers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                $ref: '#/components/schemas/CatalogItemModifier/properties/id'
+                              quantity:
+                                type: integer
+                                description: The quantity of the selections for the modifier
+                                format: int32
+                            required:
+                              - id
+                              - quantity
+                      required:
+                        - id
+                        - quantity
+                  required:
+                    - provider_id
+                    - selected_fulfillment_mode
+                    - catalog_items
+                    - buyer_location
             required:
               - action
               - message
@@ -495,6 +628,7 @@ components:
           enum:
             - ACTIVE
             - COMPLETE
+    Decimal: !<tag:yaml.org,2002:js/undefined> ''
     Value:
       description: Describes a value
       type: object
@@ -1129,154 +1263,6 @@ components:
             - $ref: '#/components/schemas/Location'
         contact:
           $ref: '#/components/schemas/Contact'
-    SearchIntent:
-      description: A Buyers search intent to purchase or avail items from the network.
-      type: object
-      properties:
-        search_string:
-          description: A raw free text search string describing the name or description of a seller.
-          type: string
-        fulfillment:
-          type: object
-          properties:
-            coordinates:
-              description: A location based search describing the position in space where the product or service is to be availed.
-              $ref: '#/components/schemas/Coordinates'
-            fulfillment_mode:
-              description: the <code>Buyer</code>'s intended means of recieving the goods or services
-              $ref: '#/components/schemas/FulfillmentMode'
-        provider:
-          description: 'Details of the provider that the Buyer wants to order from, including a detailed descriptor for name-based searches.'
-          type: object
-          properties:
-            descriptor:
-              type: object
-              properties:
-                name:
-                  description: 'The name of the provider, allowing for specific provider level search queries like ''Bob''s Pizza''.'
-                  type: string
-                id:
-                  $ref: '#/components/schemas/Provider/properties/id'
-        merchant_category_codes:
-          type: array
-          items:
-            $ref: '#/components/schemas/MerchantCategoryCode'
-          description: Array of merchant category codes
-        item:
-          description: 'Details of the item that the Buyer wants to order, including a detailed descriptor for name-based searches.'
-          type: object
-          properties:
-            descriptor:
-              type: object
-              properties:
-                name:
-                  description: 'The name of the item, allowing for specific item level search queries like ''Bread and Milk''.'
-                  type: string
-                id:
-                  $ref: '#/components/schemas/CatalogItem/properties/id'
-        cuisine_types:
-          description: Details of the cuisine types that the Buyer wants to avail.
-          type: array
-          items:
-            description: 'The network defined array of strings, i.e. Burger, Pizza'
-            type: string
-        fulfillment_modes:
-          description: The mode's of fulfillment that that the Buyer is interested in
-          type: array
-          items:
-            $ref: '#/components/schemas/FulfillmentMode'
-    ProviderList:
-      title: Provider List
-      description: |
-        - The providers that a Provider Supporting Node represents. Typically sent in response to a search query from a Buyer Supporting Node. It encompasses payment terms, and fulfillment options the Provider Supporting Node supports. A ttl can be provided, indicating how long the Buyer Supporting Node is permitted to cache and utilize the provider list. - The PSN must respond with a list of providers, the level of detail that the response contains is up to the PSN. If the BSN requires more informaton about a provider, they can trigger another research for the specific provider targeted at the PSN.
-      type: object
-      properties:
-        descriptor:
-          description: A comprehensive description of the provider catalog.
-          $ref: '#/components/schemas/Descriptor'
-        fulfillment_modes:
-          description: 'Modes of fulfillment directly supported by the PSN, subject to provider-specific overrides.'
-          type: array
-          items:
-            $ref: '#/components/schemas/FulfillmentMode'
-        providers:
-          description: 'A list of providers managed by the PSN, detailing their offerings.'
-          type: array
-          items:
-            $ref: '#/components/schemas/Provider'
-        expiration_time:
-          description: Expiry timestamp indicating when the provider list becomes obsolete.
-          type: string
-          format: date-time
-        time_to_live:
-          description: Time in seconds before the provider list should be refreshed.
-          type: integer
-    Selection:
-      description: Represents the action of a <code>Buyer</code> to add a <code>CatalogItem</code> to a <code>Cart</code>.
-      type: object
-      properties:
-        provider_id:
-          description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
-          $ref: '#/components/schemas/Provider/properties/id'
-        fulfillment_intent:
-          $ref: '#/components/schemas/FulfillmentIntent'
-        catalog_items:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                description: the <code>CatalogItemId</code> from the <code>CatalogItem</code> selection
-                $ref: '#/components/schemas/CatalogItem/properties/id'
-              quantity:
-                type: integer
-                description: The quantity of the selection
-                format: int32
-              special_instructions:
-                description: special instructions for the selected item
-                type: string
-              catalog_item_modifiers:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      $ref: '#/components/schemas/CatalogItemModifier/properties/id'
-                    quantity:
-                      type: integer
-                      description: The quantity of the selections for the modifier
-                      format: int32
-                  required:
-                    - id
-                    - quantity
-            required:
-              - id
-              - quantity
-          required:
-            - provider
-            - selected_fulfillment_mode
-            - catalog_items
-            - buyer_location
-    FulfillmentIntent:
-      title: Fulfillment Intent of a Buyer
-      description: 'Represents the action of a <code>Buyer</code> to update fulfillment specifications such as time, mode, and location.'
-      type: object
-      properties:
-        buyer_details:
-          description: The details about the buyer
-          $ref: '#/components/schemas/Buyer'
-        fulfillment_mode:
-          description: should be one of the available fulfillment modes
-          $ref: '#/components/schemas/FulfillmentMode'
-        order_notes:
-          description: 'A note that''s associated with the cart. For example, a note for a merchant from a buyer about a specific request with their order.'
-          type: string
-        fulfillment_time:
-          type: integer
-          format: date-time
-      required:
-        - buyer_details
-        - fulfillment_mode
     CallbackReferenceParameters:
       title: Network Callback Reference Identifiers
       description: the reference identifiers used during a buyer <> provider transaction lifecycle to connect the requests over multiple network requests and callback cycles.

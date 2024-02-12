@@ -12,12 +12,67 @@ content:
         bsn_parameters:
             $ref: '../schemas/NodeParameters.yaml'
         message:
-            type: object
-            properties:
-                selected:
-                    $ref: '../schemas/Selection.yaml'
+          type: object
+          properties:
+            provider_id:
+              description: the unique identifier of the <code>Provider</code> that the <code>Buyer</code> is selecting items from
+              $ref: '../schemas/entities/Provider.yaml#/properties/id'
+            fulfillment_intent:
+              description: Represents the action of a <code>Buyer</code> to update fulfillment specifications such as time, mode, and location.
+              type: object
+              properties:
+                  buyer_details:
+                      description: The details about the buyer
+                      $ref: '../schemas/entities/Buyer.yaml'
+                  fulfillment_mode:
+                      description: should be one of the available fulfillment modes
+                      $ref: '../schemas/primitives/FulfillmentMode.yaml'
+                  order_notes:
+                      description: A note that's associated with the cart. For example, a note for a merchant from a buyer about a specific request with their order.
+                      type: string
+                  fulfillment_time: 
+                      type: integer
+                      format: date-time
+              required:
+                  - buyer_details
+                  - fulfillment_mode
+            catalog_items:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    description: the <code>CatalogItemId</code> from the <code>CatalogItem</code> selection
+                    $ref: '../schemas/CatalogItem.yaml#/properties/id'
+                  quantity:
+                    type: integer
+                    description: The quantity of the selection
+                    format: int32
+                  special_instructions: 
+                    description: special instructions for the selected item 
+                    type: string
+                  catalog_item_modifiers: 
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          $ref: '../schemas/CatalogItemModifier.yaml#/properties/id'
+                        quantity: 
+                          type: integer
+                          description: The quantity of the selections for the modifier
+                          format: int32
+                      required:
+                        - id
+                        - quantity
+                required: 
+                  - id
+                  - quantity
             required:
-                - selected
+                - provider_id
+                - selected_fulfillment_mode
+                - catalog_items
+                - buyer_location
       required:
         - action
         - message

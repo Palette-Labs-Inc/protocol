@@ -134,24 +134,13 @@ Organization:
 
 
 # io 
-SearchIntent:
-  $ref: './schemas/SearchIntent.yaml'
-
-ProviderList:
-  $ref: './schemas/ProviderList.yaml'
-
-Selection: 
-  $ref: './schemas/Selection.yaml'
-
-FulfillmentIntent:
-  $ref: './schemas/FulfillmentIntent.yaml'
-
 ## network requests
 CallbackReferenceParameters:
   $ref: './schemas/CallbackReferenceParameters.yaml'
 
 NodeParameters:
   $ref: './schemas/NodeParameters.yaml'
+
 
 ## cart
 Cart: 
