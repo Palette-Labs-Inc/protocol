@@ -6,4 +6,4 @@ requestBody:
   $ref: '#/components/requestBodies/Confirm'
 responses:
   default: 
-    $ref: '#/components/responses/default'
+    $ref: '#/components/responses/PSNResponse'

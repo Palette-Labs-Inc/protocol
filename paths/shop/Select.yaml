@@ -6,4 +6,4 @@ requestBody:
   $ref: '#/components/requestBodies/Select'
 responses:
   default: 
-    $ref: '#/components/responses/default'
+    $ref: '#/components/responses/PSNResponse'

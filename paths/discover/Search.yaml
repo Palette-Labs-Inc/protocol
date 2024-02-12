@@ -7,4 +7,4 @@ requestBody:
   $ref: '#/components/requestBodies/Search'
 responses:
   default: 
-    $ref: '#/components/responses/default'
+    $ref: '#/components/responses/PSNResponse'

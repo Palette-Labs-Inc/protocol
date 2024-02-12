@@ -1,2 +1,5 @@
-default: 
-    $ref: './Response.yaml'
+PSNResponse: 
+    $ref: './responses/PSNResponse.yaml'
+
+BSNResponse: 
+    $ref: './responses/BSNResponse.yaml'

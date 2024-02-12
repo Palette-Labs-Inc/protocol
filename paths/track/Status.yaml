@@ -6,4 +6,4 @@ requestBody:
   $ref: '#/components/requestBodies/Status'
 responses:
   default: 
-    $ref: '#/components/responses/default'
+    $ref: '#/components/responses/PSNResponse'

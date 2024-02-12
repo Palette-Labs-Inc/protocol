@@ -1,9 +1,11 @@
-description: Acknowledgement of message received after successful validation of schema and signature
+description: Acknowledgement of message received by the BSN after successful validation of schema and signature
 content:
   application/json:
     schema:
       type: object
       properties:
+        psn:
+            $ref: '#/components/schemas/NodeParameters'
         message:
           type: object
           properties:
@@ -14,4 +16,5 @@ content:
         error:
           $ref: "#/components/schemas/Error"
       required:
+        - psn
         - message

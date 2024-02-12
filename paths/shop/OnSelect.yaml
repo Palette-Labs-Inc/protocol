@@ -6,4 +6,4 @@ requestBody:
   $ref: '#/components/requestBodies/OnSelect'
 responses:
   default: 
-    $ref: '#/components/responses/default'
+    $ref: '#/components/responses/BSNResponse'

@@ -1,5 +1,4 @@
 title: Node Parameters
-description: the mandatory parameters send by a Node in a network request 
 type: object
 properties:
     uid: 
