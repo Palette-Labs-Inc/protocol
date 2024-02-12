@@ -13,4 +13,4 @@ NodeAuth:
     - `created` is the UNIX timestamp when the signature was created.
     - `expires` is the UNIX timestamp when the signature expires.
     - `headers` details the parts of the request that are signed, specifically the creation time, expiration time, and the digest.
-    - `signature` is the digital signature, encoded in Base64url, created by signing the specified headers with the node's private key using the secp256k1 curve.
+    - `signature` is the digital signature, encoded in Base64url, created by signing the requestBody with the node's private key using the secp256k1 curve.
