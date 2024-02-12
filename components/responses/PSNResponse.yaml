@@ -4,7 +4,7 @@ content:
     schema:
       type: object
       properties:
-        psn:
+        psn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
           type: object
@@ -16,5 +16,5 @@ content:
         error:
           $ref: "#/components/schemas/Error"
       required:
-        - psn
+        - psn_parameters
         - message

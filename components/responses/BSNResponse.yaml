@@ -4,7 +4,7 @@ content:
     schema:
       type: object
       properties:
-        bsn:
+        bsn_parameters:
             $ref: '#/components/schemas/NodeParameters'
         message:
           type: object
@@ -17,4 +17,4 @@ content:
           $ref: "#/components/schemas/Error"
       required:
         - message
-        - bsn
+        - bsn_parameters
