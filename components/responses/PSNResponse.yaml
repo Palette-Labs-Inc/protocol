@@ -5,16 +5,27 @@ content:
       type: object
       properties:
         psn_parameters:
-            $ref: '#/components/schemas/NodeParameters'
+          type: object
+          properties:
+            uid: 
+                $ref: '../schemas/entities/Node.yaml#/properties/uid'
+            name: 
+                $ref: '../schemas/entities/Node.yaml#/properties/name'
+            callback_url: 
+                $ref: '../schemas/entities/Node.yaml#/properties/callback_url'
+          required:
+            - uid
+            - name 
+            - callback_url
         message:
           type: object
           properties:
             ack:
-              $ref: "#/components/schemas/Ack"
+              $ref: '../schemas/primitives/Ack.yaml'
           required:
             - ack
         error:
-          $ref: "#/components/schemas/Error"
+          $ref: '../schemas/primitives/Error.yaml'
       required:
         - psn_parameters
         - message

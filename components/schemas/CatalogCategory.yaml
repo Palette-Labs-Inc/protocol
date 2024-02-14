@@ -1,0 +1,18 @@
+title: Catalog Category
+description: A category to which a <code>CatalogItem</code> instance belongs. Used to group items for ease in exlporations.
+type: object
+properties:
+    id: 
+        description: A unique identifier for this <code>CatalogCategory</code>
+        type: string
+    descriptor: 
+        $ref: './Descriptor.yaml'
+    item_ids: 
+        description: A list of <code>CatalogItem</code>'s affiliated with this category
+        type: array
+        items:
+            $ref: './CatalogItem.yaml#/properties/id'
+    ordinal: 
+        description: Determines the PSNs intended position of this <code>CatalogCategory></code> appears in the <code>Catalog</code>
+        type: integer
+        format: int32

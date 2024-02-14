@@ -1,0 +1,12 @@
+title: Image File
+description: Defines an image that can be affiliated with an entity or object
+type: object
+properties: 
+    image_url:
+        $ref: './Url.yaml'
+    width:
+      description: Width of the image in pixels
+      type: string
+    height:
+      description: Height of the image in pixels
+      type: string

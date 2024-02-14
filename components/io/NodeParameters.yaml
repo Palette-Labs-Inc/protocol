@@ -1,9 +1,0 @@
-title: Node Parameters
-type: object
-properties:
-    uid: 
-        $ref: '#/components/schemas/Node/properties/uid'
-    name: 
-        $ref: '#/components/schemas/Node/properties/name'
-    callback_url: 
-        $ref: '#/components/schemas/Node/properties/callback_url'

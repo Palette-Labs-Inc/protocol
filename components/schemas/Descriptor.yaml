@@ -1,0 +1,51 @@
+description: Comprehensive description of something, accommodating a broad spectrum of attributes, physical or otherwise.
+type: object
+properties:
+  name:
+    type: string
+    description: Name of the item or entity.
+  identifier:
+    type: string
+    description: A unique identifier, which could be a code or a system-specific ID.
+  shortDescription:
+    type: string
+    description: A brief description or summary.
+  detailedDescription:
+    type: string
+    description: An extended description providing more in-depth details.
+  attributes:
+    type: array
+    description: A collection of key-value pairs for additional attributes that do not fit into the standard schema.
+    items:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+  media:
+    type: array
+    description: A collection of media files related to the item, such as documents, audio, or video files.
+    items:
+      $ref: './primitives/MediaFile.yaml'
+  images:
+    type: array
+    description: A collection of image files associated with the item.
+    items:
+      $ref: './primitives/ImageFile.yaml'
+  links:
+    type: array
+    description: Web links, including social media, official websites, or additional resources.
+    items:
+      type: object
+      properties:
+        description:
+          type: string
+        url:
+          type: string
+          format: uri
+  tags:
+    type: array
+    description: Tags or keywords associated with the item for easier categorization and search.
+    items:
+      type: string

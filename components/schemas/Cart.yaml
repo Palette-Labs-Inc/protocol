@@ -1,0 +1,34 @@
+title: Cart
+type: object
+description: Describes the current details of a <code>Buyer</code>'s selection during their transaction lifecycle.
+properties:
+  id:
+    type: string
+    description: A globally unique ID of the <code>Cart</code>
+  created_at:
+    description: The date-time of creation of this cart
+    type: string
+    format: date-time
+  updated_at:
+    description: The date-time of updated of this cart
+    type: string
+    format: date-time
+  provider: 
+    description: the provider for this cart
+    $ref: './entities/Provider.yaml'
+  cost:
+    description: The estimated costs that will be charged to the Buyer. If the order has not been initialized, the costs are subject to change. The PaymentTerm returned when the cart is initialized represents when the cost object can no longer be modified.
+    $ref: './Cost.yaml'
+  cart_line_items:
+    description: An array of currently selected <code>CatalogItem</code>s in this order.
+    type: array
+    items:
+      $ref: './CartLineItem.yaml'
+  order_notes:
+    description: special instructions needed to fulfill this order. For example, a note for a merchant from a buyer about a specific request with their order.
+    type: string
+
+required:
+  - id
+  - cost
+  - cart_line_items

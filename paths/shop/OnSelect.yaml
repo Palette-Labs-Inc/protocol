@@ -3,7 +3,7 @@ tags:
   - Buyer Supporting Node (BSN)
 description: The <code>Buyer</code> selects items from the catalog
 requestBody:
-  $ref: '#/components/requestBodies/OnSelect'
+  $ref: '../../components/requestBodies/OnSelect.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/BSNResponse'
+    $ref: '../../components/responses/BSNResponse.yaml'

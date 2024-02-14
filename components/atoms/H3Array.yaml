@@ -1,7 +1,0 @@
-h3IndexArray:
-  description: An array of H3 geospatial indices
-  type: array
-  items:
-    type: string
-    pattern: '^[0-9a-f]{15}$'
-    description: An H3 index represented as a 15-character hexadecimal string.

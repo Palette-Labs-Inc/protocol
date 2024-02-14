@@ -1,0 +1,22 @@
+
+title: Node
+description: A structure representing a node entry in the network's registry
+type: object
+properties:
+    uid:
+        type: string
+        description: Unique identifier of the node in the registry, represented as a 32-byte hexadecimal string
+        pattern: '^[0-9a-fA-F]{64}$'
+    name:
+        type: string
+        description: Name of the node
+    callback_url:
+        description: The publicly hosted url of the node's protocol server.
+        $ref: '../primitives/Url.yaml'
+    serviceable_region:
+        $ref: '../primitives/H3Array.yaml'
+    industry_code:
+        type: string
+        description: Industry code relevant to the node.
+    node_type:
+        $ref: '../primitives/NetworkRole.yaml'

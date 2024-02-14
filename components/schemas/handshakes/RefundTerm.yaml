@@ -1,0 +1,12 @@
+title: Refund Term
+description: Defines the refund term of an order. 
+type: object
+properties:
+  fulfillment_stage:
+    description: The stage of fulfillment during which this term is applicable.
+    type: array
+    items:
+      $ref: '../primitives/FulfillmentStage.yaml'
+  refund_eligible:
+    description: Indicates if a cancellation will result in a refund
+    type: boolean

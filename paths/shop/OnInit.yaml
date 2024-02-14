@@ -3,7 +3,7 @@ tags:
   - Buyer Supporting Node (BSN)
 description: The <code>PSN</code> responds to an initialized cart with full payment terms, refund terms, cancellation terms, etc. Typically this callback provides data for the <code>Buyer</code> in a checkout screen in a client application
 requestBody:
-  $ref: '#/components/requestBodies/OnInit'
+  $ref: '../../components/requestBodies/OnInit.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/BSNResponse'
+    $ref: '../../components/responses/BSNResponse.yaml'

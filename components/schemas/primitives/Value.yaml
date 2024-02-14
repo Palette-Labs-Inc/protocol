@@ -1,0 +1,23 @@
+description: Describes a value
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - CONSTANT
+      - VARIABLE
+  value:
+    $ref: './Decimal.yaml'
+  estimated_value:
+    $ref: './Decimal.yaml'
+  computed_value:
+    $ref: './Decimal.yaml'
+  range:
+    type: object
+    properties:
+      min:
+        $ref: './Decimal.yaml'
+      max:
+        $ref: './Decimal.yaml'
+  unit:
+    type: string

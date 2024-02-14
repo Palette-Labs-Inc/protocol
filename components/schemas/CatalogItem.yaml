@@ -1,0 +1,34 @@
+title: Catalog Item
+description: An item in the catalog of a <code>Provider</code>
+type: object
+properties: 
+    id: 
+        description: A unique identifier for this <code>CatalogItem</code>
+        type: string
+    descriptor:
+        $ref: './Descriptor.yaml'
+    item_type:
+        $ref: './primitives/ItemType.yaml'
+    item_price:
+        $ref: './primitives/Money.yaml'
+    ordinal: 
+        description: Determines the position of this <code>CatalogItem></code> in the <code>Category</code>
+        type: integer
+        format: int32
+    inventory_status: 
+        description: Represents whether this item is currently for sale. <code>Low Quantity</code> is calculated and defined by the <code>Provider Supporting Node (PSN)</code>.
+        type: object
+        enum: 
+            - FOR_SALE
+            - NOT_FOR_SALE
+            - LOW_QUANTITY
+    preparation_time:
+        $ref: './primitives/Value.yaml'
+    supported_fulfillment_modes: 
+        type: array
+        items:
+        $ref: './primitives/FulfillmentMode.yaml'
+    modifier_group_ids:
+        type: array
+        items:
+            $ref: './CatalogModifierGroup.yaml#/properties/id'

@@ -1,0 +1,21 @@
+title: Fulfillment Term
+type: object
+description: The terms for fulfilling this order. Typically, this is used when the order is still open and not yet confirmed.
+properties:
+
+  selected_fulfillment_mode:
+    description: The currently selected fulfillment mode for this cart
+    $ref: '../primitives/FulfillmentMode.yaml'
+  provider_details:
+    $ref: '../entities/Provider.yaml'
+  buyer_details:
+    description: The location of the buyer
+    $ref: '../entities/Buyer.yaml' 
+  fulfillment_time: 
+    description: a date-time specifying when this order should be fulfilled.
+    format: date-time
+required:
+  - available_fulfillment_modes
+  - selected_fulfillment_modes
+  - provider_details
+  - buyer_details

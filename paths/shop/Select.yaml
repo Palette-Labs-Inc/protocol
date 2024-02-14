@@ -3,7 +3,7 @@ tags:
   - Provider Supporting Node (PSN)
 description: The <code>Buyer</code> selects items from the catalog
 requestBody:
-  $ref: '#/components/requestBodies/Select'
+  $ref: '../../components/requestBodies/Select.yaml'
 responses:
   default: 
-    $ref: '#/components/responses/PSNResponse'
+    $ref: '../../components/responses/PSNResponse.yaml'

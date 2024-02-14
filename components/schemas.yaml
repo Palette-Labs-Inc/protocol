@@ -1,222 +1,172 @@
-# atoms
-Decimal: 
-    $ref: './atoms/Decimal.yaml'
-
-Value: 
-    $ref: './atoms/Value.yaml'
-
-Ack: 
-    $ref: './atoms/Ack.yaml'
-
-Error: 
-    $ref: './atoms/Error.yaml'
-
-LanguageCode: 
-    $ref: './atoms/LanguageCode.yaml'
-
-CurrencyCode: 
-    $ref: './atoms/CurrencyCode.yaml'
-
-CountryCode: 
-    $ref: './atoms/CountryCode.yaml'
-
-Coordinates: 
-    $ref: './atoms/Coordinates.yaml'
-
-H3Array: 
-    $ref: './atoms/H3Array.yaml'
-
-NetworkRole: 
-  $ref: './atoms/NetworkRole.yaml'
-
-Money: 
-  $ref: './atoms/Money.yaml'
-
-Fee: 
-  $ref: './atoms/Fee.yaml'
-
-MerchantCategoryCode: 
-  $ref: './atoms/MerchantCategoryCode.yaml'
-
-CellPhone:
-    $ref: './atoms/CellPhone.yaml'
-
-Url:
-  $ref: './atoms/Url.yaml'
-
-ImageFile:
-  $ref: './atoms/ImageFile.yaml'
-
-MediaFile:
-  $ref: './atoms/MediaFile.yaml'
-
-FulfillmentStage:
-    $ref: './atoms/FulfillmentStage.yaml'
-
-FulfillmentMode:
-    $ref: './atoms/FulfillmentMode.yaml'
-
-FulfillmentStatus:
-    $ref: './atoms/FulfillmentStatus.yaml'
-
-ItemType:
-    $ref: './atoms/ItemType.yaml'
-
-OrderStatus:
-    $ref: './atoms/OrderStatus.yaml'
-
-# molecules
+# schemas
 Location: 
-    $ref: './molecules/Location.yaml'
+  $ref: './schemas/Location.yaml'
 
 Descriptor:
-  $ref: './molecules/Descriptor.yaml'
+  $ref: './schemas/Descriptor.yaml'
 
 Cancellation: 
-  $ref: './molecules/Cancellation.yaml'
+  $ref: './schemas/Cancellation.yaml'
 
 Fulfillment: 
-   $ref: './molecules/Fulfillment.yaml'
+  $ref: './schemas/Fulfillment.yaml'
 
 Contact: 
-   $ref: './molecules/Contact.yaml'
+  $ref: './schemas/Contact.yaml'
 
 Tracking:
-   $ref: './molecules/Tracking.yaml'
+  $ref: './schemas/Tracking.yaml'
 
+
+
+# /schemas/primitives
+Decimal: 
+  $ref: './schemas/primitives/Decimal.yaml'
+
+Value: 
+  $ref: './schemas/primitives/Value.yaml'
+
+Ack: 
+  $ref: './schemas/primitives/Ack.yaml'
+
+Error: 
+  $ref: './schemas/primitives/Error.yaml'
+
+LanguageCode: 
+  $ref: './schemas/primitives/LanguageCode.yaml'
+
+CurrencyCode: 
+  $ref: './schemas/primitives/CurrencyCode.yaml'
+
+CountryCode: 
+  $ref: './schemas/primitives/CountryCode.yaml'
+
+Coordinates: 
+  $ref: './schemas/primitives/Coordinates.yaml'
+
+H3Array: 
+  $ref: './schemas/primitives/H3Array.yaml'
+
+NetworkRole: 
+  $ref: './schemas/primitives/NetworkRole.yaml'
+
+Money: 
+  $ref: './schemas/primitives/Money.yaml'
+
+Fee: 
+  $ref: './schemas/primitives/Fee.yaml'
+
+MerchantCategoryCode: 
+  $ref: './schemas/primitives/MerchantCategoryCode.yaml'
+
+CellPhone:
+  $ref: './schemas/primitives/CellPhone.yaml'
+
+Url:
+  $ref: './schemas/primitives/Url.yaml'
+
+ImageFile:
+  $ref: './schemas/primitives/ImageFile.yaml'
+
+MediaFile:
+  $ref: './schemas/primitives/MediaFile.yaml'
+
+FulfillmentStage:
+  $ref: './schemas/primitives/FulfillmentStage.yaml'
+
+FulfillmentMode:
+  $ref: './schemas/primitives/FulfillmentMode.yaml'
+
+FulfillmentStatus:
+  $ref: './schemas/primitives/FulfillmentStatus.yaml'
+
+ItemType:
+  $ref: './schemas/primitives/ItemType.yaml'
+
+OrderStatus:
+  $ref: './schemas/primitives/OrderStatus.yaml'
 
 ## catalog 
 Catalog:
-  $ref: './molecules/Catalog.yaml'
+  $ref: './schemas/Catalog.yaml'
 
 CatalogCategory:
-  $ref: './molecules/CatalogCategory.yaml'
+  $ref: './schemas/CatalogCategory.yaml'
 
 CatalogItem:
-  $ref: './molecules/CatalogItem.yaml'
+  $ref: './schemas/CatalogItem.yaml'
 
 CatalogModifierGroup: 
-    $ref: './molecules/CatalogModifierGroup.yaml'
+  $ref: './schemas/CatalogModifierGroup.yaml'
 
 CatalogItemModifier: 
-    $ref: './molecules/CatalogItemModifier.yaml'
+  $ref: './schemas/CatalogItemModifier.yaml'
 
 ItemQuantity: 
-    $ref: './atoms/ItemQuantity.yaml'
-
-ItemQuantitySelection: 
-    $ref: './atoms/ItemQuantity.yaml#/properties/selected'
-
-ItemQuantityAvailable: 
-    $ref: './atoms/ItemQuantity.yaml#/properties/available'
-
-
-## cart
-Cart: 
-    $ref: './io/Cart.yaml'
-
-CartLineItem: 
-    $ref: './io/CartLineItem.yaml'
-
-CartLineItemModifier: 
-    $ref: './io/CartLineItemModifier.yaml'
+  $ref: './schemas/primitives/ItemQuantity.yaml'
 
 
 ## order
 Order: 
-  $ref: './molecules/Order.yaml'
+  $ref: './schemas/Order.yaml'
 
 Cost: 
-  $ref: './molecules/Cost.yaml'
-
-## catalog identifiers
-CatalogId:
-    $ref: './molecules/Catalog.yaml#/properties/id'
-
-CatalogCategoryId:
-    $ref: './molecules/CatalogCategory.yaml#/properties/id'
-
-CatalogItemId:
-    $ref: './molecules/CatalogItem.yaml#/properties/id'
-
-CatalogModifierGroupId:
-    $ref: './molecules/CatalogModifierGroup.yaml#/properties/id'
-
-CatalogItemModifierId:
-    $ref: './molecules/CatalogItemModifier.yaml#/properties/id'
-
+  $ref: './schemas/Cost.yaml'
 
 # entities
 Buyer: 
-  $ref: './entities/Buyer.yaml'
+  $ref: './schemas/entities/Buyer.yaml'
 
 Provider:
-    $ref: './entities/Provider.yaml'
+  $ref: './schemas/entities/Provider.yaml'
 
 Node: 
-  $ref: './entities/Node.yaml'
+  $ref: './schemas/entities/Node.yaml'
 
 Person: 
-  $ref: './entities/Person.yaml'
+  $ref: './schemas/entities/Person.yaml'
 
 Agent: 
-  $ref: './entities/Agent.yaml'
+  $ref: './schemas/entities/Agent.yaml'
 
 Organization: 
-  $ref: './entities/Organization.yaml'
+  $ref: './schemas/entities/Organization.yaml'
 
 
-## entity identifiers
-ProviderId:
-    $ref: './entities/Provider.yaml#/properties/id'
+## cart
+Cart: 
+  $ref: './schemas/Cart.yaml'
+
+CartLineItem: 
+  $ref: './schemas/CartLineItem.yaml'
+
+CartLineItemModifier: 
+  $ref: './schemas/CartLineItemModifier.yaml'
 
 
-
-# io 
-SearchIntent:
-  $ref: './io/SearchIntent.yaml'
-
-ProviderList:
-  $ref: './io/ProviderList.yaml'
-
-Selection: 
-  $ref: './io/Selection.yaml'
-
-FulfillmentIntent:
-  $ref: './io/FulfillmentIntent.yaml'
-
-## network requests
-
-CallbackReferenceParameters:
-  $ref: './io/CallbackReferenceParameters.yaml'
-
-NodeParameters:
-  $ref: './io/NodeParameters.yaml'
-
-
-# terms 
+# terms/handshakes - contracts specifying terms between nodes 
 PaymentTerm:
-  $ref: './terms/PaymentTerm.yaml'
+  $ref: './schemas/handshakes/PaymentTerm.yaml'
 
 CancellationTerm:
-  $ref: './terms/CancellationTerm.yaml'
+  $ref: './schemas/handshakes/CancellationTerm.yaml'
 
 RefundTerm:
-  $ref: './terms/RefundTerm.yaml'
+  $ref: './schemas/handshakes/RefundTerm.yaml'
 
 FulfillmentTerm:
-  $ref: './terms/FulfillmentTerm.yaml'
+  $ref: './schemas/handshakes/FulfillmentTerm.yaml'
 
 Terms:
-  $ref: './terms/Terms.yaml'
+  $ref: './schemas/handshakes/Terms.yaml'
 
 
 # Time
 TimeRange:
-    $ref: './atoms/TimeRange.yaml'
+  $ref: './schemas/primitives/TimeRange.yaml'
 
 Schedule:
-  $ref: './molecules/Schedule.yaml'
+  $ref: './schemas/Schedule.yaml'
 
 
 

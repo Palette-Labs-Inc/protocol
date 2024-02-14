@@ -1,0 +1,25 @@
+title: Buyer
+description: Defines details about a buyer, such as contact details. This information is sent from a Buyer Supporting Node (BSN) to a Seller Supporting Node (SSN) during a customers payment intent.
+type: object 
+properties:
+  id:
+    type: string
+    description: A globally unique ID of the customer in the Seller Supporting Node's (SSN) system
+  first_name:
+    type: string
+    description: The first name of the customer
+    maxLength: 100
+  last_name:
+    type: string
+    description: The last name of the customer
+    maxLength: 100
+  default_address: 
+    $ref: '../Location.yaml'
+  contact_information:
+     $ref: '../Contact.yaml'
+required:
+  - id
+  - first_name
+  - last_name
+  - default_address
+  - contact_information
