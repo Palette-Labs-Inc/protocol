@@ -23,16 +23,37 @@ An organization with a Catalog of products or services available for sale. A pro
 #### Node Operator
 A `PSN` or `BSN` providing services to a Buyer or Producer within the network, occupying a record in the Registry. 
 
+### Public Network Infrastructure
 #### Gateway Provider (GP)
 `GP`s or `Gateways` are stateless routing software that helps nodes discover relevant services during discovery. 
  
+ ```mermaid
+
+ ```
+
 #### Registry 
 A decentralized public ledger that maintains the records of Node Operators, agents and their supported Industry Codes and the geographical regions that they represent. The registry is queried for a Producers products or services by `Gateway Providers` and `Buyer Supporting Nodes` during the search phase of a `Buyers` transaction lifecycle 
 
 A decentralized public ledger that represents the list of registered Node's in the network. During the server-to-server communication node's are expected to send a signed digest of the request body using the private key that was used to register their node. When a server recives a new request, it verifies the signature header by looking up the public key of the signer in the registry and verifying the signature.
 
 ```mermaid
+sequenceDiagram
+    autonumber
+    participant BSN
+    participant PSN
+    participant REGISTRY as Registry
+    participant PSN_VS as PSN Verification Service
 
+    BSN->>PSN: request
+    Note left of BSN: BSN signs post request
+    Note over BSN,PSN: BSN sends request to PSN
+    PSN-->>BSN: ACK
+    PSN->>REGISTRY: /lookup
+    Note over REGISTRY,PSN: PSN finds public-key of BSN in registry
+    REGISTRY->>PSN_VS: request
+    Note over PSN_VS: PSN verifies BSN signature
+    PSN_VS-->>PSN: response
+    Note over PSN: PSN processes request
 ```
 
 #### Commercial Transaction Lifecycle Overview
@@ -46,10 +67,11 @@ All commercial transactions in any two-sided market can be represented by a seri
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
 #### Discovery
-Alice searches for stores by entering the delivery location on a client app. Once the user hits search, they see a list of stores that can deliver to their location.
+Alice searches for stores by entering information on a client app. Alice's `BSN` broadcasts her intent to the network. The Network aggregates a list of available `Provider`s that can fulfill her request.
 
 ```mermaid
 sequenceDiagram
+    autonumber
     participant Alice as Alice
     participant ClientApp as Client App
     participant BSN as BSN
