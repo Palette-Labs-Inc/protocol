@@ -31,6 +31,10 @@ A decentralized public ledger that maintains the records of Node Operators, agen
 
 A decentralized public ledger that represents the list of registered Node's in the network. During the server-to-server communication node's are expected to send a signed digest of the request body using the private key that was used to register their node. When a server recives a new request, it verifies the signature header by looking up the public key of the signer in the registry and verifying the signature.
 
+```mermaid
+
+```
+
 #### Commercial Transaction Lifecycle Overview
 All commercial transactions in any two-sided market can be represented by a series of predictable interactions between a `Buyer` and a `Producer` over the life of a `Buyer`'s transaction. The network design establishes these interactions by a set of standardized APIs.
 
@@ -41,4 +45,35 @@ All commercial transactions in any two-sided market can be represented by a seri
 
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
+#### Discovery
+Alice searches for stores by entering the delivery location on a client app. Once the user hits search, they see a list of stores that can deliver to their location.
+
+```mermaid
+sequenceDiagram
+    participant Alice as Alice
+    participant ClientApp as Client App
+    participant BSN as BSN
+    participant Gateway as Gateway
+    participant PSNn as PSN(n)
+
+    Note over Alice, PSNn: discovery
+    Alice->>ClientApp: search
+    ClientApp->>BSN: api/search
+    Note over ClientApp,BSN: Alice initiates a search
+    BSN-->>ClientApp: request_id
+    BSN->>Gateway: api/search
+    Note over BSN,Gateway: BSN requests search via Gateway
+    Gateway->>BSN: ACK
+    Gateway->>PSNn: api/search
+    Note over Gateway,PSNn: Gateway requests search from PSN
+    PSNn-->>Gateway: ACK
+    PSNn->>Gateway: api/on_search
+    Note over PSNn,Gateway: PSN responds with search results
+    Gateway-->>PSNn: ACK
+    Gateway->>BSN: api/on_search
+    Note over Gateway,BSN: Gateway sends search results to BSN
+    BSN-->>Gateway: ACK
+    BSN->>ClientApp: response
+    ClientApp-->>Alice: response
+```
 
