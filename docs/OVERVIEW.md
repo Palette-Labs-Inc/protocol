@@ -59,10 +59,10 @@ sequenceDiagram
 #### Commercial Transaction Lifecycle Overview
 All commercial transactions in any two-sided market can be represented by a series of predictable interactions between a `Buyer` and a `Producer` over the life of a `Buyer`'s transaction. The network design establishes these interactions by a set of standardized APIs.
 
-*Discovery* - a `Buyer` broadcasts their intent to avail a service. The network responds with a list of `Providers`
-*Shop* - a `Buyer` constructs a cart from the items available in the catalogs of the `Provider` list and places an order with a `Provider`
-*Fulfill* - the order is fulfilled. A `Buyer` can track the status of their order.
-*Post-Fulfill* - a `Buyer` can review or request support for their order in the case that they are dissatisfied.
+**Discovery** - a `Buyer` broadcasts their intent to avail a service. The network responds with a list of `Providers`
+**Shop** - a `Buyer` constructs a cart from the items available in the catalogs of the `Provider` list and places an order with a `Provider`
+**Fulfill** - the order is fulfilled. A `Buyer` can track the status of their order.
+**Post-Fulfill** - a `Buyer` can review or request support for their order in the case that they are dissatisfied.
 
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
