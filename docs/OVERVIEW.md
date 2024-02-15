@@ -1,9 +1,5 @@
 ### Abstract
 
-This study introduces a graph theoretic approach to blockchain tokenomics for decentralized markets that effectively matches producers (i.e - sellers of products or services) with buyers. Traditionally, platforms capitalize on network effects, benefiting producers and buyers as their transactions increase. However, the growth of such platforms often leads to high rents due to increased market power. To address this, we propose a decentralized platform co-owned by market participants. We introduce algorithms for distributing platform ownership based on each agent’s contributions. Our design aims to incentivize producers to join as co-owners and actively contribute to the platform’s success by marketing it to buyers and recruiting additional producers. 
-
-We model token economies as transaction graphs, where vertices represent participants (producers and consumers), and edges symbolize transactions with weighted values indicative of economic activity. Our key contribution is the development of a dynamic transaction graph model, which evolves with each transaction, reflecting changes in token circulation and platform ownership relative to the unique contributions of the agents within the open network. 
-
 This study proposes a new communication standard; a set of rules and technical specifications for building open e-commerce networks across which providers and their services are universally discoverable from any protocol-enabled application. 
 
 ### Network Participants
