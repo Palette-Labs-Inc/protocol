@@ -127,6 +127,10 @@ In the output, you will receive an object containing the node UID and it's conte
 --- 
 # Signing headers  
 
+An HTTP Message Signature is a signature over a string generated from a subset of the components of an HTTP message in addition to metadata about the signature itself. When successfully verified against an HTTP message, an HTTP Message Signature provides cryptographic proof that the message is semantically equivalent to the message for which the signature was generated, with respect to the subset of message components that was signed.[1](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-message-signatures#section-3-1) 
+
+Because all server-to-server communications in the network are async POST requests, we can simplify what gets signed during server-to-server communications by simply signing a base64URL encoded JSON string of the request body. 
+
 During registration, a Node Operator creates a public private key pair. The public key is stored on the blockchain in the network registry along with a unique identifier. When communicating with other Node's in the network, a *sending* Node Operator signs the data that they are sending over the network, including the signature hash in the header of the HTTP request. When this message is received by a *receiving* Node, they should query the registry for the *sending* Node's public key and use the signature in the request header to decrypt the message. If the message is successfully decrypted and the status of the *sending* Node is `VERIFIED`, the *receiving* Node Operator can know that the *sending* Node Operator is properly registered and their message has not been tampered. If the *sending* Node Operator's message is unable to be decrypted, the *receiving* Node Operator should respond to the *sending* Node Operators request with an error code. 
 
 The BSN and PSN is expected to send an Authorization header (as defined in the latest [RFC](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-message-signatures#name-scheme)  where the “auth-scheme” is “Signature” and the “auth-param” parameters meet the requirements listed in Section 2.3 of [this](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-message-signatures#section-2.3) document.
@@ -160,6 +164,7 @@ Ethereum uses the Elliptic Curve Digital Signature Algorithm (ECDSA) over the se
 EIP-155 Replay Protection: Ethereum transactions include a chain ID as part of the signing process (specified in EIP-155) to prevent replay attacks across different Ethereum chains. This modification to the standard ECDSA signing process integrates the chain ID into the hash signed by the transaction creator, making the signature chain-specific.
 Signature Components: Ethereum signatures consist of three components: r, s, and v. The v component, in particular, helps indicate the recovery ID, which can be used to recover the signer's public key (and thus the address) from the signature itself, a feature not commonly found in standard ECDSA implementations.
 Message Signing: Ethereum also allows for signing arbitrary messages (not just transactions) using the eth_sign RPC call or equivalent methods in Ethereum libraries. Messages are prefixed with a specific header before hashing to prevent signed messages from being maliciously used as transaction signatures.
+
 
 #### Signature Construction 
 To construct the signing header when making a network request, you can use the `constructSignatureHeader` method provided by the registry SDK. This method takes the following arguments:
