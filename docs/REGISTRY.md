@@ -25,7 +25,7 @@ The H3 standard also allows the protocol to have a holonic structure that natura
 
 For more on generating indexes, see [the h3 GitHub repository](https://github.com/uber/h3?tab=readme-ov-file) 
 
-### Registration
+## Registration
 
 To register a new node, you can use the `registerNode` method provided by the registry SDK. This method takes an object with the following properties:
 
