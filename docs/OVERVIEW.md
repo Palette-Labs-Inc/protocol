@@ -112,7 +112,7 @@ The network's core working groups and community will work on and publish standar
    - Forwards this packet to the `Gateway Provider` using the `POST /search` method, targeting the `Gateway Provider's` callback URL as registered.
 
 4. **Gateway Provider (Broadcasting):** 
-   - Receives the search query and broadcasts it to all relevant `PSN`s (Provider Service Nodes) that match the search criteria, ensuring a wide net is cast for providers offering "pizza" in the appropriate geographical areas.
+   - Receives the search query and broadcasts it to all relevant `PSN`s (Provider Supporting Nodes) that match the search criteria, ensuring a wide net is cast for providers offering "pizza" in the appropriate geographical areas.
 
 5. **PSN (Provider Supporting Node):** 
    - Each `PSN` processes the search query and compiles a list of providers that meet the search criteria.
