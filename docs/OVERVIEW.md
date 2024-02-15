@@ -26,7 +26,7 @@ A `PSN` or `BSN` providing services to a Buyer or Producer within the network, o
 ### Public Network Infrastructure
 
 #### Gateway Provider (GP)
-`GP`s or `Gateways` are stateless routing software that helps nodes discover relevant services during discovery. 
+`GP`s or `Gateways` are stateless routing software that help nodes discover relevant services during discovery. 
  
  ```mermaid
 sequenceDiagram
@@ -36,7 +36,7 @@ sequenceDiagram
     participant PSN1 as PSN(1)
     participant PSNn as PSN(N)
 
-    Note over Gateway, PSNn: The Gateway is stateless routing software that helps nodes discover relevant services during discovery
+    Note over Gateway, PSNn: The Gateway is stateless routing software that help nodes discover relevant services during discovery
     loop Gateway, Registry Interaction
     Gateway->>REGISTRY: /lookup
     REGISTRY-->>Gateway: response
@@ -85,10 +85,17 @@ sequenceDiagram
 #### Commercial Transaction Lifecycle Overview
 All commercial transactions in any two-sided market can be represented by a series of predictable interactions between a `Buyer` and a `Producer` over the life of a `Buyer`'s transaction. The network design establishes these interactions by a set of standardized APIs.
 
-**Discovery** - a `Buyer` broadcasts their intent to avail a service. The network responds with a list of `Providers`
-**Shop** - a `Buyer` constructs a cart from the items available in the catalogs of the `Provider` list and places an order with a `Provider`
-**Fulfill** - the order is fulfilled. A `Buyer` can track the status of their order.
-**Post-Fulfill** - a `Buyer` can review or request support for their order in the case that they are dissatisfied.
+##### Discovery
+a `Buyer` broadcasts their intent to avail a service. The network responds with a list of `Providers`
+
+##### Shop
+a `Buyer` constructs a cart from the items available in the catalogs of the `Provider` list and places an order with a `Provider`
+
+##### Fulfill
+the order is fulfilled. A `Buyer` can track the status of their order.
+
+##### Post-Fulfill
+a `Buyer` can review or request support for their order in the case that they are dissatisfied.
 
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
