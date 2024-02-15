@@ -26,7 +26,7 @@ A `PSN` or `BSN` providing services to a Buyer or Producer within the network, o
 ### Public Network Infrastructure
 
 #### Gateway Provider (GP)
-`GP`s or `Gateways` are routing software and indexing services that help nodes discover relevant services during discovery. 
+`GP`s or `Gateways` are routing softwareand indexing services that help nodes discover relevant services during discovery. 
  
  ```mermaid
 sequenceDiagram
@@ -36,7 +36,7 @@ sequenceDiagram
     participant PSN1 as PSN(1)
     participant PSNn as PSN(N)
 
-    Note over Gateway, PSNn: The Gateway is a routing software that help nodes discover relevant services during discovery
+    Note over Gateway, PSNn: The Gateway is routing software that help nodes discover relevant services during discovery
     loop Gateway, Registry Interaction
     Gateway->>REGISTRY: /lookup
     REGISTRY-->>Gateway: response
@@ -50,8 +50,8 @@ sequenceDiagram
         Gateway-->>-PSN1: ACK
 
         Note left of PSNn: PSN(n) receives request
-        Gateway->>+PSN1: api/search
-        PSN1-->>-Gateway: ACK
+        Gateway->>+PSNn: api/search
+        PSNn-->>-Gateway: ACK
         PSNn->>+Gateway: api/on_search
         Gateway-->>-PSNn: ACK
     end
