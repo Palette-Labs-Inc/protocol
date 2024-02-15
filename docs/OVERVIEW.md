@@ -24,11 +24,37 @@ An organization with a Catalog of products or services available for sale. A pro
 A `PSN` or `BSN` providing services to a Buyer or Producer within the network, occupying a record in the Registry. 
 
 ### Public Network Infrastructure
+
 #### Gateway Provider (GP)
 `GP`s or `Gateways` are stateless routing software that helps nodes discover relevant services during discovery. 
  
  ```mermaid
+sequenceDiagram
+    autonumber
+    participant Gateway
+    participant REGISTRY as Registry
+    participant PSN1 as PSN(1)
+    participant PSNn as PSN(N)
 
+    Note over Gateway, PSNn: The Gateway is stateless routing software that helps nodes discover relevant services during discovery
+    loop Gateway, Registry Interaction
+    Gateway->>REGISTRY: /lookup
+    REGISTRY-->>Gateway: response
+    end 
+
+    par PSN interactions
+        Note right of PSN1: PSN(1) receives request
+        Gateway->>+PSN1: api/search
+        PSN1-->>-Gateway: ACK
+        PSN1->>+Gateway: api/on_search
+        Gateway-->>-PSN1: ACK
+
+        Note left of PSNn: PSN(n) receives request
+        Gateway->>+PSNn: api/search
+        PSNn-->>-Gateway: ACK
+        PSNn->>+Gateway: api/on_search
+        Gateway-->>-PSNn: ACK
+    end
  ```
 
 #### Registry 
@@ -67,35 +93,327 @@ All commercial transactions in any two-sided market can be represented by a seri
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
 #### Discovery
-Alice searches for stores by entering information on a client app. Alice's `BSN` broadcasts her intent to the network. The Network aggregates a list of available `Provider`s that can fulfill her request.
+1. Alice searches for stores by entering information on a client app. Alice's `BSN` broadcasts her intent to the network. The Network aggregates a list of available `Provider`s that can fulfill her request.
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Alice as Alice
+    actor Alice
     participant ClientApp as Client App
     participant BSN as BSN
     participant Gateway as Gateway
     participant PSNn as PSN(n)
 
-    Note over Alice, PSNn: discovery
-    Alice->>ClientApp: search
-    ClientApp->>BSN: api/search
-    Note over ClientApp,BSN: Alice initiates a search
-    BSN-->>ClientApp: request_id
-    BSN->>Gateway: api/search
+    Alice->>ClientApp: search 
+    ClientApp->>+BSN: api/search
+    Note over ClientApp,BSN: Client forwards search to BSN
+    BSN-->>-ClientApp: request_id
+    BSN->>+Gateway: api/search
     Note over BSN,Gateway: BSN requests search via Gateway
-    Gateway->>BSN: ACK
-    Gateway->>PSNn: api/search
+    activate Gateway
+    Gateway-->>-BSN: ACK
+    Gateway->>+PSNn: api/search
     Note over Gateway,PSNn: Gateway requests search from PSN
-    PSNn-->>Gateway: ACK
-    PSNn->>Gateway: api/on_search
+    PSNn-->>-Gateway: ACK
+    PSNn->>+Gateway: api/on_search
     Note over PSNn,Gateway: PSN responds with search results
-    Gateway-->>PSNn: ACK
-    Gateway->>BSN: api/on_search
+    Gateway-->>-PSNn: ACK
+    deactivate Gateway
+    Gateway->>+BSN: api/on_search
     Note over Gateway,BSN: Gateway sends search results to BSN
-    BSN-->>Gateway: ACK
+    BSN-->>-Gateway: ACK
     BSN->>ClientApp: response
     ClientApp-->>Alice: response
 ```
 
+#### Shop
+2. Alice clicks on Bob's Pizza to view Bob's Catalog.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    Alice->>ClientApp: search
+    Note over Alice,ClientApp: Alice clicks on Bob's Pizza to view its product catalog
+    ClientApp->>BSN: api/search
+    Note over ClientApp,BSN: Client calls the BSN to trigger search
+    BSN->>+PSN: api/search
+    activate BSN
+    Note over BSN: BSN generates the protocol request body
+    activate BSN
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_search
+    Note over BSN,PSN: PSN sends Catalog for Bob's Pizza
+    BSN-->>PSN: ACK
+    deactivate BSN
+    BSN->>-ClientApp: api/on_search response
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_search response
+```
+
+3. Alice selects items from Bob's Catalog.
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    Alice->>ClientApp: select
+    Note over Alice,ClientApp: Alice selects items from Bob's Pizza catalog
+    ClientApp->>BSN: api/select
+    Note over ClientApp,BSN: Client calls the BSN server to trigger select
+    BSN->>+PSN: api/select
+    activate BSN
+    Note over BSN,PSN: BSN server generates the protocol request body
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_select
+    Note over PSN,BSN: PSN returns the selected items and a quote for the selected items
+    BSN-->>PSN: ACK
+    deactivate BSN
+    BSN->>-ClientApp: api/on_select response
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_select response
+```
+
+4. Alice proceeds to checkout, adding billing and shipping details and receiving the final quote and payment terms from PSN
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    Alice->>ClientApp: init
+    Note over Alice,ClientApp: Alice asks for quote on selected items
+    ClientApp->>BSN: api/init
+    Note over ClientApp,BSN: Client calls the BSN server to initialize payment terms
+    BSN->>+PSN: api/init
+    activate BSN
+    Note over BSN,PSN: BSN server generates the protocol request body
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_init
+    Note over PSN,BSN: PSN returns final details and terms
+    BSN-->>-PSN: ACK
+    deactivate BSN
+    BSN->>ClientApp: api/on_init response
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_init response
+```
+
+5. Alice confirms the order. Usually the order gets confirmed by the PSN with the latest status update on the fulfillment of the order
+
+```
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+    actor Bob
+
+    Alice->>ClientApp: confirm
+    Note over Alice,ClientApp: Alice confirms payment terms
+    ClientApp->>BSN: api/confirm
+    Note over ClientApp,BSN: Client calls the BSN to submit payment
+    BSN->>+PSN: api/confirm
+    Note over BSN,PSN: BSN server generates the protocol request body
+    activate BSN
+    PSN-->>-BSN: ACK
+    PSN->>Bob: {order packet} 
+    Note over PSN,Bob: PSN forwards order to Bob
+    PSN->>+BSN: api/on_confirm
+    Note over PSN,BSN: PSN returns final details and terms
+    BSN-->>-PSN: ACK
+    BSN->>ClientApp: api/on_confirm response
+    deactivate BSN
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_confirm response
+```
+
+#### Fulfill 
+
+6. Alice's client asks for the status of her order.
+
+```mermaid
+sequenceDiagram
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    loop
+    ClientApp->>BSN: api/status
+    Note over ClientApp,BSN: Client calls the BSN server to check the status
+    BSN->>+PSN: api/status
+    Note over BSN,PSN: BSN server generates the protocol request body
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_status
+    Note over PSN,BSN: PSN returns confirmation and fulfillment instructions
+    BSN-->>PSN: ACK
+    BSN->>-ClientApp: api/on_status response
+    Note left of BSN: BSN returns on_status response
+    end
+```
+
+OR, Bob updates the status of the order
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Bob
+    participant BobPC as Bob's App
+    participant PSN
+    participant BSN
+    participant ClientApp as Client App
+
+    Note over Bob: Bob updates the order status
+    Bob ->> BobPC: {status update packet}
+    BobPC->>PSN: api/on_status
+    Note over BobPC, PSN: Bob updates the order status
+    PSN->>+BSN: api/on_status
+    BSN-->>-PSN: ACK
+    Note over BSN, PSN: PSN server generates the protocol request body
+    BSN->>ClientApp: ws:/status
+    Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
+```
+
+7. Alice asks to update her order contents
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    Alice->>ClientApp: update
+    Note over Alice,ClientApp: Alice asks to update order
+    ClientApp->>BSN: api/update
+    Note over ClientApp,BSN: Client calls the BSN server to update order
+    BSN->>+PSN: api/update
+    activate BSN
+    Note over BSN,PSN: BSN server generates the protocol request body
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_update
+    Note over PSN,BSN: PSN returns updated order
+    BSN-->>-PSN: ACK
+    deactivate BSN
+    BSN->>ClientApp: api/on_update response
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_update response
+```
+
+OR, Bub updates the order contents
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Bob
+    participant BobPC as Bob's App
+    participant PSN
+    participant BSN
+    participant ClientApp as Client App
+
+    Note over Bob: Bob updates the order
+    Bob ->> BobPC: {update packet}
+    BobPC->>PSN: api/on_update
+    Note over BobPC, PSN: Bob updates the order
+    PSN->>+BSN: api/on_update
+    BSN-->>-PSN: ACK
+    Note over BSN, PSN: PSN server generates the protocol request body
+    BSN->>ClientApp: ws:/update
+    Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
+```
+
+8. Alice asks to cancel her order
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    Alice->>ClientApp: cancel
+    Note over Alice,ClientApp: Alice asks to cancel order
+    ClientApp->>BSN: api/cancel
+    Note over ClientApp,BSN: Client calls the BSN server to cancel the order
+    BSN->>+PSN: api/cancel
+    activate BSN
+    Note over BSN,PSN: BSN server generates the protocol request body
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_cancel
+    Note over PSN,BSN: PSN returns cancelled order
+    BSN-->>-PSN: ACK
+    deactivate BSN
+    BSN->>ClientApp: api/on_cancel response
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_cancel response
+```
+
+OR, Bob cancels the order
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Bob
+    participant BobPC as Bob's App
+    participant PSN
+    participant BSN
+    participant ClientApp as Client App
+
+    Note over Bob: Bob cancels the order
+    Bob ->> BobPC: {cancellation request}
+    BobPC->>PSN: api/on_cancel
+    Note over BobPC, PSN: Bob updates the order
+    PSN->>+BSN: api/on_cancel
+    BSN-->>-PSN: ACK
+    Note over BSN, PSN: PSN server generates the protocol request body
+    BSN->>ClientApp: ws:/update
+    Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
+```
+
+## Post-Fulfill 
+
+9. Alice requests support for her order
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Alice
+    participant ClientApp as Client App
+    participant BSN
+    participant PSN
+
+    Alice->>ClientApp: support
+    Note over Alice,ClientApp: Alice asks for support with her order
+    ClientApp->>BSN: api/support
+    Note over ClientApp,BSN: Client calls the BSN server with support request
+    BSN->>+PSN: api/support
+    activate BSN
+    Note over BSN,PSN: BSN server generates the protocol request body
+    PSN-->>-BSN: ACK
+    PSN->>+BSN: api/on_support
+    Note over PSN,BSN: PSN returns support details
+    BSN-->>-PSN: ACK
+    deactivate BSN
+    BSN->>ClientApp: api/on_support response
+    Note left of BSN: BSN forwards response to client
+    ClientApp-->>Alice: response
+    Note over ClientApp,Alice: BSN returns on_support response
+```
