@@ -100,7 +100,7 @@ a `Buyer` can review or request support for their order in the case that they ar
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
 #### Discovery
-1. Alice searches for stores by entering information on a client app. Alice's `BSN` broadcasts her intent to the network. The Network aggregates a list of available `Provider`s that can fulfill her request.
+1. Alice searches for stores by entering information on a client app. Alice's `BSN` broadcasts her intent to the network. The network aggregates a list of available `Provider`s that can fulfill her request.
 
 ```mermaid
 sequenceDiagram
@@ -116,8 +116,8 @@ sequenceDiagram
     Note over ClientApp,BSN: Client forwards search to BSN
     BSN-->>-ClientApp: request_id
     BSN->>+Gateway: api/search
-    Note over BSN,Gateway: BSN requests search via Gateway
     activate Gateway
+    Note over BSN,Gateway: BSN requests search via Gateway
     Gateway-->>-BSN: ACK
     Gateway->>+PSNn: api/search
     Note over Gateway,PSNn: Gateway requests search from PSN
@@ -149,7 +149,6 @@ sequenceDiagram
     ClientApp->>BSN: api/search
     Note over ClientApp,BSN: Client calls the BSN to trigger search
     BSN->>+PSN: api/search
-    activate BSN
     Note over BSN: BSN generates the protocol request body
     activate BSN
     PSN-->>-BSN: ACK
