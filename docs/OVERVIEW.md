@@ -343,7 +343,7 @@ sequenceDiagram
    - Retrieves the final order details and payment confirmation from the `BSN`.
    - Updates the interface to inform Alice that her payment has been successfully processed and provides her with the current details of her order.
 
-```
+```mermaid
 sequenceDiagram
     autonumber
     actor Alice
