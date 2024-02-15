@@ -82,25 +82,53 @@ sequenceDiagram
     Note over PSN: PSN processes request
 ```
 
-#### Commercial Transaction Lifecycle Overview
+## Commercial Transaction Lifecycle Overview
 All commercial transactions in any two-sided market can be represented by a series of predictable interactions between a `Buyer` and a `Producer` over the life of a `Buyer`'s transaction. The network design establishes these interactions by a set of standardized APIs.
 
-##### Discovery
+### Discovery
 a `Buyer` broadcasts their intent to avail a service. The network responds with a list of `Providers`
 
-##### Shop
+### Shop
 a `Buyer` constructs a cart from the items available in the catalogs of the `Provider` list and places an order with a `Provider`
 
-##### Fulfill
+### Fulfill
 the order is fulfilled. A `Buyer` can track the status of their order.
 
-##### Post-Fulfill
+### Post-Fulfill
 a `Buyer` can review or request support for their order in the case that they are dissatisfied.
 
 The network's core working groups and community will work on and publish standards for each API with unique schema definitions tailored to the specific service types for a variety of industries. All APIs are implemented as a series of signed, asynchronous POST requests between `Node Operators`.  
 
-#### Discovery
-1. Alice searches for stores by entering information on a client app. Alice's `BSN` broadcasts her intent to the network. The network aggregates a list of available `Provider`s that can fulfill her request.
+## Discovery APIs (search, on_search)
+
+### Search, OnSearch
+1. **Client Application:** Alice initiates a search for "pizza".
+
+2. **Client Application:** Sends the search query to the `BSN`.
+
+3. **BSN (Before API Processing):** 
+   - Prepares a search packet with the query "pizza".
+   - Forwards this packet to the `Gateway Provider` using the `POST /search` method, targeting the `Gateway Provider's` callback URL as registered.
+
+4. **Gateway Provider (Broadcasting):** 
+   - Receives the search query and broadcasts it to all relevant `PSN`s (Provider Service Nodes) that match the search criteria, ensuring a wide net is cast for providers offering "pizza" in the appropriate geographical areas.
+
+5. **PSN (Provider Supporting Node):** 
+   - Each `PSN` processes the search query and compiles a list of providers that meet the search criteria.
+   - Responds to the `Gateway Provider` with their respective lists using the `POST /on_search` method, directed at the `Gateway Provider's` callback URL.
+
+6. **Gateway Provider (Aggregating Responses):** 
+   - Aggregates all responses from the `PSN`s into a comprehensive list of providers.
+   - Forwards this aggregated list back to the `BSN` using the `POST /on_search` method, ensuring the `BSN` receives a complete set of options to present to Alice.
+
+7. **BSN (After API Processing):** 
+   - Receives the aggregated list of providers from the `Gateway Provider`.
+   - Processes and compiles the information, preparing it for delivery to Alice's Client Application.
+
+8. **Client Application:** 
+   - Retrieves the compiled list of providers from the `BSN`.
+   - Presents the search results to Alice, allowing her to view and select from various providers offering "pizza".
+
 
 ```mermaid
 sequenceDiagram
@@ -133,9 +161,32 @@ sequenceDiagram
     ClientApp-->>Alice: response
 ```
 
-#### Shop
-2. Alice clicks on Bob's Pizza to view Bob's Catalog.
+### Search, OnSearch - Specific Provider
 
+1. **Client Application:** Alice selects a `Provider`.
+
+2. **Client Application:** Initiates a query by sending a request to the `BSN`.
+
+3. **BSN (Before API Processing):** 
+   - Incorporates the selected `Provider` ID into a search packet.
+   - Forwards this packet to the designated `PSN` using the `POST /search` method, targeting the `PSN's` callback URL as recorded in the service directory.
+
+4. **PSN (Provider Supporting Node):** 
+   - Receives the query and processes the request.
+   - Responds with the `Provider`'s catalog, utilizing the `POST /on_search` method directed at the `BSN's` callback URL.
+
+5. **BSN (After API Processing):** 
+   - Captures the catalog data from the PSN.
+   - Updates its records to store the catalog information, making it available for Alice's client application.
+
+6. **BSN (Communicating to Client Application):** 
+   - Sends the `Provider`'s catalog to Alice's Client Application ensuring Alice can view the available products.
+
+7. **Client Application:** 
+   - Retrieves the catalog information from the BSN.
+   - Updates the user interface to display the `Provider`'s catalog to Alice, allowing her to browse the offerings.
+
+   
 ```mermaid
 sequenceDiagram
     autonumber
@@ -156,13 +207,38 @@ sequenceDiagram
     Note over BSN,PSN: PSN sends Catalog for Bob's Pizza
     BSN-->>PSN: ACK
     deactivate BSN
-    BSN->>-ClientApp: api/on_search response
+    BSN->>-ClientApp: response
     Note left of BSN: BSN forwards response to client
     ClientApp-->>Alice: response
     Note over ClientApp,Alice: BSN returns on_search response
 ```
 
-3. Alice selects items from Bob's Catalog.
+## Shop APIs (select, init, confirm, on_select, on_init, on_confirm)
+
+### Select, OnSelect
+
+1. **Client Application:** Alice selects items from the `Provider`.
+
+2. **Client Application:** Initiates the selection process by sending a request to the `BSN`.
+
+3. **BSN (Before API Processing):** 
+   - Compiles the selected items into a selection packet.
+   - Forwards this packet to the designated `PSN` using the `POST /select` method, targeting the `PSN's` callback URL as registered in the directory.
+
+4. **PSN (Provider Supporting Node):** 
+   - Processes the selection request.
+   - Responds with a detailed cart, including itemized pricing information, through the `POST /on_select` method, addressing the `BSN's` callback URL.
+
+5. **BSN (After API Processing):** 
+   - Receives the cart and pricing details from the PSN.
+   - Updates its system to store the selection and quote.
+
+6. **BSN (Communicating to Client Application):** 
+   - Transmits the selection and pricing details to Alice's Client Application, ensuring Alice can review her selections and the associated costs.
+
+7. **Client Application:** 
+   - Retrieves the selection and pricing information from the BSN.
+   - Updates the interface to present Alice with her cart and the total price, allowing her to proceed to checkout or make adjustments as needed.
 
 ```mermaid
 sequenceDiagram
@@ -184,13 +260,36 @@ sequenceDiagram
     Note over PSN,BSN: PSN returns the selected items and a quote for the selected items
     BSN-->>PSN: ACK
     deactivate BSN
-    BSN->>-ClientApp: api/on_select response
+    BSN->>-ClientApp: response
     Note left of BSN: BSN forwards response to client
     ClientApp-->>Alice: response
     Note over ClientApp,Alice: BSN returns on_select response
 ```
 
-4. Alice proceeds to checkout, adding billing and shipping details and receiving the final quote and payment terms from PSN
+### Init, OnInit
+
+1. **Client Application:** Alice proceeds to checkout, adding her billing and shipping details.
+
+2. **Client Application:** Initiates the checkout process by sending a request to the `BSN`.
+
+3. **BSN (Before API Processing):** 
+   - Gathers Alice's billing and shipping details into the initialization packet.
+   - Forwards this packet to the designated `PSN` using the `POST /init` method, targeting the `PSN's` callback URL as recorded in the service registry.
+
+4. **PSN (Provider Supporting Node):** 
+   - Processes the initialization request.
+   - Responds with comprehensive details including the final price, payment options, refund policy, cancellation terms, and fulfillment terms, using the `POST /on_init` method directed at the `BSN's` callback URL.
+
+5. **BSN (After API Processing):** 
+   - Receives the detailed quote and terms from the `PSN`.
+   - Updates its system to store the final price and terms, preparing them for retrieval by Alice's client application.
+
+6. **BSN (Communicating to Client Application):** 
+   - Transmits the detailed quote and terms to Alice's Client Application, ensuring Alice has all the information needed to proceed.
+
+7. **Client Application:** 
+   - Retrieves the response containing the final price and terms from the `BSN`.
+   - Updates the interface to present Alice with the detailed quote and terms, allowing her to review and confirm her checkout decisions.
 
 ```mermaid
 sequenceDiagram
@@ -218,7 +317,30 @@ sequenceDiagram
     Note over ClientApp,Alice: BSN returns on_init response
 ```
 
-5. Alice confirms the order. Usually the order gets confirmed by the PSN with the latest status update on the fulfillment of the order
+### Confirm, OnConfirm
+
+1. **Client Application:** Alice decides to make a payment for her order.
+
+2. **Client Application:** Initiates the payment process by sending a payment confirmation to the `BSN`.
+
+3. **BSN (Before API Processing):** 
+   - Compiles Alice's payment information into a confirmation packet.
+   - Forwards this packet to the designated `PSN` using the `POST /confirm` method, targeting the `PSN's` callback URL as registered.
+
+4. **PSN (Provider Supporting Node):** 
+   - Receives the payment confirmation packet from the `BSN`.
+   - Verifies the payment details and, upon successful verification, responds with the active order details using the `POST /on_confirm` method, addressing the `BSN's` callback URL.
+
+5. **BSN (After API Processing):** 
+   - Receives the confirmation of the payment and the order details from the `PSN`.
+   - Updates its records with the confirmed payment status and prepares the final order details for Alice's client application.
+
+6. **BSN (Communicating to Client Application):** 
+   - Sends the confirmed order details back to Alice's Client Application, ensuring Alice receives confirmation of her payment and the status of her order.
+
+7. **Client Application:** 
+   - Retrieves the final order details and payment confirmation from the `BSN`.
+   - Updates the interface to inform Alice that her payment has been successfully processed and provides her with the current details of her order.
 
 ```
 sequenceDiagram
@@ -249,9 +371,32 @@ sequenceDiagram
     Note over ClientApp,Alice: BSN returns on_confirm response
 ```
 
-#### Fulfill 
+## Fulfillment APIs (status, update, cancel, on_status, on_update, on_cancel)
 
-6. Alice's client asks for the status of her order.
+### Status, OnStatus
+
+1. **Client Application:** Alice periodically checks the status of her order.
+
+2. **Client Application:** Initiates a status check by sending a request to the `BSN` 
+
+3. **BSN (Before API Processing):** 
+   - Prepares a status inquiry by packaging the order ID in a request packet.
+   - Forwards this request to the designated `PSN` utilizing the `POST /status` method, referencing the `PSN's` callback URL.
+
+4. **PSN (Provider Supporting Node):** 
+   - Receives the status inquiry from the `BSN`.
+   - Processes the inquiry and responds to the `BSN` with the current order status using the `POST /on_status` method, targeting the `BSN`'s callback URL.
+
+5. **BSN (After API Processing):** 
+   - Captures the current status information from the `PSN`.
+   - Updates the internal records to reflect the latest status and prepares to relay this information to Alice's client application.
+
+6. **BSN (Communicating to Client Application):** 
+   - Conveys the updated status information to Alice's Client Application.
+
+7. **Client Application:** 
+   - Receives the latest delivery status from the `BSN`.
+   - Presents the updated status to Alice
 
 ```mermaid
 sequenceDiagram
@@ -273,7 +418,27 @@ sequenceDiagram
     end
 ```
 
-OR, Bob updates the status of the order
+### OnStatus - triggerded by Provider
+
+1. **Bob's App:** Bob decides to update the status of an order.
+
+2. **Bob's App:** Initiates the status update by sending a status update packet to the `PSN`.
+
+3. **PSN (Provider Supporting Node):** 
+   - Receives the status update packet from Bob's App.
+   - Processes the update and uses the `POST /on_status` API endpoint to forward the updated status information to the `BSN`.
+
+4. **BSN (Buyer Supporting Node):** 
+   - Acknowledges the receipt of the updated status information from the PSN with an ACK (Acknowledgement) response.
+   - Prepares to forward the updated order status to the Client Application.
+
+5. **BSN (Buyer Supporting Node):** 
+   - Forwards the updated order status to the Client Application using a websocket connection (`ws:/status`), ensuring real-time update delivery.
+
+6. **Client Application:** 
+   - Receives the updated order status from the BSN.
+   - Updates the display or status information available to the buyer, ensuring the buyer is informed of the latest order status in real-time.
+
 ```mermaid
 sequenceDiagram
     autonumber
@@ -294,7 +459,32 @@ sequenceDiagram
     Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
 ```
 
-7. Alice asks to update her order contents
+
+### Update, OnUpdate
+
+1. **Client Application:** Alice requests an update to the status of her order.
+
+2. **Client Application:** Initiates the update process by invoking the `BSN` with the `api/update` request.
+
+3. **BSN (Before API Processing):** 
+   - Prepares an update request by including the order ID in an update packet.
+   - Sends this update packet to the corresponding `PSN` utilizing the `POST /update` API method, referencing the `PSN's` callback URL as registered in the system.
+
+4. **PSN (Provider Supporting Node):** 
+   - Receives the update packet from the `BSN`.
+   - Processes the order update and responds back to the BSN using the `POST /on_update` method, indicating the update has been accepted and processed.
+
+5. **BSN (After API Processing):** 
+   - Receives the updated order details from the `PSN`.
+   - Updates the system records with the new order status and prepares to inform Alice's client application of the change.
+
+6. **BSN (Communicating to Client Application):** 
+   - Sends the updated order details back to Alice's Client Application, ensuring Alice is promptly informed of the update to her order.
+
+7. **Client Application:** 
+   - Receives the updated order information from the `BSN`.
+   - Updates the user interface to reflect the new status of Alice's order, completing the update loop and ensuring Alice is aware of the current status of her order.
+
 
 ```mermaid
 sequenceDiagram
@@ -322,7 +512,26 @@ sequenceDiagram
     Note over ClientApp,Alice: BSN returns on_update response
 ```
 
-OR, Bub updates the order contents
+### OnUpdate - triggered by Provider
+
+1. **Bob's App:** Bob decides to update the contents of the order.
+
+2. **Bob's App:** Initiates the update by sending an updated order packet to the `PSN`.
+
+3. **PSN (Provider Supporting Node):** 
+   - Receives the update request from Bob's App and processes the updated order contents. 
+   - Uses the `POST /on_update` method to forward the updated order packet to the `BSN`
+
+4. **BSN (Before API Processing):** 
+   - Acknowledges receipt of the updated order details from PSN with an ACK (Acknowledgement) response. 
+   - Prepares to inform Alice's Client Application about the update.
+
+5. **BSN (After API Processing):** 
+   - Forwards the updated order packet to Alice's Client Application through a websocket connection using the `ws:/update` endpoint, ensuring real-time notification.
+
+6. **Client Application:** 
+   - Receives the updated order packet from `BSN`. Updates the order status or contents displayed to Alice, ensuring she is informed of the changes made by Bob.
+
 
 ```mermaid
 sequenceDiagram
@@ -344,7 +553,28 @@ sequenceDiagram
     Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
 ```
 
-8. Alice asks to cancel her order
+### Cancel, OnCancel
+
+1. **Client Application:** Alice asks to cancel her order.
+
+2. **Client Application:** Initiates the cancellation process by sending a request to the `BSN`.
+
+3. **BSN (Before API Processing):** 
+   - Prepares a cancellation request by packaging Alice's order ID and sending it to the appropriate `PSN` using the `POST /cancel` method on the `PSN's` callback URL, as found in the registry.
+
+4. **PSN (Provider Supporting Node):** 
+   - Receives the cancellation request and processes it. Confirms the cancellation by using the `POST /on_cancel` method, sending a confirmation back to the `BSN` through its callback URL.
+
+5. **BSN (After API Processing):** 
+   - Upon receiving confirmation of the cancellation from the `PSN`, the `BSN` updates its records to reflect the cancellation and prepares to notify Alice's client application.
+
+6. **BSN (Communicating to Client Application):** 
+   - Sends the cancellation confirmation to Alice's Client Application, ensuring Alice is informed of the order's cancellation status.
+
+7. **Client Application:** 
+   - Receives the cancellation confirmation from the `BSN`.
+   - Updates the UI to inform Alice that her order has been successfully canceled, closing the loop on the cancellation request.
+
 
 ```mermaid
 sequenceDiagram
@@ -372,7 +602,27 @@ sequenceDiagram
     Note over ClientApp,Alice: BSN returns on_cancel response
 ```
 
-OR, Bob cancels the order
+
+### OnCancel - triggered by Provider
+
+1. **Bob's App:** Bob decides to cancel the order.
+
+2. **Bob's App:** Initiates the cancellation by sending a cancellation request to the `PSN`.
+
+3. **PSN (Provider Supporting Node):** 
+   - Receives the cancellation request from Bob's App and processes the request.
+   - Uses the `POST /on_cancel` method to forward the cancellation request to the `BSN`, indicating the desire to cancel the order.
+
+4. **BSN (Before API Processing):** 
+   - Acknowledges receipt of the cancellation request from PSN with an ACK (Acknowledgement) response.
+   - Prepares to inform Alice's Client Application about the cancellation.
+
+5. **BSN (After API Processing):** 
+   - Forwards the cancellation confirmation to Alice's Client Application through a websocket connection using the `ws:/cancel` endpoint, ensuring real-time notification.
+
+6. **Client Application:** 
+   - Receives the cancellation confirmation from `BSN`.
+   - Updates the order status to reflect the cancellation to Alice, ensuring she is informed of the cancellation made by Bob.
 
 ```mermaid
 sequenceDiagram
@@ -394,9 +644,34 @@ sequenceDiagram
     Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
 ```
 
-## Post-Fulfill 
+## Post-Fulfillment APIs (support, on_support)
 
-9. Alice requests support for her order
+### Support, OnSupport
+
+1. **Alice's Client Application:** Alice identifies an issue with her order and decides to request support.
+
+2. **Alice's Client Application:** Initiates the support request by sending a support query to the `BSN`.
+
+3. **BSN (Buyer Supporting Node):** 
+   - Receives Alice's request for support and processes it.
+   - Sends a `POST /support` request to the `PSN`, including details of Alice's order and the specific support requested.
+
+4. **PSN (Provider Supporting Node):** 
+   - Acknowledges the receipt of the support request from the BSN with an ACK (Acknowledgement) response.
+   - Assesses the request and compiles the necessary support details.
+
+5. **PSN (Provider Supporting Node):** 
+   - Sends the compiled support details back to the BSN using the `POST /on_support` method.
+
+6. **BSN (Buyer Supporting Node):** 
+   - Receives the support details from the PSN and prepares the information for Alice's Client Application.
+
+7. **BSN (Buyer Supporting Node):** 
+   - Forwards the detailed support response to Alice's Client Application using the `api/on_support` response endpoint.
+
+8. **Alice's Client Application:** 
+   - Receives the support response from the BSN.
+   - Updates the interface to present the support information to Alice, ensuring she receives the help requested for her order.
 
 ```mermaid
 sequenceDiagram
