@@ -43,17 +43,19 @@ sequenceDiagram
     end 
 
     par PSN interactions
-        Note right of PSN1: PSN(1) receives request
+        Note over Gateway,PSN1: PSN(1) receives request
         Gateway->>+PSN1: api/search
         PSN1-->>-Gateway: ACK
         PSN1->>+Gateway: api/on_search
+        Note over Gateway,PSN1: PSN(1) triggers callback w/ provider list
         Gateway-->>-PSN1: ACK
-
-        Note left of PSNn: PSN(n) receives request
+        and
+        Note over Gateway,PSNn: PSN(n) receives request
         Gateway->>+PSNn: api/search
         PSNn-->>-Gateway: ACK
         PSNn->>+Gateway: api/on_search
         Gateway-->>-PSNn: ACK
+        Note over Gateway,PSNn: PSN(n) triggers callback w/ provider list
     end
  ```
 
