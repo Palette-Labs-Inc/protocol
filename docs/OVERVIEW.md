@@ -74,7 +74,8 @@ sequenceDiagram
     Note left of BSN: BSN signs post request
     Note over BSN,PSN: BSN sends request to PSN
     PSN-->>BSN: ACK
-    PSN->>REGISTRY: /lookup
+    PSN->>+REGISTRY: /lookup
+    REGISTRY->>-PSN: response
     Note over REGISTRY,PSN: PSN finds public-key of BSN in registry
     REGISTRY->>PSN_VS: request
     Note over PSN_VS: PSN verifies BSN signature
@@ -643,6 +644,7 @@ sequenceDiagram
     BSN->>ClientApp: ws:/update
     Note over BSN, ClientApp: BSN forwards the order packet to the buyer client
 ```
+
 
 ## Post-Fulfillment APIs (support, on_support)
 
