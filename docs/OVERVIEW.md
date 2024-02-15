@@ -5,13 +5,13 @@ This study proposes a new communication standard; a set of rules and technical s
 ### Network Participants
 
 #### Buyer
-An individual with a need to purchase a product or service at a given moment in time. A Buyers identity and data is represented to the open network through the services provided by the Buyer Supporting Node. 
+An individual with a need to purchase a product or service at a given moment in time. 
 
 #### Buyer Supporting Node (BSN)
 `BSNs` build software applications & store Buyer data for the network. BSNs can be managed by individual developers or organizations who intend to offer experiences to consumers but do not care to maintain inventory lists of producers.  
 
 #### Producer 
-An organization with a Catalog of products or services available for sale. A producers Catalog is managed by and represented to the open network through the Producer Supporting Node.
+An organization with a Catalog of products or services available for sale. 
 
 #### Producer Supporting Node (PSN)
 `PSN`s onboard the producer side of the network. PSNs can be managed by a local chamber of commerce, a small business cooperative, individual restaurants or retailers, taxi-networks, big tech companies, etc. The primary role of the `PSN` in the open network is to attain and maintain fresh inventory lists for producers such that when a `Buyer` broadcasts an intent to transact, they can be sure that their request to avail services/products is fulfilled by the `Producer` 
