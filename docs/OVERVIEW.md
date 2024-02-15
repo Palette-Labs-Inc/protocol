@@ -84,7 +84,7 @@ sequenceDiagram
 ```
 
 ## Commercial Transaction Lifecycle Overview
-All commercial transactions in any two-sided market can be represented by a series of predictable interactions between a `Buyer` and a `Producer` over the life of a `Buyer`'s transaction. The network design establishes these interactions by a set of standardized APIs.
+All commercial transactions in any two-sided market can be represented by a series of interactions between a `Buyer` and a `Producer` over the life of a `Buyer`'s transaction. The network design establishes these interactions by a set of standardized APIs.
 
 ### Discovery
 a `Buyer` broadcasts their intent to avail a service. The network responds with a list of `Providers`
