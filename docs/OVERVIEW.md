@@ -50,8 +50,8 @@ sequenceDiagram
         Gateway-->>-PSN1: ACK
 
         Note left of PSNn: PSN(n) receives request
-        Gateway->>+PSNn: api/search
-        PSNn-->>-Gateway: ACK
+        Gateway->>+PSN1: api/search
+        PSN1-->>-Gateway: ACK
         PSNn->>+Gateway: api/on_search
         Gateway-->>-PSNn: ACK
     end
