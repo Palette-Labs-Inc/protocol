@@ -1,6 +1,6 @@
 # Registration Abstract
 
-This document outlines a proposal for a decentralized registry infrastructure within a server-to-server communication protocol. This proposal advocates for permissionless key-pair generation and registration leveraging existing cryptographic standards (`secp256k1` for signing and `keccak256` for hashing) to simplify Authorization signatures between [Node Operatos](./OVERVIEW.md#node-operator). 
+This document outlines a proposal for a decentralized registry infrastructure within a server-to-server communication protocol. This proposal advocates for permissionless key-pair generation and registration leveraging existing cryptographic standards (`secp256k1` for signing and `keccak256` for hashing) to simplify Authorization signatures between [Node Operators](./OVERVIEW.md#node-operator). 
 
 For technical details on the registration process, please see the [@palette-labs/registry repository](https://github.com/Palette-Labs-Inc/registry/)
 
