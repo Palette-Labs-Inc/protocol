@@ -22,7 +22,7 @@ A `PSN` or `BSN` providing services to a Buyer or Producer within the network, o
 ### Public Network Infrastructure
 
 #### Gateway Provider (GP)
-`GP`s or `Gateways` are routing softwareand indexing services that help nodes discover relevant services during discovery. 
+`GP`s or `Gateways` route search packets from BSN's and index services that help `BSNs` discover relevant `Providers` during a `Buyers` search process.
  
  ```mermaid
 sequenceDiagram
