@@ -25,17 +25,23 @@ By removing entry requirements, the network allows for independent actors to int
 #### Buyer
 An individual with a need to purchase a product or service at a given moment in time. 
 
+#### Provider 
+An organization with a Catalog of products or services available for sale. 
+
 #### Buyer Servicing Node (BSN)
 `BSNs` build software applications & store Buyer data for the network. BSNs can be managed by individual developers or organizations who intend to offer experiences to consumers but do not care to maintain inventory lists of `Providers`.  
 
-#### Provider 
-An organization with a Catalog of products or services available for sale. 
+`BSNs` can be managed by individual developers or organizations who intend to offer experiences to consumers. `BSNs` might have a new idea for a new application, like a video-first shopping app, a social-commerce app, or a spatial-computing shopping experience. `BSNs` implement the protocol because it gives them instant access to a network of `Producers`. They can implement the protocol standard and get access to these `Producers` without ever having to formally onboard the `Producer` or communicate with them. 
 
 #### Provider Servicing Node (PSN)
 `PSN`s onboard the `Provider` side of the network. PSNs can be managed by a local chamber of commerce, a small business cooperative, individual restaurants or retailers, taxi-networks, big tech companies, etc. The primary role of the `PSN` in the open network is to attain and maintain fresh inventory lists for `Providers` such that when a `Buyer` broadcasts an intent to transact, they can be sure that their request to avail services/products is fulfilled by the `Provider` 
 
+The primary role of the `PSN` is to maintain inventory lists for `Producers` so that when a `Buyer` searches for a service, the `PSN` can respond with a list of `Providers` that are capable of fulfilling the `Buyers` request. `PSNs` can charge a fee for providing tools for `Producers` that help them maintain their inventory and accept more orders. For example a `PSN` might make it easier for `Producers` to manage their inventory via a point-of-sale solution. Some `Producers` may choose to run their own `PSN` instance, although this behavior is unexpected. 
+
 #### Node Operator
 A `PSN` or `BSN` providing services to a Buyer or `Provider` within the network, occupying a record in the Registry. 
+
+`BSNs` and `PSNs` are organizations, universities, businesses or any other entity that host user data, like Gmail and Outlook host email. These managed hosts can offer features that would be impractical for users to run independently at scale. They can provide better user experiences, and we should expect most people to use them instead of running their own servers.
 
 ### Public Network Infrastructure
 
