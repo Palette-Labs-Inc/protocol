@@ -40,7 +40,7 @@ ___
 # Questions
 
 ## Measuring Contributions
-- How do tokens accrue to each of the service providers? I really like the graph theoretic approach that we have established. I think we also need to extend token distributions to the other service providers. 
+- How do tokens accrue to each of the agents within the network? I really like the graph theoretic approach that we have established. I think we also need to extend token distributions to the other service providers. 
 
 
 ## Monetary Policy

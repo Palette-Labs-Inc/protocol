@@ -1,0 +1,113 @@
+# RFC: [RFC Title]
+
+- **status:** Draft | Proposed | Accepted | Deprecated | Superseded
+- **Author:** [Author Name]
+- **Created:** [Creation Date]
+- **Last supportd:** [Last supportd Date]
+
+## Abstract
+
+A brief summary of the proposal, including the problem it addresses and the proposed solution or innovation.
+
+## Introduction
+
+A more detailed explanation of the problem and why it is important to address it. This section should provide enough background to understand the context of the RFC.
+
+## Motivation
+
+Describe the motivation behind this proposal. Explain why the existing solutions are inadequate and how the proposed solution addresses the problem.
+
+## Proposal
+
+The main content of the RFC:
+- Detailed description of the proposed solution or standard.
+- Technical specifications and design details.
+- Examples of how the solution would work in practice.
+
+## Examples
+
+## References
+
+List any references such as existing RFCs, standards documents, or academic papers that were cited or used in the creation of this RFC.
+
+### Decentralized Identity Solutions
+Disco.xyz - introduces a concept of [data backpacks](https://docs.disco.xyz/disco-docs-1/welcome/welcome-to-disco/data-backpacks). Notes on the [3-sided marketplace](https://docs.disco.xyz/disco-docs-1/learn-more/data-backpacks-for-holders/the-3-sided-marketplace-of-verifiable-data) of Verifiable Data from Disco docs.
+
+
+### Bluesky Notes
+
+A data repository is a collection of data published by a single user. Repositories are self-authenticating data structures, meaning each update is signed and can be verified by anyone.
+
+They are described in more depth in the [Repository specification](https://atproto.com/specs/repository).
+
+Bluesky, self authenticating social protocol - https://bsky.social/about/blog/3-6-2022-a-self-authenticating-social-protocol
+- The three components that enable self-authentication are [cryptographic identifiers](https://en.wikipedia.org/wiki/Public-key_cryptography), [content-addressed data](https://en.wikipedia.org/wiki/Content-addressable_storage), and [verifiable computation](https://en.wikipedia.org/wiki/Verifiable_computing). The first two are familiar concepts in distributed systems, and the third is an emerging area of research that is not yet widely applied, but that we think will have large ramifications.
+- _Cryptographic identifiers_ associate users with public keys. [Self-sovereign identity](https://en.wikipedia.org/wiki/Self-sovereign_identity) is based on having cryptographic identifiers for users. Control of an account is proved by a cryptographic signature from a user, rather than an entry in a database keeping track of logins.
+
+- _Content-addressed data_ means content is referenced by its cryptographic hash — the unique digital “fingerprint” of a piece of data. Using public keys and content-addresses, we can sign content by the user's key to prove they created it. Authenticated data enables trust to reside in the data itself, not in where you found it, allowing apps to move away from client-server architectures. This creates “user-generated authority”.
+
+- _Verifiable computation_ uses cryptographic proofs to allow observers to verify that a computation was performed correctly without having to run it themselves. This can be used to preserve privacy by concealing inputs, as in a zero-knowledge proof, or to compress state that would otherwise have to be kept around for verification. The full potential of these cryptographic primitives is still being explored. Cutting edge research is currently being applied to scaling blockchains, but we are also investigating novel applications in distributed social networks.
+
+- Bluesky full ecosystem [overview](https://gitlab.com/bluesky-community1/decentralized-ecosystem/-/blob/master/README.md) 
+- Bluesky Identity and Auth [Overview](https://gitlab.com/bluesky-community1/decentralized-ecosystem/-/blob/master/topics/identity.md):
+
+
+[#](https://atproto.com/guides/data-repos#identifier-types)
+
+Multiple types of identifiers are used within a Personal Data Repository.
+
+|   |   |
+|---|---|
+|**DIDs**|[Decentralized IDs (DIDs)](https://w3c.github.io/did-core/) identify data repositories. They are broadly used as user IDs, but since every user has one data repository then a DID can be considered a reference to a data repository. The format of a DID varies by the “DID method” used but all DIDs ultimately resolve to a keypair and a list of service providers. This keypair can sign commits to the data repository.|
+|**CIDs**|[Content IDs (CIDs)](https://github.com/multiformats/cid) identify content using a fingerprint hash. They are used throughout the repository to reference the objects (nodes) within it. When a node in the repository changes, its CID also changes. Parents which reference the node must then update their reference, which in turn changes the parent’s CID as well. This chains all the way to the Commit node, which is then signed.|
+|**NSIDs**|[Namespaced Identifiers (NSIDs)](https://atproto.com/specs/nsid) identify the Lexicon type for groups of records within a repository.|
+|**rkey**|[Record Keys](https://atproto.com/specs/record-key) ("rkeys") identify individual records within a collection in a given repository. The format is specified by the collection Lexicon, with some collections having only a single record with a key like "self", and other collections having many records, with keys using a base32-encoded timestamp called a Timestamp Identifier (TID).|
+
+
+### Farcaster Notes
+- Please read [this specification](https://github.com/farcasterxyz/protocol/blob/main/docs/SPECIFICATION.md#13-storage-registry)
+
+
+
+### Comparison between Bsky and Farcaster
+
+#### Bsky
+Records and messages in atproto are stored, transmitted, encoded, and authenticated in a consistent way. The core "data model" is based on [Interplanetary Linked Data (IPLD)](https://ipld.io/docs/data-model/), a specification for hash-linked data structures from the IPFS ecosystem.
+
+When data needs to be authenticated (signed), referenced (linked by content hash), or stored efficiently, it is encoded in Concise Binary Object Representation (CBOR). CBOR is an IETF standard roughly based on JSON. IPLD specifies a normalized subset of CBOR called **DAG-CBOR,** which is what atproto uses.
+
+IPLD also specifies an analogous set of conventions of JSON called **DAG-JSON,** but atproto uses a different set of conventions when encoding JSON data.
+
+The schema definition language for atproto is [Lexicon](https://atproto.com/specs/lexicon). The IPLD Schema language is not used. Other lower-level data structures, like [repository](https://atproto.com/specs/repository) internals, are not specified with Lexicons, but use the same data model and encodings.
+
+In IPLD, distinct pieces of data are called **nodes,** and when encoded in binary (DAG-CBOR) result in a **block.** A node may have internal nested structure (maps or lists). Nodes may reference each other by string URLs or URIs, just like with regular JSON on the web. In IPLD, they can also reference each other strongly by hash, referred to in IPLD as a **link.** A set of linked nodes can form higher-level data structures like [Merkle Trees](https://en.wikipedia.org/wiki/Merkle_tree) or [Directed Acyclical Graphs (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph). Links can also refer to arbitrary binary data (blobs).
+
+Unlike URLs, hash references (links) do not encode a specific network location where the content can be found. The location and access mechanism must be inferred by protocol-level context. Hash references do have the property of being "self-certifying", meaning that returned data can be verified against the link hash. This makes it possible to redistribute content and trust copies even if coming from an untrusted party.
+
+Links are encoded as [IPFS Content Identifiers](https://docs.ipfs.tech/concepts/content-addressing/#identifier-formats) (CIDs), which have both binary and string representations. CIDs include a metadata code which indicates whether it links to a node (DAG-CBOR) or arbitrary binary data. Some additional constraints on the use of CIDs in atproto are described below.
+
+
+### Farcaster
+In Farcaster, the individual accounts grant client applications the ability to "sign on their behalf". This feels elegant to me. The message data then contains any number of request body formats across a users transaction lifecycle. A message then contains.
+
+```ts
+message MessageData {
+  MessageType type = 1;
+  uint64 fid = 2;
+  uint32 timestamp = 3;
+  FarcasterNetwork network = 4;
+  oneof body {
+    CastAddBody cast_add_body = 5;
+    CastRemoveBody cast_remove_body = 6;
+    ReactionBody reaction_body = 7;
+    UserNameProofBody proof_body = 8;
+    VerificationAddEthAddressBody verification_add_eth_address_body = 9;
+    VerificationRemoveBody verification_remove_body = 10;
+    UserDataBody user_data_body = 12;
+    LinkBody link_body = 14;
+    UserNameProof username_proof_body = 15;
+  }
+}
+```
+
+Farcaster Syncs data across hubs like in a p2p network. So each hub provides a completely accounted state of the network. 
