@@ -1,4 +1,4 @@
-# RFC: [RFC Title]
+# RFC: Core Architecture
 
 - **status:** Draft
 - **Author:** Michael Perhats
