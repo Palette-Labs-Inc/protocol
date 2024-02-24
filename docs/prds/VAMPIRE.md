@@ -3,8 +3,8 @@
 ## Problem Statement
 How can the network employ a design to ensure resilience against vampire attacks? A vampire-attack resistant architecture would imply strong properties. 
 
-How can the network employ a design that is resistant to multi-homing tendencies in traditional platforms? For example, drivers and merchants are prone to simaltaneously using many competitive services simaltaneously. In food delivery many restaurants tend to use more than 3 delivery services (DoorDash, UberEats, GrubHub). 
-A multi-homing resistant architecture that continuously encourages new entrants to adopt our common framework (instead of creating a new network) would imply strong / desireable properties.  
+How can the network employ a design that is resistant to multi-homing tendencies in traditional platforms? For example, drivers and merchants are prone to simaltaneously using many competitive services. In food delivery many restaurants tend to use more than 3 delivery services (DoorDash, UberEats, GrubHub). 
+A multi-homing resistant architecture that continuously encourages new entrants to adopt the standard framework (instead of creating a new network) would imply strong / desireable properties.  
 
 ___ 
 
