@@ -12,7 +12,7 @@ We decided in previous conversations that we would make self-dealing unprofitabl
 
 Many projects mint tokens based on a simple exponential decay model. Under this model, rewards are highest in the beginning, so mining generates many tokens per unit of work early in the networkʼs life. Because we do not implement the simple expoenential decay model, the network could be subject to vampire attacks that introduce better rewards early on.
 
-Ultimately, I think out network design (where self-dealing is not profitable), is more sustainable but this could be considered a vulnerability. 
+Ultimately, I think out network design (where self-dealing is not profitable), is more sustainable but this could be considered a vulnerability.
 
 ### Detecting and Penalizing Self-Dealing: 
 Is there an algorithmic way to detect self-dealing? 
@@ -30,7 +30,6 @@ Providers are aware that their services are subject to verification, which disco
 - Do we need to build a reputation system? If so, any ideas on what this should look like? 
 - How to quantify trust? How to improve discoverability of providers within the network based on consistent historical performance? 
 - How to further discourage self-dealing by making it *less profitable* compared to providing legitimate services?
-
 ___ 
 
 ## Lazy Providers
