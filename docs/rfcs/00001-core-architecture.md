@@ -6,17 +6,15 @@
 - **Last supportd:** 02-24-2024
 
 ## Abstract
-
-This document proposes a network architecture; an overview of different actors who can work together to build open e-commerce networks across which Providers and their services are universally discoverable from any protocol-enabled application.
+This document proposes an overview of different actors who can work together to build open e-commerce networks across which Providers and their services are universally discoverable from any protocol-enabled application.
 
 ## Introduction
-
 We believe there is a generational opportunity to decentralize internet infrastructure for commercial markets. Of all of the possible places that one could focus on, we believe that commercial markets are the largest and most disrupt-able category.
 
 Traditionally, platforms capitalize on [network effects](https://en.wikipedia.org/wiki/Network_effect), benefiting Providers and buyers as their transactions increase. However, the growth of such platforms often leads to high rents due to increased market power. To address this, we propose a decentralized network co-owned by market participants. We introduce algorithms for distributing platform ownership based on the unique contributions of a variety of actors within the network. Our design aims to incentivize Providers to join as co-owners and actively contribute to the platform’s success by marketing it to buyers and recruiting additional Providers. This document defines the different actors within the network, and their unique roles and incentives.  
 
 ## Motivation
-The building blocks for commercial markets should exist outside of private companies as public digital infrastructure, like the Internet itself. An open, decentralized protocol for commercial markets gives Buyers and Providers a choice in their experience, Providers control over their relationships with Buyers, and developers the freedom to innovate without requesting access from any authority. 
+The building blocks for commercial markets should exist outside of private companies as public digital infrastructure, like the Internet itself. An open, decentralized protocol for commercial markets gives Buyers and Providers a choice in their experience, Providers control over their relationships with Buyers, and developers the freedom to innovate without requiring access from any authority. 
 
 By removing entry requirements, the network allows for independent actors to introduce local optimizations, taking advantage of societies collective cognitive surplus to fill economic gaps in markets.
 
@@ -112,9 +110,9 @@ Modern platforms use sophisticated services for: search and discovery, personali
 -  a routing or logistics service could inform which drivers are returned by a `PSN` when a `Buyer` searches for a mobility or rideshare service.  
 - a recommendation service could inform which `Providers` are returned by the network when a `Buyer` searches for a book written by a specific author. 
 
-Independent parties can write `Service Modules` for various computational needs and sell them to `Node Operators`.  In future designs, there will be ways for services to be discovered by `Node Operators` and used at any point during the transaction lifecycle. A network token can function as a micro-payments layer to facilitate the exchange of services. It also introduces a novel business model for publishing algorithms that provide utility for the network. This approach enables the development of a diverse range of services, enhancing the network's utility, reach, and potential.
+Independent parties can write `Service Modules` for various computational needs and sell them to `Node Operators`.  There should be ways for services to be discovered by `Node Operators` and used at any point during the transaction lifecycle. A network token can function as a micro-payments layer to facilitate the exchange of services. It also introduces a novel business model for publishing algorithms that provide utility for the network. This approach enables the development of a diverse range of services, enhancing the network's possibilities. 
 
-Independent third parties should be able to list their services in a publicly discoverable registry. Their services should be computationally verifiable and self-authenticating.
+Independent third parties should be able to list their services in a publicly discoverable registry. Their services should be computationally verifiable and self-authenticating. This could be designed similarly to [custom feeds](https://github.com/bluesky-social/feed-generator) in ATProto (Bsky).
 
 ```mermaid
 sequenceDiagram

@@ -150,13 +150,12 @@ During registration, a Node Operator creates a public private key pair. The publ
 The BSN and PSN is expected to send an Authorization header (as defined in the latest [RFC](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-message-signatures#name-scheme)  where the “auth-scheme” is “Signature” and the “auth-param” parameters meet the requirements listed in Section 2.3 of [this](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-message-signatures#section-2.3) document.
 
 Below is the format of a BSN/PSN Authorization header using a typical HTTP Signature format:
-
-`Authorization: Signature keyId="{registry_public_key_identifier}",algorithm="ecdsa-p256-keccak256",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64url(secp256k1(signing string))"`
+`Authorization: Signature keyId="{registry_public_key_identifier}",algorithm="ES256K",created="1606970629",expires="1607030629",headers="(created) (expires) digest",signature="Base64url(secp256k1(signing string))"`
 
 The signature parameters component value is the serialization of the signature parameters for this signature, including the covered components ordered set with all associated parameters. These parameters include any of the following[¶](https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-message-signatures#section-2.): 
 - `created`: Creation time as an Integer UNIX timestamp value. Sub-second precision is not supported. Inclusion of this parameter is RECOMMENDED
 - `expires`: Expiration time as an Integer UNIX timestamp value. Sub-second precision is not supported
-- `algorithm`: The HTTP message signature algorithm from the HTTP Signature Algorithms registry, as a String value
+- `algorithm`: The HTTP message signature algorithm from the HTTP Signature Algorithms registry, as a String value. In this case secp256k1.
 - `keyid`: The public key identifier for the key material as a String value. This is the public key identifier on the registry for the sending node. The public key can be found by querying the registry based on the public key identifier. 
 
 ### Purpose of `headers` in `authorizationHeader`:
