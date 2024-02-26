@@ -1,4 +1,4 @@
-# RFC: topographical cryptography concepts
+# RFC: core cryptography concepts
 
 - **status:** Draft
 - **Author:** Michael Perhats
@@ -9,7 +9,7 @@
 In our analysis, we borrow concepts from both federated and p2p networks to deliver a self-authenticating protocol. Our research adopts concepts of[“authenticated data structures”](https://www.cs.umd.edu/~mwh/papers/gpads.pdf), [decentralized identifiers](https://www.w3.org/TR/did-core/), [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography), [content addresses](https://en.wikipedia.org/wiki/Content-addressable_storage), and [verifiable computation](https://en.wikipedia.org/wiki/Content-addressable_storage). 
 
 ## Introduction
-The [core network architecture](./00001-core-architecture.md) defines a distributed network of `Buyer` and `Provider` Servicing Nodes who onboard either side of a two-sided-market. In centralized corporate networks and federated server-to-server networks, the servers own a users identity and, as such, their relationship to the network. As the network grows, and power accumulates to these central authorities, platforms begin to extract from stakeholders - usually through increasingly high take rates in commercial settings. The intermediaries relationships with network participants changes from positive-sum to zero-sum. _More about the attract, extract lifecycle of web2 platforms [here](https://cdixon.org/2018/02/18/why-decentralization-matters)_.
+The [core network architecture](./00001-core-architecture.md) defines a distributed network of `Buyer` and `Provider` Servicing Nodes who onboard either side of a two-sided-market. In centralized corporate networks and federated server-to-server networks, the servers own a users identity and, as such, their relationship to the network. As the network grows, and power accumulates to central authorities, platforms begin to extract from stakeholders - usually through increasingly high take rates in commercial settings. The intermediaries relationships with network participants changes from positive-sum to zero-sum. _More about the attract, extract lifecycle of web2 platforms [here](https://cdixon.org/2018/02/18/why-decentralization-matters)_.
 
 To prevent such undesirable market dynamics, we develop structures for a [self-authenticating](https://en.wiktionary.org/wiki/self-authenticating) protocol. Our design grants users the ability to "switch" between managed-hosts (nodes) at will, shifting control to users, and introduces a concept of a "data-backpack" through content-addressed (vs. location addressed) data structures.
 
@@ -32,7 +32,6 @@ Our design supports a network with the following desirable qualities:
 - **Privacy and Security**: Employs cryptographic methods for secure data exchange between entities.
 - **Scalability and Efficiency**: Optimizes tradeoffs between federated and p2p networks.
 - **Trust and Transparency**: Offers verifiable mechanisms for data integrity and authenticity.
-
 
 ## Proposal (TODO)
 
