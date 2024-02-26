@@ -1,4 +1,4 @@
-# RFC: Self-Authentication
+# RFC: topographical cryptography concepts
 
 - **status:** Draft
 - **Author:** Michael Perhats
@@ -6,20 +6,12 @@
 - **Last supportd:** 02-26-2024
 
 ## Abstract
-
-This abstract is cut and paste from the [W3C publication on DIDs](https://www.w3.org/TR/did-core/)
-
-[Decentralized identifiers](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers) (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity. A [DID](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers) refers to any subject (e.g., a person, organization, thing, data model, abstract entity, etc.) as determined by the controller of the [DID](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers). In contrast to typical, federated identifiers, [DIDs](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers) have been designed so that they may be decoupled from centralized registries, identity providers, and certificate authorities. Specifically, while other parties might be used to help enable the discovery of information related to a [DID](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers), the design enables the controller of a [DID](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers) to prove control over it without requiring permission from any other party. [DIDs](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers) are [URIs](https://www.w3.org/TR/did-core/#dfn-uri) that associate a [DID subject](https://www.w3.org/TR/did-core/#dfn-did-subjects) with a [DID document](https://www.w3.org/TR/did-core/#dfn-did-documents) allowing trustable interactions associated with that subject.
-
-Each [DID document](https://www.w3.org/TR/did-core/#dfn-did-documents) can express cryptographic material, [verification methods](https://www.w3.org/TR/did-core/#dfn-verification-method), or [services](https://www.w3.org/TR/did-core/#dfn-service), which provide a set of mechanisms enabling a [DID controller](https://www.w3.org/TR/did-core/#dfn-did-controllers) to prove control of the [DID](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers). [Services](https://www.w3.org/TR/did-core/#dfn-service) enable trusted interactions associated with the [DID subject](https://www.w3.org/TR/did-core/#dfn-did-subjects). A [DID](https://www.w3.org/TR/did-core/#dfn-decentralized-identifiers) might provide the means to return the [DID subject](https://www.w3.org/TR/did-core/#dfn-did-subjects) itself, if the [DID subject](https://www.w3.org/TR/did-core/#dfn-did-subjects) is an information resource such as a data model.
+In our analysis, we borrow concepts from both federated and p2p networks to deliver a self-authenticating protocol. Our research adopts concepts of[“authenticated data structures”](https://www.cs.umd.edu/~mwh/papers/gpads.pdf), [decentralized identifiers](https://www.w3.org/TR/did-core/), [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography), [content addresses](https://en.wikipedia.org/wiki/Content-addressable_storage), and [verifiable computation](https://en.wikipedia.org/wiki/Content-addressable_storage). 
 
 ## Introduction
-
 The [core network architecture](./00001-core-architecture.md) defines a distributed network of `Buyer` and `Provider` Servicing Nodes who onboard either side of a two-sided-market. In centralized corporate networks and federated server-to-server networks, the servers own a users identity and, as such, their relationship to the network. As the network grows, and power accumulates to these central authorities, platforms begin to extract from stakeholders - usually through increasingly high take rates in commercial settings. The intermediaries relationships with network participants changes from positive-sum to zero-sum. _More about the attract, extract lifecycle of web2 platforms [here](https://cdixon.org/2018/02/18/why-decentralization-matters)_.
 
-To prevent such dynamics, we develop structures for a [self-authenticating](https://en.wiktionary.org/wiki/self-authenticating) protocol. Our design grants users the ability to "switch" between managed-hosts (nodes) at will, shifting control to users, and introduces a concept of a "data-backpack" through content-addressed (vs. location addressed) data structures. 
-
-In our analysis, we borrow concepts from both federated and p2p networks. Our research adopts concepts of[“authenticated data structures”](https://www.cs.umd.edu/~mwh/papers/gpads.pdf), [decentralized identifiers](https://www.w3.org/TR/did-core/), [public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography), [content addresses](https://en.wikipedia.org/wiki/Content-addressable_storage), and [verifiable computation](https://en.wikipedia.org/wiki/Content-addressable_storage).
+To prevent such undesirable market dynamics, we develop structures for a [self-authenticating](https://en.wiktionary.org/wiki/self-authenticating) protocol. Our design grants users the ability to "switch" between managed-hosts (nodes) at will, shifting control to users, and introduces a concept of a "data-backpack" through content-addressed (vs. location addressed) data structures.
 
 **Our design has 3 considerations:**
 
@@ -32,6 +24,24 @@ As a user travels between applications in the network, they can present and auth
 - _Verifiable Compute / ZK_ - Verifiable computations allow an agent to outsource computational tasks to untrusted third parties and verify that the computation was performed correctly (as in a zero knowledge proof) without having to perform the computation themselves. Verifiably compute is useful in distributed systems for preserving private information (concealing inputs), and delegating complex tasks to entities with more resources to perform specific computations.
 
 ## Motivation
+
+Our design supports a network with the following desirable qualities:
+- **User Sovereignty**: Users control their identity and data without dependency on central authorities.
+- **Data Portability**: Enables seamless transition between service providers, enhancing user choice and flexibility.
+- **Interoperability**: Facilitates communication across diverse networks and services.
+- **Privacy and Security**: Employs cryptographic methods for secure data exchange between entities.
+- **Scalability and Efficiency**: Optimizes tradeoffs between federated and p2p networks.
+- **Trust and Transparency**: Offers verifiable mechanisms for data integrity and authenticity.
+
+
+## Proposal (TODO)
+
+The main content of the RFC:
+- Detailed description of the proposed solution or standard.
+- Technical specifications and design details.
+- Examples of how the solution would work in practice.
+
+## Examples (TODO)
 
 **Case study 1:**
 - Alice signs up for Client App Nosh.
@@ -47,17 +57,6 @@ As a user travels between applications in the network, they can present and auth
 - The switch from `PSN` GrubDash to `PSN` DelishEats does not require permission from `PSN` GrubDash. 
 - `PSN` DelishEats now fulfills Bob's needs.
 
-## Proposal
-
-The main content of the RFC:
-- Detailed description of the proposed solution or standard.
-- Technical specifications and design details.
-- Examples of how the solution would work in practice.
-
-## Examples
-
-
-
 ## References
 - ATProto [Repository specification](https://atproto.com/specs/repository).
 - Farcaster [protocol specificatiion](https://github.com/farcasterxyz/protocol/blob/main/docs/SPECIFICATION.md#13-storage-registry)
@@ -72,4 +71,3 @@ The main content of the RFC:
 - - Bluesky full ecosystem [overview](https://gitlab.com/bluesky-community1/decentralized-ecosystem/-/blob/master/README.md) 
 - Bluesky Identity and Auth [overview](https://gitlab.com/bluesky-community1/decentralized-ecosystem/-/blob/master/topics/identity.md)
 - ActivityPub [W3C specification](https://www.w3.org/TR/activitypub/)
-- Disco.xyz - introduces a concept of [data backpacks](https://docs.disco.xyz/disco-docs-1/welcome/welcome-to-disco/data-backpacks). Notes on the [3-sided marketplace](https://docs.disco.xyz/disco-docs-1/learn-more/data-backpacks-for-holders/the-3-sided-marketplace-of-verifiable-data) of Verifiable Data from Disco docs.
