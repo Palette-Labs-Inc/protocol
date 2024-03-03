@@ -81,3 +81,11 @@ Existing software approaches like consensus and validity proofs aren’t feasibl
 
 A random sampling approach to verification usually involves the network generating measurement requests to each provider/validator on the network. If the measurement request is correctly served, the provider receives a larger reward. As long as the provider can’t distinguish between a measurement request and a normal request, they should be incentivized to correctly respond to each request.
 
+
+
+## Notes from DePIN Verification
+- Random sampling in Filecoin
+- Auditing based approach
+- Trusted execution environments in hardware. TEE is very deep. 
+- Governance based approach where someone can auditing the transactions and then and flag problematic orders. Should be de-listed or rewards get slashed if there is a provable self-dealing. Make it game theoretically disadvantageous. 
+- Statistical approach to verfiication. 
