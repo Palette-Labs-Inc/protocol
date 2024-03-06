@@ -20,18 +20,11 @@ Each [DID document](https://www.w3.org/TR/did-core/#dfn-did-documents) can exp
 DIDs aspire to be a [self-sovereign identity](http://www.lifewithalacrity.com/2016/04/the-path-to-self-soverereign-identity.html). They differ from other globally unique identifiers in that they are globally resolvable, decentralized, and cryptographically verifiable. DIDs require a global key-value database in which the database is a blockchain, distributed ledger, or decentralized network.
 
 ## Motivation
-Centralized identities are administered and controlled by a single authority. Centralized networks offer users identities that are administered and controlled by a single service. Decentralized networks offer forms of identity that give users varying degrees of control. Decentralized identities may be [federated, user-centric, or self-sovereign](https://github.com/WebOfTrustInfo/self-sovereign-identity/blob/master/ThePathToSelf-SovereignIdentity.md).
-
-Identity allows an entity to:
-
-- control an account and access private data
-- communicate with another entity
-- establish visible reputation and credibility
-
 Desirable qualities for decentralized identities:
 
-- Allow authentication and migration between services
+- Allow for self authentication and migration between services
 - Allow communication across services
+- User controlled authorization
 - Unique, global, and memorable
 
 ## Proposal (TODO)

@@ -1,4 +1,4 @@
-# RFC: Core Architecture
+# RFC: Transaction Lifecycle APIs
 
 - **status:** Draft
 - **Author:** Michael Perhats
