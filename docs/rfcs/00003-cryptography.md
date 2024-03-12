@@ -31,7 +31,6 @@ Our design supports a network with the following desirable qualities:
 - **Interoperability**: Facilitates communication across diverse networks and services.
 - **Privacy and Security**: Employs cryptographic methods for secure data exchange between entities.
 - **Scalability and Efficiency**: Optimizes tradeoffs between federated and p2p networks.
-- **Trust and Transparency**: Offers verifiable mechanisms for data integrity and authenticity.
 
 ## Proposal (TODO)
 
@@ -43,11 +42,10 @@ The main content of the RFC:
 ## Examples (TODO)
 
 **Case study 1:**
-- Alice signs up for Client App Nosh.
-- Alice inputs shipping address, her shipping address is stored in `BSN(x)` (buyer side backend server).
+- Alice signs up for Client App Nosh
+- Alice inputs shipping address, her shipping address is stored in `BSN(x)` (buyer side backend server)
 - Client Nosh saves Shipping Address, data is content addressed in `BSN(x)`
-- Alice authorizes Client App Chomp to use her data.
-- Client App Chomp finds Alice's data based on her DID and the CID from a distributed hash table or registry, similar to IPFS.
+- Alice authorizes Client App Chomp to use her data
 
 **Case study 2:**
 - Bob signs up for `PSN` GrubDash.
