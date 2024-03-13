@@ -73,3 +73,4 @@ The following design considerations are inherited by [WebAuthN](https://www.w3.o
 7. [Solid MIT Project](https://solidproject.org/)
 8. [Zero-Knowledge Proofs](https://en.wikipedia.org/wiki/Zero-knowledge_proof)
 9. [User-Controlled Capabilities (UCAN)](https://ucan.xyz/)
+10. [Data repositories](https://atproto.com/guides/data-repos)
